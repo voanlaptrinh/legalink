@@ -7,6 +7,7 @@ use App\Models\Images;
 use App\Models\Introduces;
 use App\Models\Members;
 use App\Models\News;
+use App\Models\Questions;
 use App\Models\Sliders;
 use App\Models\Webconfigs;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ class HomeController extends Controller
         $sliders = Sliders::all();
         $introduces = Introduces::find(1);
         $members = Members::all();
-        return view('users.home.index', compact('latestNews', 'webConfig', 'sliders','introduces','members'));
+        $questions = Questions::orderBy('id', 'desc')->take(4)->get();
+        return view('users.home.index', compact('latestNews', 'webConfig', 'sliders','introduces','members','questions'));
     }
     public function thuvien(Request $request)
     {

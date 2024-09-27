@@ -93,11 +93,17 @@
                         </a>
                     </li>
                     <li
-                    class="sidebar-item {{ in_array(Request::route()->getName(), ['images.admin','images.create','images.edit']) ? 'active' : '' }}">
-                    <a class='sidebar-link' href='{{ route('images.admin') }}'>
-                        <i class="bi bi-file-image"></i> <span class="align-middle">Thư viện ảnh</span>
-                    </a>
-                </li>
+                        class="sidebar-item {{ in_array(Request::route()->getName(), ['images.admin', 'images.create', 'images.edit']) ? 'active' : '' }}">
+                        <a class='sidebar-link' href='{{ route('images.admin') }}'>
+                            <i class="bi bi-file-image"></i> <span class="align-middle">Thư viện ảnh</span>
+                        </a>
+                    </li>
+                    <li
+                        class="sidebar-item {{ in_array(Request::route()->getName(), ['questions.admin']) ? 'active' : '' }}">
+                        <a class='sidebar-link' href='{{ route('questions.admin') }}'>
+                            <i class="bi bi-file-image"></i> <span class="align-middle">Câu hỏi</span>
+                        </a>
+                    </li>
                     {{-- <li
                         class="sidebar-item {{ in_array(Request::route()->getName(), ['products.index', 'products.create', 'products.edit', 'products.detail']) ? 'active' : '' }}">
                         <a class='sidebar-link' href='{{route('products.index')}}'>
@@ -161,7 +167,8 @@
                                             </div>
                                             <div class="col-10 ps-2">
                                                 <div class="text-dark">Vanessa Tucker</div>
-                                                <div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu
+                                                <div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis
+                                                    arcu
                                                     tortor.</div>
                                                 <div class="text-muted small mt-1">15m ago</div>
                                             </div>

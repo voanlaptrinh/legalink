@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\DashboadController;
 use App\Http\Controllers\Admin\ImagesController;
+use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\WebConfigController;
 use App\Http\Controllers\UploadController;
@@ -86,5 +87,14 @@ Route::prefix('/admin')->group(function () {
     });
     Route::prefix(('/lien-he'))->group(function () {
         Route::get('/', [ContactsController::class, 'index'])->name('contacts.index');
+    });
+    Route::prefix('/cau-hoi')->group(function () {
+        Route::get('/', [QuestionController::class, 'index'])->name('questions.admin');
+        Route::get('/create', [QuestionController::class, 'create'])->name('questions.create');
+        Route::post('/store', [QuestionController::class, 'store'])->name('questions.store');
+        Route::get('/{id}/edit', [QuestionController::class, 'edit'])->name('questions.edit');
+        Route::put('/{id}', [QuestionController::class, 'update'])->name('questions.update');
+        Route::delete('delete/{id}', [QuestionController::class, 'destroy'])->name('questions.destroy');
+
     });
 });

@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Introduces;
 use App\Models\Members;
 use App\Models\News;
+use App\Models\Questions;
 use App\Models\Webconfigs;
 use Illuminate\Database\Seeder;
 
@@ -44,15 +45,15 @@ class DatabaseSeeder extends Seeder
             'key' => 'Luật, legalink, pháp lý, pháp chế'
 
         ]);
-        for ($i=0; $i < 10; $i++) { 
+        for ($i = 0; $i < 10; $i++) {
             News::create([
-                'title'=> 'Tin tức legalink',
+                'title' => 'Tin tức legalink',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. dapibus
             Tincidunt mollis pretium.',
                 'alias' => 'tin-tuc-legalink-' . $i,
             ]);
         }
-        for ($i=0; $i < 5; $i++) { 
+        for ($i = 0; $i < 5; $i++) {
             Members::create([
                 'name' => 'LegaLink',
                 'description' => 'Lorem ipsum dolor sit amet',
@@ -60,6 +61,15 @@ class DatabaseSeeder extends Seeder
                 'email' => 'lega@example.com',
                 'phone' => '098766279',
                 'alias' => 'legalink-' . $i,
+            ]);
+        }
+        for ($i = 0; $i < 10; $i++) {
+            Questions::create(attributes: [
+                'name' => 'Đây là câu hỏi thường gặp ?',
+                'description' => 'Đây là đoạn trả lời cho câu hỏi thường gặp, nội dung
+                                        câu trả lời sẽ được rút ngắn khoảng 256 ký tự, nếu xem chi tiết thì
+                                        click vào câu hỏi và xem chi tiết câu trả lời,...',
+
             ]);
         }
     }

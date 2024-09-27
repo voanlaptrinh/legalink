@@ -55,23 +55,25 @@
                     <ul class="accordion-box">
 
                         <!--Block-->
-                        <li class="accordion block active-block">
-                            <div class="acc-btn active">Đây là câu hỏi thường gặp ? <div
+                        @foreach ($questions as $index => $question)
+                        <li class="accordion block {{ $index == 0 ? 'active-block' : '' }}">
+                            <div class="acc-btn {{ $index == 0 ? 'active' : '' }}">
+                                {{$question->name}} <div
                                     class="icon flaticon-down-arrow-1"></div>
                                 <div class="cross-icon flaticon-multiply"></div>
                             </div>
-                            <div class="acc-content current">
+                            <div class="acc-content  {{ $index == 0 ? 'current' : '' }}">
                                 <div class="content">
-                                    <div class="text">Đây là đoạn trả lời cho câu hỏi thường gặp, nội dung
-                                        câu trả lời sẽ được rút ngắn khoảng 256 ký tự, nếu xem chi tiết thì
-                                        click vào câu hỏi và xem chi tiết câu trả lời,...</div>
+                                    <div class="text">{{$question->description}}</div>
                                 </div>
                             </div>
                         </li>
+                        @endforeach
+                        
 
 
 
-                        <!--Block-->
+                        {{-- <!--Block-->
                         <li class="accordion block">
                             <div class="acc-btn">Đây là câu hỏi thường gặp ? <div class="icon flaticon-down-arrow-1">
                                 </div>
@@ -129,7 +131,7 @@
                                         click vào câu hỏi và xem chi tiết câu trả lời,...</div>
                                 </div>
                             </div>
-                        </li>
+                        </li> --}}
 
                     </ul>
 
