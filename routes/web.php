@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\ArticleServiceController;
 use App\Http\Controllers\Admin\ContactsController;
 use App\Http\Controllers\Admin\IntroducesController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\DashboadController;
+use App\Http\Controllers\Admin\EvaluationsController;
 use App\Http\Controllers\Admin\ImagesController;
+use App\Http\Controllers\Admin\MenuServiceController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\WebConfigController;
@@ -14,6 +17,7 @@ use App\Http\Controllers\Users\ContactsControler;
 use App\Http\Controllers\Users\HomeController;
 use App\Http\Controllers\Users\IntroduceController;
 use App\Http\Controllers\Users\MembersControler;
+use App\Http\Controllers\Users\MenuServiceController as UsersMenuServiceController;
 use App\Http\Controllers\Users\NewsController as UsersNewsController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +42,18 @@ Route::get('gioi-thieu', [IntroduceController::class, 'index'])->name('introduce
 Route::get('nhan-su', [MembersControler::class, 'index'])->name('members');
 Route::get('lien-he', [ContactsControler::class, 'index'])->name('contacts');
 Route::post('lienhe/store', [ContactsControler::class, 'store'])->name('contacts.store');
+
+
+Route::get('/menu/{alias}', [UsersMenuServiceController::class, 'showMenu'])->name('menu.show');
+
+// Route hiển thị chi tiết bài viết
+Route::get('/articles/{alias}', [UsersMenuServiceController::class, 'showArticle'])->name('articles.show');
+
+
+
+
+
+
 
 Route::prefix('/admin')->group(function () {
     Route::get('/',  [DashboadController::class, 'dashboard'])->name('admin.dashboard');
@@ -96,5 +112,31 @@ Route::prefix('/admin')->group(function () {
         Route::put('/{id}', [QuestionController::class, 'update'])->name('questions.update');
         Route::delete('delete/{id}', [QuestionController::class, 'destroy'])->name('questions.destroy');
 
+    });
+    Route::prefix(('/Danh-gia-khach-hang'))->group(function () {
+        Route::get('/', [EvaluationsController::class, 'index'])->name( 'evaluations.index');
+        Route::get('/create', [EvaluationsController::class, 'create'])->name( 'evaluations.create');
+        Route::post('/store', [EvaluationsController::class, 'store'])->name('evaluations.store');
+        Route::get('/{id}/edit', [EvaluationsController::class, 'edit'])->name('evaluations.edit');
+        Route::put('/{id}', [EvaluationsController::class, 'update'])->name('evaluations.update');
+        Route::delete('delete/{id}', [EvaluationsController::class, 'destroy'])->name('evaluations.destroy');
+    });
+    Route::prefix(('/menu-dich-vu'))->group(function () {
+        Route::get('/', [MenuServiceController::class, 'index'])->name( 'menuservice.index');
+        Route::get('/create', [MenuServiceController::class, 'create'])->name( 'menuservice.create');
+        Route::post('/store', [MenuServiceController::class, 'store'])->name('menuservice.store');
+        Route::get('/{alias}/edit', [MenuServiceController::class, 'edit'])->name('menuservice.edit');
+        Route::put('/{id}', [MenuServiceController::class, 'update'])->name('menuservice.update');
+        Route::delete('delete/{id}', [MenuServiceController::class, 'destroy'])->name('menuservice.destroy');
+
+    });
+    Route::prefix(('/bai-viet-dich-vu'))->group(function () { 
+        Route::get('/', [ArticleServiceController::class, 'index'])->name( 'article.index');
+        Route::get('/create', [ArticleServiceController::class, 'create'])->name( 'article.create');
+        Route::post('/store', [ArticleServiceController::class, 'store'])->name('article.store');
+        Route::get('/{id}/edit', [ArticleServiceController::class, 'edit'])->name('article.edit');
+        Route::put('/{id}', [ArticleServiceController::class, 'update'])->name('article.update');
+        Route::delete('delete/{id}', [ArticleServiceController::class, 'destroy'])->name('article.destroy');
+        Route::get('/{id}/detail', [ArticleServiceController::class, 'detail'])->name('article.detail');
     });
 });

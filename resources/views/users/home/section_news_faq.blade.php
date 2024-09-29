@@ -64,7 +64,7 @@
                             </div>
                             <div class="acc-content  {{ $index == 0 ? 'current' : '' }}">
                                 <div class="content">
-                                    <div class="text">{{$question->description}}</div>
+                                    <div class="text defau_3">{{$question->description}}</div>
                                 </div>
                             </div>
                         </li>

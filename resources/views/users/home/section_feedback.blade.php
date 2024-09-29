@@ -9,86 +9,25 @@
         <div class="testimonial-carousel">
             <div class="swiper-wrapper">
 
+                @foreach ($evaluations as $evaluation)
                 <div class="swiper-slide">
                     <!-- Testimonial Block -->
                     <div class="testimonial-block">
                         <div class="inner-box">
                             <div class="content">
                                 <div class="author-image">
-                                    <img src="/images/resource/author-1.png" alt="" />
+                                    <img src="{{ $evaluation->image ? asset($evaluation->image) : '/source/images/resource/author-1.png' }}" alt="Author Image" />
                                 </div>
                                 <div class="quote-icon icon_quotations"></div>
-                                <div class="author">Nguyễn Ngọc Đức <span>/ CEO at MetaSoft</span></div>
-                                <div class="text"> Tôi rất hài lòng về sự tận tâm và cả sự uy tín trong quá
-                                    trình tư vấn hỗ trợ doanh nghiệp tôi ở thời điểm vừa mới bắt đầu cho hành
-                                    trình xây dựng thương hiệu. Legalink rất đúng chuẩn theo tiêu chị họ đưa ra
-                                    " TÂM - TRÍ - TÍN"
+                                <div class="author">{{$evaluation->name}}</div>
+                                <div class="text defau_3"> {{$evaluation->description}}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="swiper-slide">
-                    <!-- Testimonial Block -->
-                    <div class="testimonial-block">
-                        <div class="inner-box">
-                            <div class="content">
-                                <div class="author-image">
-                                    <img src="/images/resource/author-1.png" alt="" />
-                                </div>
-                                <div class="quote-icon icon_quotations"></div>
-                                <div class="author">Nguyễn Ngọc Đức <span>/ CEO at MetaSoft</span></div>
-                                <div class="text"> Tôi rất hài lòng về sự tận tâm và cả sự uy tín trong quá
-                                    trình tư vấn hỗ trợ doanh nghiệp tôi ở thời điểm vừa mới bắt đầu cho hành
-                                    trình xây dựng thương hiệu. Legalink rất đúng chuẩn theo tiêu chị họ đưa ra
-                                    " TÂM - TRÍ - TÍN"
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="swiper-slide">
-                    <!-- Testimonial Block -->
-                    <div class="testimonial-block">
-                        <div class="inner-box">
-                            <div class="content">
-                                <div class="author-image">
-                                    <img src="/images/resource/author-1.png" alt="" />
-                                </div>
-                                <div class="quote-icon icon_quotations"></div>
-                                <div class="author">Nguyễn Ngọc Đức <span>/ CEO at MetaSoft</span></div>
-                                <div class="text"> Tôi rất hài lòng về sự tận tâm và cả sự uy tín trong quá
-                                    trình tư vấn hỗ trợ doanh nghiệp tôi ở thời điểm vừa mới bắt đầu cho hành
-                                    trình xây dựng thương hiệu. Legalink rất đúng chuẩn theo tiêu chị họ đưa ra
-                                    " TÂM - TRÍ - TÍN"
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <!-- Testimonial Block -->
-                    <div class="testimonial-block">
-                        <div class="inner-box">
-                            <div class="content">
-                                <div class="author-image">
-                                    <img src="/images/resource/author-1.png" alt="" />
-                                </div>
-                                <div class="quote-icon icon_quotations"></div>
-                                <div class="author">Nguyễn Ngọc Đức <span>/ CEO at MetaSoft</span></div>
-                                <div class="text"> Tôi rất hài lòng về sự tận tâm và cả sự uy tín trong quá
-                                    trình tư vấn hỗ trợ doanh nghiệp tôi ở thời điểm vừa mới bắt đầu cho hành
-                                    trình xây dựng thương hiệu. Legalink rất đúng chuẩn theo tiêu chị họ đưa ra
-                                    " TÂM - TRÍ - TÍN"
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+               
 
 
             </div>

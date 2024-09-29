@@ -79,7 +79,7 @@
             <!-- Consulation Form -->
             <div class="consulation-form">
                 <!-- Consulation Form -->
-                <form method="post" action="{{route('contacts.store')}}" id="contact-form">
+                <form method="post" action="{{route('contacts.store')}}" >
                     @csrf
                     <div class="row clearfix">
                         <div class="col-lg-4 col-md-6 col-sm-12 form-group">
@@ -101,6 +101,12 @@
                         <div class="col-lg-4 col-md-12 col-sm-12 form-group">
                             <input type="email" name="email" value="{{old('email')}}" placeholder="E-mail" required>
                             @error('email')
+                            <p class="fw-bold" style="color: red;">{{ $message }}</p>
+                        @enderror
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                            <input type="text" name="phone" value="{{old('phone')}}" placeholder="Số điện thoại" required>
+                            @error('phone')
                             <p class="fw-bold" style="color: red;">{{ $message }}</p>
                         @enderror
                         </div>

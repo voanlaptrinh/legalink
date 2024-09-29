@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contacts;
+use App\Models\MenusServices;
 use App\Models\Sliders;
 use App\Models\Webconfigs;
 use Illuminate\Http\Request;
@@ -15,8 +16,9 @@ class ContactsControler extends Controller
         
         $webConfig = Webconfigs::find(1);
         $sliders = Sliders::all();
-      
-        return view('users.contact.index', compact( 'webConfig', 'sliders'));
+        $menus = MenusServices::whereNull('parent_id')->with('children')->get();
+
+        return view('users.contact.index', compact( 'webConfig', 'sliders','menus'));
     }
     public function store(Request $request)
     {
@@ -24,6 +26,7 @@ class ContactsControler extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'email' => 'required|string|email',
+          'phone' => 'required|string|regex:/^[0-9]{10}$/',
            
         ], [
             'name.required' => 'Tiêu đề là bắt buộc.',
@@ -34,6 +37,9 @@ class ContactsControler extends Controller
             'description.required' => 'Mô tả là bắt buộc.',
             'email.required' => 'Email là bắt buộc.',
             'email.email' => 'Phải là email.',
+            'phone.required' => 'Vui lòng nhập số điện thoại.',
+            'phone.string' => 'Số điện thoại phải là một chuỗi.',
+            'phone.regex' => 'Số điện thoại phải có đúng 10 chữ số.',
 
             
         ]);
@@ -43,6 +49,7 @@ class ContactsControler extends Controller
         Contacts::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
             'select_what' => $request->input('select_what'),
             'description' => $request->input('description'),
         ]);

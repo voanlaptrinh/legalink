@@ -15,7 +15,7 @@
                                 <li>Tin tức</li>
                                 <li>{{ $news->title }}</li>
                             </ul>
-                            <div class="content">
+                            <div class="content" style="overflow-wrap: break-word; word-wrap: break-word; white-space: normal; overflow: hidden;">
                                 @if ($news->content)
                                     {!! $news->content !!}
                                 @else

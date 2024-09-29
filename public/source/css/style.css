@@ -376,6 +376,7 @@ footer {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .product-card {
     position: relative;
     overflow: hidden; /* Đảm bảo phần tử không tràn ra khỏi box */

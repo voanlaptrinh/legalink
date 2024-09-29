@@ -11,4 +11,8 @@ class Members extends Model
     protected $fillable = [
         'name', 'alias', 'description', 'content', 'image', 'email', 'phone'
     ];
+    public function articles()
+    {
+        return $this->belongsToMany(ArticlesService::class, 'article_member', 'member_id', 'article_service_id');
+    }
 }

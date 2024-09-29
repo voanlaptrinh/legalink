@@ -25,7 +25,7 @@
     <link href="{{asset('/source/css/main.css')}}" rel="stylesheet">
     <link href="{{asset('/source/css/responsive.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="/source/css/icofont.min.css">
-
+    <link rel="stylesheet" href="{{ asset('/source/css/toastr.min.css') }}">
 
 
     <!-- Fonts -->
@@ -80,7 +80,24 @@
     <script src="{{asset('/source/js_user/validate.js')}}"></script>
     <script src="{{asset('/source/js_user/jquery-ui.js')}}"></script>
     <script src="{{asset('/source/js_user/script.js')}}"></script>
+    <script src="{{ asset('/source/js/toastr.min.js') }}"></script>
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
 
+        @if (Session::has('error'))
+            toastr.error("{{ Session::get('error') }}");
+        @endif
+
+        @if (Session::has('info'))
+            toastr.info("{{ Session::get('info') }}");
+        @endif
+
+        @if (Session::has('warning'))
+            toastr.warning("{{ Session::get('warning') }}");
+        @endif
+    </script>
 </body>
 
 </html>

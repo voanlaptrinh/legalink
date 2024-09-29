@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Evaluations;
 use App\Models\Introduces;
 use App\Models\Members;
 use App\Models\News;
@@ -69,6 +70,16 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Đây là đoạn trả lời cho câu hỏi thường gặp, nội dung
                                         câu trả lời sẽ được rút ngắn khoảng 256 ký tự, nếu xem chi tiết thì
                                         click vào câu hỏi và xem chi tiết câu trả lời,...',
+
+            ]);
+        }
+        for ($i = 0; $i < 10; $i++) {
+            Evaluations::create(attributes: [
+                'name' => 'NGUYỄN NGỌC ĐỨC',
+                'description' => 'Tôi rất hài lòng về sự tận tâm và cả sự uy tín trong quá
+                                    trình tư vấn hỗ trợ doanh nghiệp tôi ở thời điểm vừa mới bắt đầu cho hành
+                                    trình xây dựng thương hiệu. Legalink rất đúng chuẩn theo tiêu chị họ đưa ra
+                                    " TÂM - TRÍ - TÍN"ádddddddddddđqweterwtewrtewrt',
 
             ]);
         }

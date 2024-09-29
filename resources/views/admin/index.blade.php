@@ -10,6 +10,7 @@
     <script src="{{ asset('/source/js/jquery-3.5.1.min.js') }}"></script>
 
     <link rel="stylesheet" href="{{ asset('/source/css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('/source/css/toastr.min.css') }}">
 </head>
 
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
@@ -41,6 +42,21 @@
                 </div>
 
                 <ul class="sidebar-nav">
+                    <li class="sidebar-header">
+                        Dịch vụ
+                    </li>
+                    <li
+                        class="sidebar-item {{ in_array(Request::route()->getName(), ['menuservice.index','menuservice.create','menuservice.edit']) ? 'active' : '' }}">
+                        <a class='sidebar-link' href='{{ route('menuservice.index') }}'>
+                            <i class="bi bi-people-fill"></i> <span class="align-middle">Menu dịch vụ</span>
+                        </a>
+                    </li>
+                    <li
+                        class="sidebar-item {{ in_array(Request::route()->getName(), ['article.index','article.create','article.edit', 'article.detail']) ? 'active' : '' }}">
+                        <a class='sidebar-link' href='{{ route('article.index') }}'>
+                            <i class="bi bi-people-fill"></i> <span class="align-middle">Bài viết dịch vụ</span>
+                        </a>
+                    </li>
                     <li class="sidebar-header">
                         Pages
                     </li>
@@ -102,6 +118,12 @@
                         class="sidebar-item {{ in_array(Request::route()->getName(), ['questions.admin']) ? 'active' : '' }}">
                         <a class='sidebar-link' href='{{ route('questions.admin') }}'>
                             <i class="bi bi-file-image"></i> <span class="align-middle">Câu hỏi</span>
+                        </a>
+                    </li>
+                    <li
+                        class="sidebar-item {{ in_array(Request::route()->getName(), ['evaluations.index']) ? 'active' : '' }}">
+                        <a class='sidebar-link' href='{{ route('evaluations.index') }}'>
+                            <i class="bi bi-file-image"></i> <span class="align-middle">Đánh giá khách hàng</span>
                         </a>
                     </li>
                     {{-- <li
@@ -303,7 +325,24 @@
 
 
     <script src="{{ asset('/source/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('/source/js/toastr.min.js') }}"></script>
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
 
+        @if (Session::has('error'))
+            toastr.error("{{ Session::get('error') }}");
+        @endif
+
+        @if (Session::has('info'))
+            toastr.info("{{ Session::get('info') }}");
+        @endif
+
+        @if (Session::has('warning'))
+            toastr.warning("{{ Session::get('warning') }}");
+        @endif
+    </script>
 
     <script type="text/javascript">
         tinymce.init({

@@ -4772,3 +4772,10 @@ img{
 .nac_pri li .page-link{
 	border-radius: 50% !important 
 }
+.defau_3{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

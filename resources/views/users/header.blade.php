@@ -7,15 +7,15 @@
 
                 <!-- Top Left -->
                 <div class="top-left pull-left">
-                    <div class="text">{{$webConfig->address}}</div>
+                    <div class="text">{{ $webConfig->address }}</div>
                 </div>
 
                 <!-- Top Right -->
                 <div class="top-right pull-right">
                     <!-- Info List -->
                     <ul class="info-list">
-                        <li><a href="mailto:{{$webConfig->email}}">{{$webConfig->email}}</a></li>
-                        <li><a href="tel:{{$webConfig->phone}}">{{$webConfig->phone}}</a></li>
+                        <li><a href="mailto:{{ $webConfig->email }}">{{ $webConfig->email }}</a></li>
+                        <li><a href="tel:{{ $webConfig->phone }}">{{ $webConfig->phone }}</a></li>
                     </ul>
                 </div>
 
@@ -29,10 +29,10 @@
             <div class="clearfix">
 
                 <div class="pull-left logo-box">
-                    <div class="logo"><a href="{{route('home')}}"><img src="{{asset('source/images/logo.png')}}" alt=""
-                                title=""></a></div>
-                    <div class="logo-two"><a href="{{route('home')}}"><img src="{{asset('source/images/logo-2.png')}}" alt=""
-                                title=""></a></div>
+                    <div class="logo"><a href="{{ route('home') }}"><img src="{{ asset('source/images/logo.png') }}"
+                                alt="" title=""></a></div>
+                    <div class="logo-two"><a href="{{ route('home') }}"><img
+                                src="{{ asset('source/images/logo-2.png') }}" alt="" title=""></a></div>
                 </div>
 
                 <div class="nav-outer clearfix">
@@ -55,30 +55,24 @@
 
                                 <li class="dropdown"><a href="">Thông Tin</a>
                                     <ul>
-                                        <li><a href="{{route('introduce')}}">Về Chúng Tôi</a></li>
-                                        <li><a href="{{route('members')}}">Nhân Sự</a></li>
+                                        <li><a href="{{ route('introduce') }}">Về Chúng Tôi</a></li>
+                                        <li><a href="{{ route('members') }}">Nhân Sự</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown"><a href="">Dịch Vụ</a>
                                     <ul>
-                                        <li class="dropdown"><a href="">Luật Doanh Ngiệp</a>
-                                            <ul>
-                                                <li><a href="">Danh Muc 1</a></li>
-                                                <li><a href="">Danh Muc 1</a></li>
-                                                <li><a href="">Danh Muc 1</a></li>
-                                                <li><a href="">Danh Muc 1</a></li>
-                                                <li><a href="">Danh Muc 1</a></li>
-                                                <li><a href="">Danh Muc 1</a></li>
-                                                <li><a href="">Danh Muc 1</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="">Luật Sở Hữu Trí Tuệ</a></li>
-                                        <li><a href="">Pháp Luật Đầu Tư</a></li>
-                                        <li><a href="">Giấy Phép</a></li>
-                                        <li><a href="">Kế Toán Thuế</a></li>
-                                        <li><a href="">Giải Quyết Tranh Chấp</a></li>
-                                        <li><a href="">Tư Vấn Pháp Luật</a></li>
-                                        <li><a href="">Văn Bản Pháp Luật</a></li>
+                                        @foreach ($menus as $menu)
+                                            <li {{ $menu->children->count() ? 'dropdown' : '' }}><a href="{{ route('menu.show', $menu->alias) }}">{{ $menu->title }}</a>
+                                                @if ($menu->children->count())
+                                                <ul>
+                                                    @foreach ($menu->children as $subMenu)
+                                                        <li><a href="{{ route('menu.show', $subMenu->alias) }}">{{ $subMenu->title }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                              
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </li>
                             </ul>
@@ -86,11 +80,11 @@
                             <ul class="navigation right-nav clearfix">
                                 <li class="dropdown"><a href="#">Tin Tức</a>
                                     <ul>
-                                        <li><a href="{{route('news')}}">Tin Tức</a></li>
-                                        <li><a href="{{route('thuvien')}}">Thư Viện Ảnh</a></li>
+                                        <li><a href="{{ route('news') }}">Tin Tức</a></li>
+                                        <li><a href="{{ route('thuvien') }}">Thư Viện Ảnh</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="{{route('contacts')}}">Liên Hệ</a></li>
+                                <li><a href="{{ route('contacts') }}">Liên Hệ</a></li>
                             </ul>
 
                         </div>
@@ -127,8 +121,8 @@
         <div class="close-btn"><span class="icon lnr lnr-cross"></span></div>
 
         <nav class="menu-box">
-            <div class="nav-logo"><a href=""><img src="/images/logo-2.png" alt=""
-                        title=""></a></div>
+            <div class="nav-logo"><a href=""><img src="/images/logo-2.png" alt="" title=""></a>
+            </div>
             <div class="menu-outer">
                 <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
             </div>
