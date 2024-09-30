@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\DashboadController;
 use App\Http\Controllers\Admin\EvaluationsController;
+use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Admin\MenuServiceController;
 use App\Http\Controllers\Admin\QuestionController;
@@ -57,7 +58,14 @@ Route::get('/articles/{alias}', [UsersMenuServiceController::class, 'showArticle
 
 Route::prefix('/admin')->group(function () {
     Route::get('/',  [DashboadController::class, 'dashboard'])->name('admin.dashboard');
+    Route::prefix('/files')->group(function () {
+        Route::get('/', [FileController::class, 'index'])->name('files.index');
+        Route::get('/create', [FileController::class, 'create'])->name('files.create');
+        Route::post('/store', [FileController::class, 'store'])->name('files.store');
+        Route::get('/files/{id}/edit', [FileController::class, 'edit'])->name('files.edit');
+Route::put('/files/{id}', [FileController::class, 'update'])->name('files.update');
 
+    });
     Route::prefix('/news')->group(function () {
         Route::get('/', [NewsController::class, 'index'])->name('news.index');
         Route::get('/create', [NewsController::class, 'create'])->name('news.create');

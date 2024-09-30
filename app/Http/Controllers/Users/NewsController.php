@@ -24,6 +24,7 @@ class NewsController extends Controller
         $news = News::where('alias', $alias)->firstOrFail();
         $webConfig = Webconfigs::find(1);
         $sliders = Sliders::all();
+        $news->increment('views');
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
         $latestNews = News::orderBy('id', 'desc')->take(4)->get();
         return view('users.news.detail', compact('news', 'webConfig', 'sliders','latestNews', 'menus'));

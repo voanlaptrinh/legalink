@@ -98,6 +98,13 @@
             toastr.warning("{{ Session::get('warning') }}");
         @endif
     </script>
+    <script>$('.dropdown a').on('click', function(e) {
+        if ($(this).next('ul').length) {
+            e.preventDefault(); // This will stop the link from being followed
+        }
+    });
+    
+    </script>
 </body>
 
 </html>

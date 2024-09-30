@@ -81,7 +81,6 @@
                                     @else
                                         <tr class="text-center">
                                             <td colspan="4">Không có sliders nào</td>
-
                                         </tr>
                                     @endif
                                 </tbody>

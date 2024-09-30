@@ -2,11 +2,11 @@
 @section('content')
     <div class="row mb-2 mb-xl-3">
         <div class="col-auto d-none d-sm-block">
-            <h3><strong>Thống kê</strong> Danh mục</h3>
+            <h3><strong>Thống kê</strong> files</h3>
         </div>
 
         <div class="col-auto ms-auto text-end mt-n1">
-            <a href="{{ route('article.create') }}" class="btn btn-primary">Thêm mới danh mục</a>
+            <a href="{{ route('files.create') }}" class="btn btn-primary">Thêm mới files</a>
         </div>
     </div>
     <div class="row">
@@ -16,7 +16,7 @@
             <div class="card flex-fill w-100">
                 <div class="card-header">
                     <div class="float-end">
-                        <form class="row g-2" method="GET" action="{{ route('article.index') }}">
+                        <form class="row g-2" method="GET" action="{{ route('files.index') }}">
 
                             <div class="col-auto">
                                 <input type="text" name="search" class="form-control border-2"
@@ -41,15 +41,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (count($articles) > 0)
-                                    @foreach ($articles as $article)
+                                    @if (count($files) > 0)
+                                    @foreach ($files as $file)
                                         <tr>
-                                            <td>{{ $article->name }}</td>
+                                            <td>{{ $file->name }}</td>
                                             <td>
-                                              {{ $article->created_at}}
+                                              {{ $file->created_at}}
                                             </td>
 
-                                            <td class="table-action text-end">
+                                            {{-- <td class="table-action text-end">
                                                 <a href="{{ route('article.edit', $article->id) }}"
                                                     class="btn btn-primary text-white"><svg
                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -86,12 +86,12 @@
                                                       </svg>
                                                 </a>
 
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 @else
                                     <tr class="text-center">
-                                        <td colspan="3">Không có danh mục nào</td>
+                                        <td colspan="3">Không có file nào</td>
 
                                     </tr>
                                 @endif
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                        {{ $articles->appends(request()->query())->links('pagination::bootstrap-4') }}
+                        {{ $files->appends(request()->query())->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>

@@ -57,6 +57,12 @@
                             <i class="bi bi-people-fill"></i> <span class="align-middle">Bài viết dịch vụ</span>
                         </a>
                     </li>
+                    <li
+                        class="sidebar-item {{ in_array(Request::route()->getName(), ['files.index','files.create','files.edit', 'files.detail']) ? 'active' : '' }}">
+                        <a class='sidebar-link' href='{{ route('files.index') }}'>
+                            <i class="bi bi-people-fill"></i> <span class="align-middle">File</span>
+                        </a>
+                    </li>
                     <li class="sidebar-header">
                         Pages
                     </li>

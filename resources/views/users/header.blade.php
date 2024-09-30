@@ -62,15 +62,20 @@
                                 <li class="dropdown"><a href="">Dịch Vụ</a>
                                     <ul>
                                         @foreach ($menus as $menu)
-                                            <li {{ $menu->children->count() ? 'dropdown' : '' }}><a href="{{ route('menu.show', $menu->alias) }}">{{ $menu->title }}</a>
+                                            <li class="{{ $menu->children->count() ? 'dropdown' : '' }}">
+                                                <a href="#" onclick="window.location.href='{{ route('menu.show', $menu->alias) }}'; return false;">{{ $menu->title }}</a>
+
+                                             
+                                            
                                                 @if ($menu->children->count())
-                                                <ul>
-                                                    @foreach ($menu->children as $subMenu)
-                                                        <li><a href="{{ route('menu.show', $subMenu->alias) }}">{{ $subMenu->title }}</a></li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                              
+                                                    <ul>
+                                                        @foreach ($menu->children as $subMenu)
+                                                            <li><a
+                                                                    href="{{ route('menu.show', $subMenu->alias) }}">{{ $subMenu->title }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
                                             </li>
                                         @endforeach
                                     </ul>

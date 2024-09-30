@@ -63,7 +63,7 @@
                         <div class="sidebar-widget reservation-widget">
                             <div class="widget-content">
                                 <div class="sidebar-title">
-                                    <h3>Reservations</h3>
+                                    <h3>Phản hồi</h3>
                                 </div>
                                 <style>
                                     .form-group .ui-selectmenu-button.ui-button {
@@ -118,7 +118,7 @@
 
                                         <div class="form-group">
                                             <button class="theme-btn btn-style-one" type="submit" name="submit-form"><span
-                                                    class="txt">send message</span></button>
+                                                    class="txt">Gửi</span></button>
                                         </div>
 
                                     </form>
