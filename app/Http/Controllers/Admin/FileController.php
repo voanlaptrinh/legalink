@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Files;
+use Illuminate\Support\Facades\Storage;
 class FileController extends Controller
 {
     public function index(Request $request)
@@ -102,5 +103,26 @@ class FileController extends Controller
         $fileRecord->save();
 
         return redirect()->route('files.index')->with('success', 'File updated successfully!');
+    }
+    public function destroy($id)
+    {
+        // Tìm file cần xóa
+        $file = Files::findOrFail($id);
+
+        // Xóa file trên hệ thống lưu trữ (nếu tồn tại)
+        if ($file->file && Storage::disk('public')->exists($file->file)) {
+            Storage::disk('public')->delete($file->file);
+        }
+
+        // Xóa hình ảnh trên hệ thống lưu trữ (nếu tồn tại)
+        if ($file->image && Storage::disk('public')->exists($file->image)) {
+            Storage::disk('public')->delete($file->image);
+        }
+
+        // Xóa bản ghi trong cơ sở dữ liệu
+        $file->delete();
+
+        // Điều hướng lại danh sách file với thông báo thành công
+        return redirect()->route('files.index')->with('success', 'File deleted successfully!');
     }
 }

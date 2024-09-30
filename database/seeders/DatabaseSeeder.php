@@ -7,8 +7,10 @@ namespace Database\Seeders;
 use App\Models\Evaluations;
 use App\Models\Introduces;
 use App\Models\Members;
+use App\Models\MenusServices;
 use App\Models\News;
 use App\Models\Questions;
+use App\Models\User;
 use App\Models\Webconfigs;
 use Illuminate\Database\Seeder;
 
@@ -83,5 +85,47 @@ class DatabaseSeeder extends Seeder
 
             ]);
         }
+        MenusServices::create([
+            'title' => 'Luật Doanh Nghiệp',
+            'description' => 'Lorem ipsum dolor sitori dolo tur adipiscing elit.Aenean me vel suscipit magna',
+            'alias' => 'luat-doanh-nghiep-1',
+        ]);
+        MenusServices::create([
+            'title' => 'Luật Sở Hữu Trí Tuệ',
+            'description' => 'Lorem ipsum dolor sitori dolo tur adipiscing elit.Aenean me vel suscipit magna',
+            'alias' => 'luat-so-huu-tri-tue-2',
+        ]);
+        MenusServices::create([
+            'title' => 'Pháp Luật Đầu tư',
+            'description' => 'Lorem ipsum dolor sitori dolo tur adipiscing elit.Aenean me vel suscipit magna',
+            'alias' => 'phap-luat-dau-tu-3',
+        ]);
+        MenusServices::create([
+            'title' => 'Giấy Phép',
+            'description' => 'Lorem ipsum dolor sitori dolo tur adipiscing elit.Aenean me vel suscipit magna',
+            'alias' => 'giay-phep-4',
+        ]);
+        MenusServices::create([
+            'title' => 'Kế Toán Thuế',
+            'description' => 'Lorem ipsum dolor sitori dolo tur adipiscing elit.Aenean me vel suscipit magna',
+            'alias' => 'ke-toan-thue-5',
+        ]);
+        MenusServices::create([
+            'title' => 'Giải Quyết Tranh Chấp',
+            'description' => 'Lorem ipsum dolor sitori dolo tur adipiscing elit.Aenean me vel suscipit magna',
+            'alias' => 'giai-quyet-tranh-chap-6',
+        ]);
+        MenusServices::create([
+            'title' => 'Tư Vấn Pháp Luật',
+            'description' => 'Lorem ipsum dolor sitori dolo tur adipiscing elit.Aenean me vel suscipit magna',
+            'alias' => 'tu-van-phap-luat-7',
+        ]);
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('12345678'),
+            'role' => 'admin',
+        ]);
+
     }
 }

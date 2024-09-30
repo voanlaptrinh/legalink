@@ -17,6 +17,7 @@ use App\Http\Controllers\UploadController;
 use App\Http\Controllers\Users\ContactsControler;
 use App\Http\Controllers\Users\HomeController;
 use App\Http\Controllers\Users\IntroduceController;
+use App\Http\Controllers\Users\LoginController;
 use App\Http\Controllers\Users\MembersControler;
 use App\Http\Controllers\Users\MenuServiceController as UsersMenuServiceController;
 use App\Http\Controllers\Users\NewsController as UsersNewsController;
@@ -32,11 +33,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::post('/upload-image', action: [UploadController::class, 'uploadImage'])->name('upload-image');
 
 Route::get('/',  [HomeController::class, 'index'])->name('home');
 Route::get('/tin-tuc', [UsersNewsController::class, 'index'])->name('news');
-Route::get('/thu-vien-anh', [HomeController::class, 'thuvien'])->name( 'thuvien');
+Route::get('/thu-vien-anh', [HomeController::class, 'thuvien'])->name('thuvien');
 Route::get('/{alias}/chi-tiet', [UsersNewsController::class, 'detail'])->name('news.chi');
 
 Route::get('gioi-thieu', [IntroduceController::class, 'index'])->name('introduce');
@@ -51,20 +53,23 @@ Route::get('/menu/{alias}', [UsersMenuServiceController::class, 'showMenu'])->na
 Route::get('/articles/{alias}', [UsersMenuServiceController::class, 'showArticle'])->name('articles.show');
 
 
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('postlogin');
+Route::post('/register', [LoginController::class, 'register'])->name('postregister');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 
 
-
-Route::prefix('/admin')->group(function () {
+Route::prefix('/admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/',  [DashboadController::class, 'dashboard'])->name('admin.dashboard');
     Route::prefix('/files')->group(function () {
         Route::get('/', [FileController::class, 'index'])->name('files.index');
         Route::get('/create', [FileController::class, 'create'])->name('files.create');
         Route::post('/store', [FileController::class, 'store'])->name('files.store');
         Route::get('/files/{id}/edit', [FileController::class, 'edit'])->name('files.edit');
-Route::put('/files/{id}', [FileController::class, 'update'])->name('files.update');
-
+        Route::put('/files/{id}', [FileController::class, 'update'])->name('files.update');
+        Route::delete('/files/{id}', [FileController::class, 'destroy'])->name('files.destroy');
     });
     Route::prefix('/news')->group(function () {
         Route::get('/', [NewsController::class, 'index'])->name('news.index');
@@ -83,7 +88,6 @@ Route::put('/files/{id}', [FileController::class, 'update'])->name('files.update
         Route::get('/{alias}/detail', [MemberController::class, 'detail'])->name('members.detail');
         Route::put('/{id}', [MemberController::class, 'update'])->name('members.update');
         Route::delete('delete/{id}', [MemberController::class, 'destroy'])->name('members.destroy');
-   
     });
     Route::prefix('/sliders')->group(function () {
         Route::get('/', [SliderController::class, 'index'])->name('sliders.index');
@@ -119,28 +123,26 @@ Route::put('/files/{id}', [FileController::class, 'update'])->name('files.update
         Route::get('/{id}/edit', [QuestionController::class, 'edit'])->name('questions.edit');
         Route::put('/{id}', [QuestionController::class, 'update'])->name('questions.update');
         Route::delete('delete/{id}', [QuestionController::class, 'destroy'])->name('questions.destroy');
-
     });
     Route::prefix(('/Danh-gia-khach-hang'))->group(function () {
-        Route::get('/', [EvaluationsController::class, 'index'])->name( 'evaluations.index');
-        Route::get('/create', [EvaluationsController::class, 'create'])->name( 'evaluations.create');
+        Route::get('/', [EvaluationsController::class, 'index'])->name('evaluations.index');
+        Route::get('/create', [EvaluationsController::class, 'create'])->name('evaluations.create');
         Route::post('/store', [EvaluationsController::class, 'store'])->name('evaluations.store');
         Route::get('/{id}/edit', [EvaluationsController::class, 'edit'])->name('evaluations.edit');
         Route::put('/{id}', [EvaluationsController::class, 'update'])->name('evaluations.update');
         Route::delete('delete/{id}', [EvaluationsController::class, 'destroy'])->name('evaluations.destroy');
     });
     Route::prefix(('/menu-dich-vu'))->group(function () {
-        Route::get('/', [MenuServiceController::class, 'index'])->name( 'menuservice.index');
-        Route::get('/create', [MenuServiceController::class, 'create'])->name( 'menuservice.create');
+        Route::get('/', [MenuServiceController::class, 'index'])->name('menuservice.index');
+        Route::get('/create', [MenuServiceController::class, 'create'])->name('menuservice.create');
         Route::post('/store', [MenuServiceController::class, 'store'])->name('menuservice.store');
         Route::get('/{alias}/edit', [MenuServiceController::class, 'edit'])->name('menuservice.edit');
         Route::put('/{id}', [MenuServiceController::class, 'update'])->name('menuservice.update');
         Route::delete('delete/{id}', [MenuServiceController::class, 'destroy'])->name('menuservice.destroy');
-
     });
-    Route::prefix(('/bai-viet-dich-vu'))->group(function () { 
-        Route::get('/', [ArticleServiceController::class, 'index'])->name( 'article.index');
-        Route::get('/create', [ArticleServiceController::class, 'create'])->name( 'article.create');
+    Route::prefix(('/bai-viet-dich-vu'))->group(function () {
+        Route::get('/', [ArticleServiceController::class, 'index'])->name('article.index');
+        Route::get('/create', [ArticleServiceController::class, 'create'])->name('article.create');
         Route::post('/store', [ArticleServiceController::class, 'store'])->name('article.store');
         Route::get('/{id}/edit', [ArticleServiceController::class, 'edit'])->name('article.edit');
         Route::put('/{id}', [ArticleServiceController::class, 'update'])->name('article.update');
