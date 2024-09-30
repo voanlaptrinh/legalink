@@ -27,14 +27,14 @@
                             <div>
                                 <label class="form-label" for="title">Tên bài viết:</label>
                                 <input type="text" id="name" name="name" class="form-control"
-                                    placeholder="Tên bài viết" value="{{ old('name') }}">
+                                    placeholder="Tên bài viết" value="{{ old('name', $file->name) }}">
                                 @error('name')
                                     <p class="fw-bold" style="color: red;">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div>
                                 <label class="form-label" for="title">Giá:</label>
-                                <input type="number" name="price" class="form-control" value="{{ old('price') }}"
+                                <input type="number" name="price" class="form-control" value="{{ old('price', $file->price) }}"
                                     required>
                                 @error('price')
                                     <p class="fw-bold" style="color: red;">{{ $message }}</p>
@@ -43,6 +43,8 @@
                             <div>
                                 <label class="form-label" for="title">File:</label>
                                 <input type="file" name="file" class="form-control" required>
+                                <p>Current File: <a href="{{ asset('storage/'.$file->file) }}" target="_blank">{{ $file->name }}</a></p>
+                            </div>
                                 @error('file')
                                     <p class="fw-bold" style="color: red;">{{ $message }}</p>
                                 @enderror
@@ -50,7 +52,7 @@
                         </div>
                         <div class="mb-3 col-lg-6">
                             <div class="text-center">
-                                <img id="preview-image" src="{{ asset('source/imges/none-image.jpg') }}" alt=""
+                                <img id="preview-image" src="{{ asset('storage/'. $file->image) }}" alt=""
                                     class="review_img img-thumbnail" style="max-width: 290px; max-height: 288px;">
                                 <input type="file" class="form-control" name="image" id="image"
                                     onchange="previewImage(event)">
@@ -60,7 +62,7 @@
                             @enderror
                         </div>
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            <button type="submit" class="btn btn-primary">Sửa</button>
                             <a href="{{ route('files.index') }}" class="btn btn-primary">Quay lại</a>
         
                         </div>
