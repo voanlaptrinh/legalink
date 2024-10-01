@@ -5,10 +5,10 @@
             <div class="logo"><a href="{{route('home')}}"><img src="/images/logo.png" alt="" /></a></div>
         </div>
         <ul class="footer-nav">
-            <li><a href="">Về Chúng Tôi</a></li>
-            <li><a href="">Dịch Vụ</a></li>
-            <li><a href="">Liên Hệ</a></li>
-            <li><a href="">Thư Viện</a></li>
+            <li><a href="{{ route('introduce') }}">Về Chúng Tôi</a></li>
+            <li><a href="{{ route('news') }}">Tin Tức</a></li>
+            <li><a href="{{ route('thuvien') }}">Thư Viện</a></li>
+            <li><a href="{{ route('contacts') }}">Liên Hệ</a></li>
         </ul>
         <!-- Social Box -->
         <ul class="social-box">
