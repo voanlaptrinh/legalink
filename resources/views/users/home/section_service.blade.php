@@ -11,7 +11,7 @@
             @foreach ($menus as $items)
                 <div class="service-block col-lg-3 col-md-6 col-sm-12">
                     <div class="inner-box">
-                        <div class="image-layer" style="background-image: url(images/resource/service-1.jpg)">
+                        <div class="image-layer" style="background-image: url({{asset('source/images/resource/service-1.jpg')}})">
                         </div>
                        
                         <h5><a href="{{ route('menu.show', $items->alias) }}">{{$items->title}}</a></h5>
