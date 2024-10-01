@@ -36,6 +36,15 @@ class ArticleServiceController extends Controller
             'name' => 'required|string|max:255',
             'content' => 'required',
             'members_ids' => 'required|array', // Expecting an array of member IDs
+        ], [
+            'menus_services_id.required' => 'Trường này là bắt buộc.',
+            'menus_services_id.exists' => 'Dịch vụ không tồn tại trong danh sách.',
+            'name.required' => 'Tên là bắt buộc.',
+            'name.string' => 'Tên phải là một chuỗi.',
+            'name.max' => 'Tên không được vượt quá 255 ký tự.',
+            'content.required' => 'Nội dung là bắt buộc.',
+            'members_ids.required' => 'Cần chọn ít nhất một thành viên.',
+            'members_ids.array' => 'Danh sách thành viên không hợp lệ.',
         ]);
 
         // Create new article service
@@ -71,6 +80,15 @@ class ArticleServiceController extends Controller
             'name' => 'required|string|max:255',
             'content' => 'required',
             'members_ids' => 'required|array', // Expecting an array of member IDs
+        ], [
+            'menus_services_id.required' => 'Trường này là bắt buộc.',
+            'menus_services_id.exists' => 'Dịch vụ không tồn tại trong danh sách.',
+            'name.required' => 'Tên là bắt buộc.',
+            'name.string' => 'Tên phải là một chuỗi.',
+            'name.max' => 'Tên không được vượt quá 255 ký tự.',
+            'content.required' => 'Nội dung là bắt buộc.',
+            'members_ids.required' => 'Cần chọn ít nhất một thành viên.',
+            'members_ids.array' => 'Danh sách thành viên không hợp lệ.',
         ]);
 
         // Find the existing article service

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ArticleServiceController;
 use App\Http\Controllers\Admin\ContactsController;
 use App\Http\Controllers\Admin\IntroducesController;
@@ -12,11 +13,14 @@ use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Admin\MenuServiceController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WebConfigController;
+use App\Http\Controllers\BankQrCodeController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\Users\ContactsControler;
 use App\Http\Controllers\Users\HomeController;
 use App\Http\Controllers\Users\IntroduceController;
+use App\Http\Controllers\Users\LawController;
 use App\Http\Controllers\Users\LoginController;
 use App\Http\Controllers\Users\MembersControler;
 use App\Http\Controllers\Users\MenuServiceController as UsersMenuServiceController;
@@ -44,6 +48,9 @@ Route::get('/{alias}/chi-tiet', [UsersNewsController::class, 'detail'])->name('n
 Route::get('gioi-thieu', [IntroduceController::class, 'index'])->name('introduce');
 Route::get('nhan-su', [MembersControler::class, 'index'])->name('members');
 Route::get('lien-he', [ContactsControler::class, 'index'])->name('contacts');
+Route::get('van-ban-phap-luat', [LawController::class, 'index'])->name('law.index');
+Route::post('/download-file/{id}', [LawController::class, 'download'])->name('file.download');
+Route::get('/generate-bank-qr-code', action: [BankQrCodeController::class, 'generateQrCode']);
 Route::post('lienhe/store', [ContactsControler::class, 'store'])->name('contacts.store');
 
 
@@ -148,5 +155,18 @@ Route::prefix('/admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::put('/{id}', [ArticleServiceController::class, 'update'])->name('article.update');
         Route::delete('delete/{id}', [ArticleServiceController::class, 'destroy'])->name('article.destroy');
         Route::get('/{id}/detail', [ArticleServiceController::class, 'detail'])->name('article.detail');
+    });
+    Route::prefix(('/tai-khoan-nguoi-dung'))->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('users.index');
+        Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+
+    });
+    Route::prefix(('/tai-khoan-quan-ly'))->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('adminaccount.index');
+        Route::get('/create', [AdminController::class, 'create'])->name('adminaccount.create');
+        Route::post('/store', [AdminController::class, 'store'])->name('adminaccount.store');
+        Route::put('/adminaccount/{id}', [AdminController::class, 'update'])->name('adminaccount.update');
+
+
     });
 });
