@@ -17,7 +17,7 @@
         <div class="inner-box">
             <div class="image">
                 @if ($member->image)
-                <a href=""><img src="{{asset('/source' . $member->image)}}" alt="" /></a>
+                <a href=""><img src="{{asset($member->image)}}" alt="" /></a>
                 @else
                     
                 <a href=""><img src="{{asset('/source/images/resource/team-1.jpg')}}" alt="" /></a>

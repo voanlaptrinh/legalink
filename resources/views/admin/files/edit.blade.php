@@ -44,7 +44,7 @@
                                 <div>
                                     <label class="form-label" for="title">File:</label>
                                     <input type="file" name="file" class="form-control" >
-                                    <p>Current File: <a href="{{ asset('storage/' . $file->file) }}"
+                                    <p>Current File: <a href="{{ asset( $file->file) }}"
                                             target="_blank">{{ $file->name }}</a></p>
                                 </div>
                                 @error('file')
@@ -54,7 +54,7 @@
                        
                         <div class="mb-3 col-lg-6">
                             <div class="text-center">
-                                <img id="preview-image" src="{{ asset('storage/' . $file->image) }}" alt=""
+                                <img id="preview-image" src="{{ asset( $file->image) }}" alt=""
                                     class="review_img img-thumbnail" style="max-width: 290px; max-height: 288px;">
                                 <input type="file" class="form-control" name="image" id="image"
                                     onchange="previewImage(event)">

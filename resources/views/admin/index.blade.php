@@ -17,7 +17,7 @@
     <div class="wrapper">
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
-                <a class='sidebar-brand text-center' href='index.html'>
+                <a class='sidebar-brand text-center' href='/'>
                     <span class="sidebar-brand-text align-middle color__pet">
                         LegaLink
                     </span>
@@ -59,7 +59,7 @@
                     <li
                         class="sidebar-item {{ in_array(Request::route()->getName(), ['files.index','files.create','files.edit', 'files.detail']) ? 'active' : '' }}">
                         <a class='sidebar-link' href='{{ route('files.index') }}'>
-                            <i class="bi bi-file-earmark-zip"></i> <span class="align-middle">File</span>
+                            <i class="bi bi-file-earmark-zip"></i> <span class="align-middle">File (Văn bản pháp luật)</span>
                         </a>
                     </li>
                     <li class="sidebar-header">

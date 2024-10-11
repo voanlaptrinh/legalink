@@ -60,7 +60,7 @@
             <!-- Sec Title -->
             <div class="sec-title light centered">
                 <div class="title">Nhân sự</div>
-                <h2>Chuyên viên tư vẫn</h2>
+                <h2>Chuyên viên tư vấn</h2>
             </div>
             <div class="team-carousel">
                 <div class="swiper-wrapper">
@@ -72,10 +72,10 @@
                                 <div class="inner-box">
                                     <div class="image">
                                         @if ($member->image)
-                                            <a href=""><img src="{{ asset('/source' . $member->image) }}"
+                                            <a href=""><img src="{{ asset( $member->image) }}"  class="img-fluid"
                                                     alt="" /></a>
                                         @else
-                                            <a href=""><img src="{{ asset('/source/images/resource/team-1.jpg') }}"
+                                            <a href=""><img src="{{ asset('/source/images/resource/team-1.jpg') }}" class="img-fluid"
                                                     alt="" /></a>
                                         @endif
                                     </div>

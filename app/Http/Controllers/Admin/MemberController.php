@@ -60,14 +60,23 @@ class MemberController extends Controller
             if ($image->isValid()) {
                 $imageExtension = $image->getClientOriginalExtension();
                 $imageName = Str::random(10) . '.' . $imageExtension;
-                $imagePath = $image->storeAs('images', $imageName, 'public');
-                if (!Storage::disk('public')->exists('images/' . $imageName)) {
+        
+                // Save image to public/source/news
+                $destinationPath = public_path('source/members');
+                $image->move($destinationPath, $imageName);
+        
+                // Construct the image path for storing in the database
+                $imagePath = 'source/members/' . $imageName;
+        
+                // Check if the image exists in the destination path
+                if (!file_exists(public_path($imagePath))) {
                     return redirect()->back()->withErrors('Lỗi khi lưu ảnh.');
                 }
             } else {
                 return redirect()->back()->withErrors('Ảnh không hợp lệ.');
             }
         }
+        
 
         $member = Members::create([
             'name' => $request->input('name'),
@@ -116,15 +125,26 @@ class MemberController extends Controller
         $alias = Str::slug($request->input('name'), '-' ). '-' . $id;
 
         $imagePath = $news->image;
+
         if ($request->hasFile('image')) {
-            if ($news->image && file_exists(storage_path('app/public/' . $news->image))) {
-                unlink(storage_path('app/public/' . $news->image));
+            
+            if ($news->image && file_exists(public_path($news->image))) {
+                unlink(public_path($news->image));
             }
+        
+      
             $image = $request->file('image');
             $imageExtension = $image->getClientOriginalExtension();
             $imageName = Str::random(10) . '.' . $imageExtension;
-            $imagePath = $image->storeAs('images', $imageName, 'public');
+        
+
+            $destinationPath = public_path('source/members');
+            $image->move($destinationPath, $imageName);
+        
+          
+            $imagePath = 'source/members/' . $imageName;
         }
+        
 
         $news->update([
             'name' => $request->input('name'),
@@ -143,7 +163,10 @@ class MemberController extends Controller
         $members = Members::findOrFail($id);
 
         if ($members->image) {
-            $imagePath = storage_path('app/public/' . $members->image);
+            // Construct the path for the existing image in the public directory
+            $imagePath = public_path($members->image);
+            
+            // Check if the file exists and delete it
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }

@@ -19,7 +19,7 @@
                                 <div class="image">
                                     <a href="">
                                         @if ($latestNew->image)
-                                            <img src="{{ asset('/storage/' . $latestNew->image) }}" alt="" />
+                                            <img src="{{ asset( $latestNew->image) }}" alt="" />
                                         @else
                                             <img src="{{ asset('source/images/resource/news-1.jpg') }}"
                                                 alt="" />

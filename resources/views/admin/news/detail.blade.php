@@ -7,7 +7,7 @@
                 <h5 class="card-title mb-0">Chi tiết tin tức (<i class="bi bi-eye"></i> {{$news->views}})</h5>
             </div>
             <div class="card-body text-center">
-                <img src="{{ asset('storage/' . $news->image) }}" alt="Christina Mason" class="img-fluid mb-2" width="128" height="128">
+                <img src="{{ asset( $news->image) }}" alt="Christina Mason" class="img-fluid mb-2" width="128" height="128">
                 <h5 class="card-title mb-0">{{$news->title}}</h5>
 
             </div>

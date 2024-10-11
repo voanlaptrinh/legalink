@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Files;
 use Illuminate\Support\Facades\Storage;
+
 class FileController extends Controller
 {
     public function index(Request $request)
@@ -34,17 +35,27 @@ class FileController extends Controller
         ]);
 
         // Xử lý file tải lên
+        $filePath = null;
+        $imagePath = null;
+
+        // Xử lý file tải lên
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('uploads', $fileName, 'public'); // Lưu file trong thư mục public/uploads
+
+            // Lưu file trong thư mục public/source/upload
+            $file->move(public_path('source/upload'), $fileName);
+            $filePath = 'source/upload/' . $fileName; // Đường dẫn lưu file
         }
 
         // Xử lý hình ảnh (nếu có)
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_image_' . $image->getClientOriginalName();
-            $imagePath = $image->storeAs('uploads/images', $imageName, 'public'); // Lưu hình ảnh trong public/uploads/images
+
+            // Lưu hình ảnh trong public/source/upload
+            $image->move(public_path('source/upload'), $imageName);
+            $imagePath = 'source/upload/' . $imageName; // Đường dẫn lưu hình ảnh
         }
 
         // Lưu thông tin file vào cơ sở dữ liệu
@@ -85,19 +96,38 @@ class FileController extends Controller
 
         // Nếu có file mới, xử lý upload file và cập nhật đường dẫn
         if ($request->hasFile('file')) {
+            // Xóa file cũ nếu tồn tại
+            if ($fileRecord->file && file_exists(public_path($fileRecord->file))) {
+                unlink(public_path($fileRecord->file));
+            }
+    
             $file = $request->file('file');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('uploads', $fileName, 'public');
-            $fileRecord->file = $filePath;
+    
+            // Lưu file vào thư mục public/source/upload
+            $file->move(public_path('source/upload'), $fileName);
+            
+            // Cập nhật đường dẫn vào bản ghi
+            $fileRecord->file = 'source/upload/' . $fileName;
         }
-
-        // Nếu có ảnh mới, xử lý upload hình ảnh
+    
+        // Xóa hình ảnh cũ nếu có và tải lên hình ảnh mới
         if ($request->hasFile('image')) {
+            // Xóa hình ảnh cũ nếu tồn tại
+            if ($fileRecord->image && file_exists(public_path($fileRecord->image))) {
+                unlink(public_path($fileRecord->image));
+            }
+    
             $image = $request->file('image');
             $imageName = time() . '_image_' . $image->getClientOriginalName();
-            $imagePath = $image->storeAs('uploads/images', $imageName, 'public');
-            $fileRecord->image = $imagePath;
+            
+            // Lưu hình ảnh vào thư mục public/source/upload
+            $image->move(public_path('source/upload'), $imageName);
+            
+            // Cập nhật đường dẫn vào bản ghi
+            $fileRecord->image = 'source/upload/' . $imageName;
         }
+    
 
         // Lưu thông tin cập nhật vào cơ sở dữ liệu
         $fileRecord->save();
@@ -110,15 +140,14 @@ class FileController extends Controller
         $file = Files::findOrFail($id);
 
         // Xóa file trên hệ thống lưu trữ (nếu tồn tại)
-        if ($file->file && Storage::disk('public')->exists($file->file)) {
-            Storage::disk('public')->delete($file->file);
+        if ($file->file && file_exists(public_path($file->file))) {
+            unlink(public_path($file->file)); // Sử dụng unlink để xóa file
         }
-
+    
         // Xóa hình ảnh trên hệ thống lưu trữ (nếu tồn tại)
-        if ($file->image && Storage::disk('public')->exists($file->image)) {
-            Storage::disk('public')->delete($file->image);
+        if ($file->image && file_exists(public_path($file->image))) {
+            unlink(public_path($file->image)); // Sử dụng unlink để xóa hình ảnh
         }
-
         // Xóa bản ghi trong cơ sở dữ liệu
         $file->delete();
 

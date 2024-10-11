@@ -40,19 +40,33 @@ class ImagesController extends Controller
      
 
         $imagePath = null;
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
+        
             if ($image->isValid()) {
+                // Get the image extension and generate a random name
                 $imageExtension = $image->getClientOriginalExtension();
                 $imageName = Str::random(10) . '.' . $imageExtension;
-                $imagePath = $image->storeAs('images', $imageName, 'public');
-                if (!Storage::disk('public')->exists('images/' . $imageName)) {
+        
+                // Define the destination path
+                $destinationPath = public_path('source/news');
+        
+                // Move the uploaded image to the destination path
+                $image->move($destinationPath, $imageName);
+        
+                // Construct the path to save in the database
+                $imagePath = 'source/news/' . $imageName;
+        
+                // Check if the file was successfully saved
+                if (!file_exists($destinationPath . '/' . $imageName)) {
                     return redirect()->back()->withErrors('Lỗi khi lưu ảnh.');
                 }
             } else {
                 return redirect()->back()->withErrors('Ảnh không hợp lệ.');
             }
         }
+        
 
         Images::create([
             'title' => $request->input('title'),
@@ -84,15 +98,34 @@ class ImagesController extends Controller
         $slider = Images::findOrFail($id);
 
         $imagePath = $slider->image;
+
+        // Check if the request contains a file
         if ($request->hasFile('image')) {
-            if ($slider->image && file_exists(storage_path('app/public/' . $slider->image))) {
-                unlink(storage_path('app/public/' . $slider->image));
+            // If there is an existing image, delete it from the public directory
+            if ($slider->image && file_exists(public_path($slider->image))) {
+                unlink(public_path($slider->image));
             }
+        
+            // Handle the uploaded image
             $image = $request->file('image');
-            $imageExtension = $image->getClientOriginalExtension();
-            $imageName = Str::random(10) . '.' . $imageExtension;
-            $imagePath = $image->storeAs('images', $imageName, 'public');
+        
+            if ($image->isValid()) {
+                $imageExtension = $image->getClientOriginalExtension();
+                $imageName = Str::random(10) . '.' . $imageExtension;
+        
+                // Define the destination path
+                $destinationPath = public_path('source/news');
+        
+                // Move the uploaded image to the destination path
+                $image->move($destinationPath, $imageName);
+        
+                // Construct the path to save in the database
+                $imagePath = 'source/news/' . $imageName;
+            } else {
+                return redirect()->back()->withErrors('Ảnh không hợp lệ.');
+            }
         }
+        
 
         $slider->update([
             'title' => $request->input('title'),
@@ -106,11 +139,15 @@ class ImagesController extends Controller
         $slider = Images::findOrFail($id);
 
         if ($slider->image) {
-            $imagePath = storage_path('app/public/' . $slider->image);
+            // Construct the path for the existing image in the public directory
+            $imagePath = public_path($slider->image);
+            
+            // Check if the file exists and delete it
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }
         }
+        
         $slider->delete();
         return redirect()->route('images.admin')->with('success', 'Thư viện ảnh đã được xóa thành công!');
     }

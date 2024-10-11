@@ -44,19 +44,31 @@ class EvaluationsController extends Controller
         ]);
 
         $imagePath = null;
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             if ($image->isValid()) {
                 $imageExtension = $image->getClientOriginalExtension();
                 $imageName = Str::random(10) . '.' . $imageExtension;
-                $imagePath = $image->storeAs('images', $imageName, 'public');
-                if (!Storage::disk('public')->exists('images/' . $imageName)) {
+        
+                // Define the destination path in the public directory
+                $destinationPath = public_path('source/evaluations');
+        
+                // Move the uploaded image to the destination path
+                $image->move($destinationPath, $imageName);
+        
+                // Set the image path for storage (to save in the database)
+                $imagePath = 'source/evaluations/' . $imageName;
+        
+                // Optionally, you can check if the image was successfully saved
+                if (!file_exists($destinationPath . '/' . $imageName)) {
                     return redirect()->back()->withErrors('Lỗi khi lưu ảnh.');
                 }
             } else {
                 return redirect()->back()->withErrors('Ảnh không hợp lệ.');
             }
         }
+        
 
       Evaluations::create([
             'name' => $request->input('name'),
@@ -89,17 +101,34 @@ class EvaluationsController extends Controller
         ]);
 
         $evaluation = Evaluations::findOrFail($id);
-   
         $imagePath = $evaluation->image;
+
+        // Check if a new image file is being uploaded
         if ($request->hasFile('image')) {
-            if ($evaluation->image && file_exists(storage_path('app/public/' . $evaluation->image))) {
-                unlink(storage_path('app/public/' . $evaluation->image));
+            // Delete the existing image file from the public directory if it exists
+            if ($evaluation->image && file_exists(public_path($evaluation->image))) {
+                unlink(public_path($evaluation->image));
             }
+        
+            // Handle the new image upload
             $image = $request->file('image');
-            $imageExtension = $image->getClientOriginalExtension();
-            $imageName = Str::random(10) . '.' . $imageExtension;
-            $imagePath = $image->storeAs('images', $imageName, 'public');
+            if ($image->isValid()) {
+                $imageExtension = $image->getClientOriginalExtension();
+                $imageName = Str::random(10) . '.' . $imageExtension;
+        
+                // Define the destination path in the public directory
+                $destinationPath = public_path('source/evaluations');
+        
+                // Move the uploaded image to the destination path
+                $image->move($destinationPath, $imageName);
+        
+                // Set the image path for storage (to save in the database)
+                $imagePath = 'source/evaluations/' . $imageName;
+            } else {
+                return redirect()->back()->withErrors('Ảnh không hợp lệ.');
+            }
         }
+        
 
         $evaluation->update([
             'name' => $request->input('name'),
@@ -116,7 +145,10 @@ class EvaluationsController extends Controller
         $news = Evaluations::findOrFail($id);
 
         if ($news->image) {
-            $imagePath = storage_path('app/public/' . $news->image);
+            // Construct the path for the existing image in the public directory
+            $imagePath = public_path($news->image);
+            
+            // Check if the file exists and delete it
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }

@@ -7,7 +7,7 @@
                     <h5 class="card-title mb-0">Chi tiết thành viên</h5>
                 </div>
                 <div class="card-body text-center">
-                    <img src="{{ asset('storage/' . $member->image) }}" alt="Christina Mason" class="img-fluid mb-2"
+                    <img src="{{ asset($member->image) }}" alt="Christina Mason" class="img-fluid mb-2"
                         width="128" height="128">
                     <h5 class="card-title mb-0">{{ $member->name }}</h5>
 

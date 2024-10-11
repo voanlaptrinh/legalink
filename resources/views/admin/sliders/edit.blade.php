@@ -32,7 +32,7 @@
                         <div class="col-lg-4 ">
                             <!-- Hình ảnh xem trước -->
                            <div class="text-center"> 
-                            <img id="preview-image"  src="{{asset('storage/' . $slider->image)}}" alt="" class="review_img img-thumbnail" style="max-width: 290px; max-height: 288px;">
+                            <img id="preview-image"  src="{{asset( $slider->image)}}" alt="" class="review_img img-thumbnail" style="max-width: 290px; max-height: 288px;">
                             <input type="file" class="form-control" name="image" id="image" onchange="previewImage(event)">
                            </div>
                             @error('image')

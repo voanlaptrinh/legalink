@@ -16,7 +16,7 @@
                         <div class="inner-box">
                             <div class="content">
                                 <div class="author-image">
-                                    <img src="{{ $evaluation->image ? asset('storage/' .$evaluation->image) : '/source/images/resource/author-1.png' }}" alt="Author Image" />
+                                    <img src="{{ $evaluation->image ? asset($evaluation->image) : '/source/images/resource/author-1.png' }}" alt="Author Image" />
                                 </div>
                                 <div class="quote-icon icon_quotations"></div>
                                 <div class="author">{{$evaluation->name}}</div>

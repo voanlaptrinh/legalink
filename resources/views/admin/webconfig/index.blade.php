@@ -15,7 +15,7 @@
                             <!-- Hình ảnh xem trước -->
                            <div class="text-center"> 
                             <img id="preview-image"  
-                            src="{{ $webConfig->logo ? asset('storage/' . $webConfig->logo) : asset('source/imges/none-image.jpg') }}" 
+                            src="{{ $webConfig->logo ? asset( $webConfig->logo) : asset('source/imges/none-image.jpg') }}" 
                             alt="Preview Image" 
                             class="review_img img-thumbnail" 
                             style="max-width: 290px; max-height: 288px;">

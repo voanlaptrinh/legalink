@@ -37,6 +37,7 @@
                                         <th>Tên</th>
                                         <th>giá</th>
                                         <th>ngày tạo</th>
+                                        <th>Xem trước file</th>
 
                                         <th class="text-end">Thao tác</th>
                                     </tr>
@@ -50,6 +51,8 @@
                                             <td>
                                               {{ $file->created_at}}
                                             </td>
+                                            <td><a href="{{ asset( $file->file) }}"
+                                                target="_blank">View file</a></td>
 
                                             <td class="table-action text-end">
                                                 <a href="{{ route('files.edit', $file->id) }}"

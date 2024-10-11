@@ -5,7 +5,7 @@
         <div class="swiper-wrapper">
             @if (count($sliders)>0)
                 @foreach ($sliders as $item)
-                    <div class="swiper-slide" style="background-image: url({{ asset('/storage/' . $item->image) }})">
+                    <div class="swiper-slide" style="background-image: url({{ asset( $item->image) }})">
                         <div class="auto-container">
 
                             <div class="content-boxed">

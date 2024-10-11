@@ -48,7 +48,7 @@
                         <div class="col-lg-4 ">
                             <!-- Hình ảnh xem trước -->
                             <div class="text-center">
-                                <img id="preview-image" src="{{ asset('storage/' . $member->image) }}" alt=""
+                                <img id="preview-image" src="{{ asset( $member->image) }}" alt=""
                                     class="review_img img-thumbnail" style="max-width: 290px; max-height: 288px;">
                                 <input type="file" class="form-control" name="image" id="image"
                                     onchange="previewImage(event)">

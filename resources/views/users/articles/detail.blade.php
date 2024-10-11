@@ -32,7 +32,7 @@
                                         <div class="lawyer-column col-lg-4 col-md-4 col-sm-6">
                                             <div class="image">
                                                 @if ($member->image)
-                                                    <a href=""><img src="{{ asset('/source' . $member->image) }}"
+                                                    <a href=""><img src="{{ asset($member->image) }}"
                                                             alt="" /></a>
                                                 @else
                                                     <a href=""><img

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Webconfigs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Str;
 class WebConfigController extends Controller
 {
     public function index(Request $request)
@@ -55,7 +55,7 @@ class WebConfigController extends Controller
             'logo.required' => 'Vui lòng tải lên logo.',
             'logo.image' => 'Logo phải là một hình ảnh.',
             'logo.mimes' => 'Logo chỉ được chấp nhận với các định dạng: jpeg, png, jpg, gif, svg.',
-           
+
         ]);
 
         // Find the existing WebConfig model based on some criteria (you might use ID or some unique identifier)
@@ -88,21 +88,27 @@ class WebConfigController extends Controller
 
 
         // Handle logo upload
-       // Handle logo upload
-if ($request->hasFile('logo')) {
-    // Delete the old logo if it exists
-    if ($webConfig->logo) {
-        Storage::disk('public')->delete($webConfig->logo);
-    }
-
-    // Store the new logo in the 'logos' directory inside the 'public' disk
-    $logoPath = $request->file('logo')->store('logos', 'public');
+        // Handle logo upload
+        if ($request->hasFile('logo')) {
+            // Xóa logo cũ nếu có
+            if ($webConfig->logo && file_exists(public_path($webConfig->logo))) {
+                unlink(public_path($webConfig->logo));
+            }
     
-    // Save the new logo path in the database
-    $webConfig->logo = $logoPath;
-}
+            // Xử lý file logo mới
+            $logo = $request->file('logo');
+            $logoExtension = $logo->getClientOriginalExtension(); // Lấy đuôi file
+            $logoName = Str::random(10) . '.' . $logoExtension; // Tạo tên ngẫu nhiên cho logo
+            $logoPath = 'source/logo/' . $logoName; // Đường dẫn sẽ lưu file
+    
+            // Di chuyển logo vào thư mục public/source/logo
+            $logo->move(public_path('source/logo'), $logoName);
+    
+            // Lưu đường dẫn logo mới vào cơ sở dữ liệu
+            $webConfig->logo = $logoPath;
+        }
 
-       
+
 
         // Save the changes
         $webConfig->save();

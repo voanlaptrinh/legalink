@@ -48,21 +48,27 @@ class NewsController extends Controller
         ]);
 
         $alias = Str::slug($request->input('title'));
-
         $imagePath = null;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             if ($image->isValid()) {
+                
                 $imageExtension = $image->getClientOriginalExtension();
                 $imageName = Str::random(10) . '.' . $imageExtension;
-                $imagePath = $image->storeAs('images', $imageName, 'public');
-                if (!Storage::disk('public')->exists('images/' . $imageName)) {
+                $destinationPath = public_path('source/news');
+        
+                $image->move($destinationPath, $imageName);
+        
+                $imagePath = 'source/news/' . $imageName;
+        
+                if (!file_exists(public_path($imagePath))) {
                     return redirect()->back()->withErrors('Lỗi khi lưu ảnh.');
                 }
             } else {
                 return redirect()->back()->withErrors('Ảnh không hợp lệ.');
             }
         }
+        
 
         $news = News::create([
             'title' => $request->input('title'),
@@ -73,6 +79,7 @@ class NewsController extends Controller
         ]);
         $alias = Str::slug($request->input('title'), '-') . '-' . $news->id;
         $news->update(['alias' => $alias]);
+        dd($news);
         return redirect()->route('news.index')->with('success', 'Tin tức đã được thêm thành công!');
     }
     public function edit($alias)
@@ -102,14 +109,24 @@ class NewsController extends Controller
         $alias = Str::slug($request->input('title'), '-' ). '-' . $id;
 
         $imagePath = $news->image;
+
         if ($request->hasFile('image')) {
-            if ($news->image && file_exists(storage_path('app/public/' . $news->image))) {
-                unlink(storage_path('app/public/' . $news->image));
+            // Delete the old image from public/source/news if it exists
+            if ($news->image && file_exists(public_path($news->image))) {
+                unlink(public_path($news->image));
             }
+        
+            // Upload the new image
             $image = $request->file('image');
             $imageExtension = $image->getClientOriginalExtension();
             $imageName = Str::random(10) . '.' . $imageExtension;
-            $imagePath = $image->storeAs('images', $imageName, 'public');
+        
+            // Move the new image to public/source/news
+            $destinationPath = public_path('source/news');
+            $image->move($destinationPath, $imageName);
+        
+            // Store the new image path
+            $imagePath = 'source/news/' . $imageName;
         }
 
         $news->update([
@@ -125,9 +142,11 @@ class NewsController extends Controller
     public function destroy($id)
     {
         $news = News::findOrFail($id);
-
         if ($news->image) {
-            $imagePath = storage_path('app/public/' . $news->image);
+            // Construct the path for the existing image in the public directory
+            $imagePath = public_path($news->image);
+            
+            // Check if the file exists and delete it
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }

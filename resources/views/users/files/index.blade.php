@@ -15,15 +15,15 @@
                     <div class="inner-box">
                         <div class="image">
                             @if ($item->image)
-                            <a href=""><img src="{{asset('/storage/' . $item->image)}}" alt="" /></a>
+                            <a href=""><img src="{{asset( $item->image)}}" alt="" /></a>
                             @else
                                 
-                            <a href=""><img src="{{asset('/source/images/resource/news-4.jpg')}}" alt="" /></a>
+                            <a href=""><img src="{{asset('/source/images/resource/news-4.jpg')}}" alt=""  class="img-fluid"/></a>
                             @endif
                         </div>
                    
                         <h4><a href="" class="text-limit-2-line">{{$item->name}}</a></h4>
-                        <p class="text-limit-2-line">{{number_format($item->price)}}</p>
+                        <p class="text-limit-2-line">Giá:{{number_format($item->price)}} đ</p>
                         <div class="post-date">{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F, Y') }}
                             by <span>Admin</span></div>
                             <form action="{{ route('file.download', $item->id) }}" method="POST">

@@ -92,11 +92,11 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <img src="{{ $evaluation->image ? asset('storage/' .$evaluation->image) : '/source/images/resource/author-1.png' }}" alt="" class="img-fluid">
+                                                                <img src="{{ $evaluation->image ? asset($evaluation->image) : '/source/images/resource/author-1.png' }}" alt="" class="img-fluid">
                                                                 <p><strong>Name:</strong> {{ $evaluation->name }}</p>
                                                                 <p><strong>Created At:</strong> {{ $evaluation->created_at }}</p>
                                                                 <p><strong>Details:</strong> {{$evaluation->description}}</p>
-                                                                <!-- Add more evaluation details here as needed -->
+                                                             
                                                             </div>
                                                         
                                                         </div>

@@ -14,7 +14,7 @@
                         <div class="inner-box">
                             <div class="image">
                                 @if ($item->image)
-                                <a href="{{ route('news.chi', $item->alias) }}"><img src="{{asset('/storage/' . $item->image)}}" alt="" /></a>
+                                <a href="{{ route('news.chi', $item->alias) }}"><img src="{{asset( $item->image)}}" alt="" /></a>
                                 @else
                                     
                                 <a href="{{ route('news.chi', $item->alias) }}"><img src="{{asset('/source/images/resource/news-4.jpg')}}" alt="" /></a>

@@ -37,7 +37,7 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th>Tên</th>
-                                        <th>Ngày tạo</th>
+                                        <th>nội dung</th>
                                         <th class="">Thao tác</th>
                                     </tr>
                                 </thead>

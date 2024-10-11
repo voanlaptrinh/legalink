@@ -16,13 +16,20 @@ class UploadController extends Controller
     
         $file = $request->file('file');
         
+        // Tạo tên tệp tin ngẫu nhiên
         $filename = uniqid() . '.' . $file->getClientOriginalExtension();
         
-        $path = $file->storeAs('public/images', $filename);
+        // Đích đến là thư mục public/source/news
+        $destinationPath = public_path('source/tyni');
+        
+        // Di chuyển tệp tin đến public/source/news
+        $file->move($destinationPath, $filename);
     
-        $location = Storage::url($path);
+        // Đường dẫn URL tới hình ảnh vừa tải lên
+        $location = asset('source/tyni/' . $filename);
     
         return response()->json(['location' => $location]);
     }
+    
     
 }

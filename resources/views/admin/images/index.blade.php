@@ -63,7 +63,7 @@
                                                             </svg></button>
                                                     </form>
                                                     <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" 
-                                                    data-bs-target="#imageModal" data-image="{{ asset('storage/' . $image->image) }}">
+                                                    data-bs-target="#imageModal" data-image="{{ asset( $image->image) }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                     height="16" fill="currentColor" class="bi bi-eye"
                                                     viewBox="0 0 16 16">

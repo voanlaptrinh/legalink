@@ -17,7 +17,7 @@ class SliderController extends Controller
     }
     public function create()
     {
-      
+
         return view('admin.sliders.create');
     }
     public function store(Request $request)
@@ -35,16 +35,24 @@ class SliderController extends Controller
             'image.mimes' => 'Hình ảnh phải có định dạng jpeg, png, jpg, gif, hoặc svg.',
         ]);
 
-     
 
         $imagePath = null;
+
+        // Kiểm tra nếu có file hình ảnh được upload
         if ($request->hasFile('image')) {
             $image = $request->file('image');
+
+            // Kiểm tra tính hợp lệ của file hình ảnh
             if ($image->isValid()) {
-                $imageExtension = $image->getClientOriginalExtension();
-                $imageName = Str::random(10) . '.' . $imageExtension;
-                $imagePath = $image->storeAs('images', $imageName, 'public');
-                if (!Storage::disk('public')->exists('images/' . $imageName)) {
+                $imageExtension = $image->getClientOriginalExtension(); // Lấy đuôi file
+                $imageName = Str::random(10) . '.' . $imageExtension; // Tạo tên ngẫu nhiên cho hình ảnh
+                $imagePath = 'source/slider/' . $imageName; // Đường dẫn sẽ lưu file
+
+                // Lưu hình ảnh vào thư mục public/source/slider
+                $image->move(public_path('source/slider'), $imageName);
+
+                // Kiểm tra xem file đã được lưu thành công
+                if (!file_exists(public_path($imagePath))) {
                     return redirect()->back()->withErrors('Lỗi khi lưu ảnh.');
                 }
             } else {
@@ -56,7 +64,7 @@ class SliderController extends Controller
             'title' => $request->input('title'),
             // 'alias' => $alias,
             'description' => $request->input('description'),
-         
+
             'image' => $imagePath,
         ]);
         return redirect()->route('sliders.index')->with('success', 'Sliders đã được thêm thành công!');
@@ -84,14 +92,22 @@ class SliderController extends Controller
         $slider = Sliders::findOrFail($id);
 
         $imagePath = $slider->image;
+
+        // Kiểm tra nếu có file hình ảnh được upload
         if ($request->hasFile('image')) {
-            if ($slider->image && file_exists(storage_path('app/public/' . $slider->image))) {
-                unlink(storage_path('app/public/' . $slider->image));
+            // Xóa ảnh cũ nếu có
+            if ($slider->image && file_exists(public_path($slider->image))) {
+                unlink(public_path($slider->image));
             }
+
+            // Xử lý file hình ảnh mới
             $image = $request->file('image');
-            $imageExtension = $image->getClientOriginalExtension();
-            $imageName = Str::random(10) . '.' . $imageExtension;
-            $imagePath = $image->storeAs('images', $imageName, 'public');
+            $imageExtension = $image->getClientOriginalExtension(); // Lấy đuôi file
+            $imageName = Str::random(10) . '.' . $imageExtension; // Tạo tên ngẫu nhiên cho hình ảnh
+            $imagePath = 'source/slider/' . $imageName; // Đường dẫn sẽ lưu file
+
+            // Di chuyển hình ảnh vào thư mục public/source/upload
+            $image->move(public_path('source/slider'), $imageName);
         }
 
         $slider->update([
@@ -108,7 +124,10 @@ class SliderController extends Controller
         $slider = Sliders::findOrFail($id);
 
         if ($slider->image) {
-            $imagePath = storage_path('app/public/' . $slider->image);
+            // Construct the path for the existing image in the public directory
+            $imagePath = public_path($slider->image);
+            
+            // Check if the file exists and delete it
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }
@@ -116,5 +135,4 @@ class SliderController extends Controller
         $slider->delete();
         return redirect()->route('sliders.index')->with('success', 'Sliders đã được xóa thành công!');
     }
-
 }
