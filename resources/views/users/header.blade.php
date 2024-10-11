@@ -158,8 +158,8 @@
                         .search-form-container {
                             position: absolute;
                             top: -11px;
-                            left: -126px;
-                            width: 173px;
+                            left: -107px;
+                            width: 160px;
                             transition: left 0.5s ease;
                             z-index: 1000;
                         }
@@ -170,8 +170,8 @@
                             <li>
 
                                 <div id="searchForm" class="search-form-container d-none">
-                                    <form class="position-relative w-100" action="" method="GET">
-                                        <input class="form-control input___search_query" style="border-radius: 20px"
+                                    <form class="position-relative w-100" action="{{ route('search') }}" method="GET">
+                                        <input class="form-control input___search_query"  style="border-radius: 20px"
                                             type="text" value="{{ old('query', $query ?? '') }}" name="query"
                                             placeholder="" aria-label="Search" autocomplete="off">
                                         <button
