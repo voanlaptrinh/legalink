@@ -56,7 +56,7 @@
                         </div>
                         <h6>Phan Kim Du</h6>
                         <div class="designation">CEO/Luật LEGALINK</div>
-                        <a href="" class="theme-btn btn-style-one"><span class="txt">xem
+                        <a href="{{route('introduce')}}" class="theme-btn btn-style-one"><span class="txt">xem
                                 thêm</span></a>
                     </div>
                 </div>

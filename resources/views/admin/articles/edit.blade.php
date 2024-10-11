@@ -7,7 +7,7 @@
         <label for="menus_services_id">Menu Dịch Vụ:</label>
         <select name="menus_services_id" id="menus_services_id" class="form-control" required>
             <option value="">Chọn Menu Dịch Vụ</option>
-            @foreach($menus as $menu)
+            @foreach ($menus as $menu)
                 <option value="{{ $menu->id }}" {{ $article->menus_services_id == $menu->id ? 'selected' : '' }}>
                     {{ $menu->title }}
                 </option>
@@ -49,7 +49,7 @@
     <div class="form-group">
         <label for="members_ids">Thành Viên Phụ Trách:</label>
         <select name="members_ids[]" id="members_ids" class="form-control" multiple required>
-            @foreach($members as $member)
+            @foreach ($members as $member)
                 <option value="{{ $member->id }}" 
                     {{ in_array($member->id, $article->getMembersArray()) ? 'selected' : '' }}>
                     {{ $member->name }}
@@ -108,10 +108,10 @@
                             <label for="parent_id" class="form-label">Danh mục:</label>
                             <select name="menus_services_id" class="form-control">
                                 @foreach ($menus as $menu)
-                                    
-                                <option value="{{ $menu->id }}" {{ $article->menus_services_id == $menu->id ? 'selected' : '' }}>
-                                    {{ $menu->title }}
-                                </option>
+                                    <option value="{{ $menu->id }}"
+                                        {{ $article->menus_services_id == $menu->id ? 'selected' : '' }}>
+                                        {{ $menu->title }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -120,16 +120,16 @@
                                 <label class="form-label">Thành viên phụ trách</label>
                                 <select class="form-select" size="6" name="members_ids[]" id="members_ids" multiple>
                                     @foreach ($members as $member)
-                                    <option value="{{ $member->id }}" 
-                                        {{ in_array($member->id, $article->getMembersArray()) ? 'selected' : '' }}>
-                                        {{ $member->name }}
-                                    </option>
+                                        <option value="{{ $member->id }}"
+                                            {{ in_array($member->id, $article->getMembersArray()) ? 'selected' : '' }}>
+                                            {{ $member->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                             @error('members_ids')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="row mb-3 ">
                             <div class="col-lg-12">
@@ -137,10 +137,10 @@
                                 <textarea class="form-control" placeholder="Nội dung" id="tyni" name="content" rows="10">{{ old('content', $article->content) }}</textarea>
                             </div>
                             @error('content')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                      
+
                         <div class="text-end">
                             <button type="submit" class="btn btn-primary">Sửa</button>
                             <a href="{{ route('menuservice.index') }}" class="btn btn-primary">Quay lại</a>
@@ -151,4 +151,49 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+
+            $('#members_ids').select2({
+                placeholder: "Select members",
+                allowClear: true,
+                width: '100%',
+            });
+
+
+            function updateSelectedMembers() {
+                var selectedMembers = $('#members_ids').val();
+                var selectedList = $('#selected-members');
+                selectedList.empty();
+
+                if (selectedMembers && selectedMembers.length > 0) {
+                    selectedMembers.forEach(function(memberId) {
+                        var memberName = $('#members_ids option[value="' + memberId + '"]').text();
+                        selectedList.append(
+                            '<li class="list-group-item d-flex justify-content-between align-items-center">' +
+                            memberName +
+                            ' <button type="button" class="btn btn-danger btn-sm remove-member" data-id="' +
+                            memberId + '">Remove</button>' +
+                            '</li>'
+                        );
+                    });
+                }
+            }
+
+            // Update selected members on change
+            $('#members_ids').on('change', function() {
+                updateSelectedMembers();
+            });
+
+
+            $(document).on('click', '.remove-member', function() {
+                var memberId = $(this).data('id');
+                $('#members_ids option[value="' + memberId + '"]').prop('selected', false);
+                $('#members_ids').trigger('change');
+            });
+
+
+            updateSelectedMembers();
+        });
+    </script>
 @endsection

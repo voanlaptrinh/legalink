@@ -34,7 +34,7 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th>Tên</th>
-                                        <th>Tài khoản</th>
+                                        <th>Số tiền hiện có</th>
                                         <th>Email</th>
                                         <th>Ngày tạo</th>
                                         <th class="">Thao tác</th>

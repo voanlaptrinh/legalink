@@ -54,9 +54,9 @@
                                         </span>
                                     @enderror
 
-                                    <div class="text-end pt-2 pb-2">
+                                    {{-- <div class="text-end pt-2 pb-2">
                                         <a href=""> Quên mật khẩu?</a>
-                                    </div>
+                                    </div> --}}
                                     <button class="w-100 btn   btn-success" type="submit">Đăng nhập</button>
                                     <button type="button" class="w-100 btn btn-primary  mt-4"
                                         id="showRegister">Đăng ký</button>

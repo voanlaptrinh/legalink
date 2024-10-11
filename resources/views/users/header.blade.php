@@ -188,16 +188,16 @@
                             </li>
                             @if (Auth::user())
                                 <li class="frop">
-                                    <a href="#"><i class="icofont-user"></i></a>
+                                    <a href="javascript:void(0);"><i class="icofont-user"></i></a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a class="text-dark" style="font-size: 12px" href="#"
+                                            <a class="text-dark" style="font-size: 12px"
                                                 onclick="window.location.href=''; return false;">
                                                 {{ Auth::user()->name }}
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="text-dark" style="font-size: 12px">Số tiền:
+                                            <a href="javascript:void(0);" class="text-dark" style="font-size: 12px">Số tiền:
                                                 {{ number_format(Auth::user()->price) }}</a>
                                         </li>
                                         <li>
@@ -256,7 +256,7 @@
         <div class="close-btn"><span class="icon lnr lnr-cross"></span></div>
 
         <nav class="menu-box">
-            <div class="nav-logo"><a href=""><img src="{{ asset('/source/images/logo-2.png') }}"
+            <div class="nav-logo"><a ><img src="{{ asset('/source/images/logo-2.png') }}"
                         alt="" title=""></a>
             </div>
             <div class="ps-3">

@@ -75,7 +75,10 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="row mb-3 ">
+                        <style>
+
+                        </style>
+                        <div class="row mb-3">
                             <div class="col-lg-12">
                                 <label class="form-label">Thành viên phụ trách</label>
                                 <select class="form-select" size="4" name="members_ids[]" id="members_ids" multiple>
@@ -84,8 +87,9 @@
                                     @endforeach
                                 </select>
                             </div>
-
                         </div>
+
+
                         <div class="row mb-3 ">
                             <div class="col-lg-12">
                                 <label class="form-label">Nội dung</label>
@@ -93,7 +97,7 @@
                             </div>
 
                         </div>
-                      
+
                         <div class="text-end">
                             <button type="submit" class="btn btn-primary">Thêm mới</button>
                             <a href="{{ route('menuservice.index') }}" class="btn btn-primary">Quay lại</a>
@@ -104,4 +108,55 @@
             </div>
         </div>
     </div>
+    <style>
+        .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .remove-member {
+            margin-left: 10px;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+          
+            $('#members_ids').select2({
+                placeholder: "Select members", 
+                allowClear: true, 
+                width: '100%', 
+            });
+
+          
+            $('#members_ids').on('change', function() {
+                var selectedMembers = $(this).val(); 
+                var selectedList = $('#selected-members');
+                selectedList.empty(); 
+
+              
+                if (selectedMembers && selectedMembers.length > 0) {
+                    selectedMembers.forEach(function(memberId) {
+                        var memberName = $('#members_ids option[value="' + memberId + '"]').text();
+                        selectedList.append(
+                            '<li class="list-group-item d-flex justify-content-between align-items-center">' +
+                            memberName +
+                            ' <button type="button" class="btn btn-danger btn-sm remove-member" data-id="' +
+                            memberId + '">Remove</button>' +
+                            '</li>'
+                        );
+                    });
+                }
+            });
+
+            $(document).on('click', '.remove-member', function() {
+                var memberId = $(this).data('id');
+                $('#members_ids option[value="' + memberId + '"]').prop('selected',
+                false); 
+                $('#members_ids').trigger('change'); 
+                $('#members_ids').select2(); 
+            });
+        });
+    </script>
 @endsection
