@@ -14,7 +14,7 @@ class MemberController extends Controller
     {
         $query = Members::query();
         if ($request->has('name') && $request->input('name') != '') {
-            $query->where('title', 'like', '%' . $request->input('name') . '%');
+            $query->where('name', 'like', '%' . $request->input('name') . '%');
         }
 
 

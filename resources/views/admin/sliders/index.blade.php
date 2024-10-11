@@ -63,7 +63,7 @@
                                                             </svg></button>
                                                     </form>
                                                     <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" 
-                                                    data-bs-target="#imageModal" data-image="{{ asset('storage/' . $slider->image) }}">
+                                                    data-bs-target="#imageModal" data-image="{{ asset('storage/' . $slider->image) }}" data-description={{$slider->description}} data-title={{$slider->title}} >
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                     height="16" fill="currentColor" class="bi bi-eye"
                                                     viewBox="0 0 16 16">
@@ -100,8 +100,14 @@
                 <h5 class="modal-title" id="imageModalLabel">Slider Detail</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center">
-                <img id="sliderImage" src="" alt="Slider Image" class="img-fluid" />
+            <div class="modal-body text-center row">
+                <div class="col-6">
+                    <h4 class="detail-name"></h4>
+                    <h6 class="detail-description"></h6>
+                </div>
+                <div class="col-6">
+                    <img id="sliderImage" src="" alt="Slider Image" class="img-fluid" />
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -110,17 +116,25 @@
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var imageModal = document.getElementById('imageModal');
-        imageModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget; // Button that triggered the modal
-            var imageSrc = button.getAttribute('data-image'); // Extract info from data-* attributes
-            var modalImage = imageModal.querySelector('#sliderImage');
-            
-            // Update the image in the modal
-            modalImage.src = imageSrc;
-        });
+   document.addEventListener('DOMContentLoaded', function () {
+    var imageModal = document.getElementById('imageModal');
+    imageModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // Button that triggered the modal
+        var imageSrc = button.getAttribute('data-image'); // Get image URL
+        var title = button.getAttribute('data-title'); // Get title
+        var description = button.getAttribute('data-description'); // Get title
+
+        var modalImage = imageModal.querySelector('#sliderImage');
+        var modalTitle = imageModal.querySelector('.detail-name');
+        var modalDescription = imageModal.querySelector('.detail-description');
+
+        // Update the image and title in the modal
+        modalImage.src = imageSrc;
+        modalTitle.textContent = title;
+        modalDescription.textContent = description;
     });
+});
+
 </script>
 
 @endsection

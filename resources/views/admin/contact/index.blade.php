@@ -2,12 +2,10 @@
 @section('content')
     <div class="row mb-2 mb-xl-3">
         <div class="col-auto d-none d-sm-block">
-            <h3><strong>Thống kê</strong> Tin tức</h3>
+            <h3><strong>Thống kê</strong> Liên hệ</h3>
         </div>
 
-        <div class="col-auto ms-auto text-end mt-n1">
-            <a href="{{ route('news.create') }}" class="btn btn-primary">Thêm mới tin tức</a>
-        </div>
+    
     </div>
     <div class="row">
 

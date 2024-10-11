@@ -29,6 +29,7 @@ class EvaluationsController extends Controller
     }
     public function store(Request $request)
     {
+      
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -42,7 +43,6 @@ class EvaluationsController extends Controller
             'image.mimes' => 'Hình ảnh phải có định dạng jpeg, png, jpg, gif, hoặc svg.',
         ]);
 
-    
         $imagePath = null;
         if ($request->hasFile('image')) {
             $image = $request->file('image');

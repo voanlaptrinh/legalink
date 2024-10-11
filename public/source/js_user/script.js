@@ -293,22 +293,26 @@
 			var outerBox = $(this).parents('.accordion-box');
 			var target = $(this).parents('.accordion');
 			
-			if($(this).hasClass('active')!==true){
+			// Toggle the active state
+			if($(this).hasClass('active')){
+				// If already active, remove active class and slide up content
+				$(this).removeClass('active');
+				target.removeClass('active-block');
+				$(this).next('.acc-content').slideUp(300);
+			} else {
+				// If not active, remove active classes from others
 				$(outerBox).find('.accordion .acc-btn').removeClass('active');
-			}
-			
-			if ($(this).next('.acc-content').is(':visible')){
-				return false;
-			}else{
-				$(this).addClass('active');
 				$(outerBox).children('.accordion').removeClass('active-block');
 				$(outerBox).find('.accordion').children('.acc-content').slideUp(300);
+	
+				// Add active class to the clicked item and slide down content
+				$(this).addClass('active');
 				target.addClass('active-block');
-				$(this).next('.acc-content').slideDown(300);	
+				$(this).next('.acc-content').slideDown(300);    
 			}
-		});	
+		}); 
 	}
-
+	
 	
 	
 	

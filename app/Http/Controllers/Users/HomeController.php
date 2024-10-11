@@ -24,7 +24,7 @@ class HomeController extends Controller
         $introduces = Introduces::find(1);
         $menus = MenusServices::whereNull('parent_id')->with('children')->get(); //Lấy các menu liên quan đến dịch vụ
         $members = Members::all();
-        $questions = Questions::orderBy('id', 'desc')->take(4)->get();
+        $questions = Questions::orderBy('id', 'desc')->take(6)->get();
         $evaluations = Evaluations::all();
         return view('users.home.index', compact('latestNews', 'webConfig', 'sliders','introduces','members','questions', 'evaluations','menus'));
     }

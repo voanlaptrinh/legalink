@@ -38,6 +38,7 @@ class WebConfigController extends Controller
             'instagram' => 'nullable',
             'reddit' => 'nullable',
             'linkedin' => 'nullable',
+            'whats_app' => 'nullable',
             'google' => 'nullable',
             // Add validation for other fields
         ], [
@@ -81,6 +82,7 @@ class WebConfigController extends Controller
             'reddit' => $request->input('reddit'),
             'linkedin' => $request->input('linkedin'),
             'google' => $request->input('google'),
+            'whats_app' => $request->input('whats_app'),
             // Add update for other fields
         ]);
 

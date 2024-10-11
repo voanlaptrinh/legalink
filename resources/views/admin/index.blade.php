@@ -100,7 +100,7 @@
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ in_array(Request::route()->getName(), ['sliders.index']) ? 'active' : '' }}">
+                        class="sidebar-item {{ in_array(Request::route()->getName(), ['sliders.index','sliders.create', 'sliders.edit']) ? 'active' : '' }}">
                         <a class='sidebar-link' href='{{ route('sliders.index') }}'>
                             <i class="bi bi-file-earmark-image"></i> <span class="align-middle">Sliders</span>
                         </a>
@@ -124,7 +124,7 @@
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ in_array(Request::route()->getName(), ['evaluations.index']) ? 'active' : '' }}">
+                        class="sidebar-item {{ in_array(Request::route()->getName(), ['evaluations.index','evaluations.create','evaluations.edit']) ? 'active' : '' }}">
                         <a class='sidebar-link' href='{{ route('evaluations.index') }}'>
                             <i class="bi bi-file-image"></i> <span class="align-middle">Đánh giá khách hàng</span>
                         </a>
