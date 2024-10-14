@@ -50,7 +50,11 @@ Route::get('gioi-thieu', [IntroduceController::class, 'index'])->name('introduce
 Route::get('nhan-su', [MembersControler::class, 'index'])->name('members');
 Route::get('lien-he', [ContactsControler::class, 'index'])->name('contacts');
 Route::get('van-ban-phap-luat', [LawController::class, 'index'])->name('law.index');
+
 Route::post('/download-file/{id}', [LawController::class, 'download'])->name('file.download');
+
+Route::get('/file/preview/{id}', [LawController::class, 'preview'])->name('file.preview');
+
 Route::get('/generate-bank-qr-code', action: [BankQrCodeController::class, 'generateQrCode']);
 Route::post('lienhe/store', [ContactsControler::class, 'store'])->name('contacts.store');
 

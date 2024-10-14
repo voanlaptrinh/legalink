@@ -10,6 +10,10 @@ use App\Models\Webconfigs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\Writer\HTML;
+
+use Smalot\PdfParser\Parser;
 
 class LawController extends Controller
 {
@@ -22,8 +26,10 @@ class LawController extends Controller
         $files = Files::when($search, function ($query, $search) {
             return $query->where('name', 'like', "%{$search}%");
         })->paginate(20);
-        return view('users.files.index', compact('files', 'search','webConfig','menus','sliders'));
+        return view('users.files.index', compact('files', 'search', 'webConfig', 'menus', 'sliders'));
     }
+
+
     public function download($id)
     {
         // Kiểm tra xem người dùng đã đăng nhập hay chưa
@@ -56,5 +62,79 @@ class LawController extends Controller
 
         // Nếu file tồn tại, thực hiện tải file xuống
         return Storage::disk('public')->download($filePath);
+    }
+
+
+
+    public function preview($id)
+    {
+        $file = Files::findOrFail($id);
+        $webConfig = Webconfigs::find(1);
+        $sliders = Sliders::all();
+        $menus = MenusServices::whereNull('parent_id')->with('children')->get();
+        // Check the   $webConfig = Webconfigs::find(1);file extension
+        $filePath = public_path($file->file);
+        $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+        if ($extension === 'pdf') {
+            // For PDFs, directly return the view for rendering
+            return view('users.files.preview_pdf', compact('file', 'sliders', 'menus', 'webConfig'));
+        } elseif ($extension === 'docx') {
+            // Convert DOCX to HTML and return a partial view
+            $content = $this->previewDocx($filePath);
+            return view('users.files.preview_docx', compact('content','sliders', 'file','menus','webConfig'));
+        }
+
+        // For unsupported formats, redirect to download or show an error message
+        return redirect()->route('file.download', $id);
+    }
+
+
+    protected function previewDocx($filePath)
+    {
+        // Load the DOCX file
+        $phpWord = IOFactory::load($filePath);
+    
+        // Create an HTML writer
+        $htmlWriter = new HTML($phpWord);
+        $htmlOutput = '';
+    
+        // Capture HTML output as a string
+        ob_start(); // Start output buffering
+        $htmlWriter->save('php://output');
+        $htmlOutput = ob_get_clean(); // Get the output and clean the buffer
+    
+        // Set a character limit for the preview
+        $limit = 800; // Set the character limit for preview
+        $previewContent = '';
+        $currentLength = 0;
+    
+        // Use DOMDocument to parse the HTML and limit content
+        $dom = new \DOMDocument();
+        @$dom->loadHTML($htmlOutput, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD); // Load HTML
+    
+        // Iterate through the paragraphs and limit the content
+        $paragraphs = $dom->getElementsByTagName('p');
+        foreach ($paragraphs as $paragraph) {
+            if ($currentLength >= $limit) {
+                $previewContent .= '...'; // Limit reached
+                break;
+            }
+            $paragraphHtml = $dom->saveHTML($paragraph); // Append paragraph to preview content
+            $previewContent .= $paragraphHtml;
+            $currentLength += strlen(strip_tags($paragraphHtml)); // Update current length without HTML tags
+        }
+    
+        return $previewContent; // Return the limited HTML content
+    }
+    protected function extractPdfContent($filePath)
+    {
+        $parser = new Parser();
+        $pdf = $parser->parseFile($filePath);
+
+        // Get the first page text
+        $text = $pdf->getText();
+
+        // Limit the content to the first 500 characters or any limit you prefer
+        return substr($text, 0, 500) . '...';
     }
 }
