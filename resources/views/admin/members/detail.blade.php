@@ -30,7 +30,7 @@
                 <div class="card-header col-12 d-sm-flex justify-content-between align-items-center">
 
                     <h5 class="card-title mb-0">Nội dung</h5>
-                    <a href="{{ route('news.index') }}" class="btn btn-secondary">Quay lại</a>
+                    <a href="{{ route('members.index') }}" class="btn btn-secondary">Quay lại</a>
                 </div>
                 <div class="card-body content__log h-100"
                     style="overflow-wrap: break-word; word-wrap: break-word; white-space: normal; overflow: hidden;">

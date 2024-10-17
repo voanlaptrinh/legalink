@@ -142,6 +142,12 @@
                             <i class="bi bi-gear-wide-connected"></i><span class="align-middle">Cài đặt web</span>
                         </a>
                     </li>
+                    <li
+                        class="sidebar-item {{ in_array(Request::route()->getName(), ['pay.index']) ? 'active' : '' }}">
+                        <a class='sidebar-link' href='{{ route('pay.index') }}'>
+                            <i class="bi bi-gear-wide-connected"></i><span class="align-middle">Cài đặt thông tin chuyển khoản</span>
+                        </a>
+                    </li>
 
                 </ul>
 
@@ -155,14 +161,7 @@
                     <i class="hamburger align-self-center"></i>
                 </a>
 
-                <form class="d-none d-sm-inline-block">
-                    <div class="input-group input-group-navbar">
-                        <input type="text" class="form-control" placeholder="Search…" aria-label="Search">
-                        <button class="btn" type="button">
-                            <i class="align-middle" data-feather="search"></i>
-                        </button>
-                    </div>
-                </form>
+
 
 
 

@@ -24,13 +24,14 @@ class SliderController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,sv',
         ], [
             'title.required' => 'Tiêu đề là bắt buộc.',
             'title.string' => 'Tiêu đề phải là chuỗi.',
             'title.max' => 'Tiêu đề không được vượt quá 255 ký tự.',
             'description.string' => 'Mô tả phải là chuỗi.',
+            'description.max' => 'Mô tả không quá 255 kí tự.',
             'image.image' => 'Tệp tin phải là hình ảnh.',
             'image.mimes' => 'Hình ảnh phải có định dạng jpeg, png, jpg, gif, hoặc svg.',
         ]);
@@ -78,13 +79,14 @@ class SliderController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ], [
             'title.required' => 'Tiêu đề là bắt buộc.',
             'title.string' => 'Tiêu đề phải là chuỗi.',
             'title.max' => 'Tiêu đề không được vượt quá 255 ký tự.',
             'description.string' => 'Mô tả phải là chuỗi.',
+            'description.max' => 'Mô tả không quá 255 kí tự.',
             'image.image' => 'Tệp tin phải là hình ảnh.',
             'image.mimes' => 'Hình ảnh phải có định dạng jpeg, png, jpg, gif, hoặc svg.',
         ]);

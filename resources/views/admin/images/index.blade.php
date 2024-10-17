@@ -63,7 +63,7 @@
                                                             </svg></button>
                                                     </form>
                                                     <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" 
-                                                    data-bs-target="#imageModal" data-image="{{ asset( $image->image) }}">
+                                                    data-bs-target="#imageModal" data-image="{{ asset( $image->image) }}" data-title="{{$image->title}}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                     height="16" fill="currentColor" class="bi bi-eye"
                                                     viewBox="0 0 16 16">
@@ -80,7 +80,7 @@
                                         @endforeach
                                     @else
                                         <tr class="text-center">
-                                            <td colspan="4">Không có sliders nào</td>
+                                            <td colspan="4">Không có ảnh nào</td>
 
                                         </tr>
                                     @endif
@@ -94,34 +94,39 @@
         </div>
     </div>
     <!-- Modal -->
-<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="imageModalLabel">Chi tiết thư viện ảnh</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <img id="sliderImage" src="" alt="Slider Image" class="img-fluid" />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="imageModalLabel">Chi tiết thư viện ảnh (<span id="modalTitle"></span>)</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="sliderImage" src="" alt="Slider Image" class="img-fluid" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var imageModal = document.getElementById('imageModal');
-        imageModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget; // Button that triggered the modal
-            var imageSrc = button.getAttribute('data-image'); // Extract info from data-* attributes
-            var modalImage = imageModal.querySelector('#sliderImage');
-            
-            // Update the image in the modal
-            modalImage.src = imageSrc;
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var imageModal = document.getElementById('imageModal');
+            imageModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget; // Button that triggered the modal
+                var imageSrc = button.getAttribute('data-image'); // Get image source
+                var imageTitle = button.getAttribute('data-title'); // Get image title
+    
+                var modalImage = imageModal.querySelector('#sliderImage');
+                var modalTitle = imageModal.querySelector('#modalTitle');
+                
+                // Update the image and title in the modal
+                modalImage.src = imageSrc;
+                modalTitle.textContent = imageTitle;
+            });
         });
-    });
-</script>
+    </script>
 
 @endsection

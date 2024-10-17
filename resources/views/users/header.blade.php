@@ -170,8 +170,9 @@
                             <li>
 
                                 <div id="searchForm" class="search-form-container d-none">
-                                    <form class="position-relative w-100" action="{{ route('search') }}" method="GET">
-                                        <input class="form-control input___search_query"  style="border-radius: 20px"
+                                    <form class="position-relative w-100" action="{{ route('search') }}"
+                                        method="GET">
+                                        <input class="form-control input___search_query" style="border-radius: 20px"
                                             type="text" value="{{ old('query', $query ?? '') }}" name="query"
                                             placeholder="" aria-label="Search" autocomplete="off">
                                         <button
@@ -197,7 +198,12 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);" class="text-dark" style="font-size: 12px">Số tiền:
+                                            <a class="text-dark" style="font-size: 12px" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"> Nạp tiền</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="text-dark"
+                                                style="font-size: 12px">Số tiền:
                                                 {{ number_format(Auth::user()->price) }}</a>
                                         </li>
                                         <li>
@@ -256,8 +262,8 @@
         <div class="close-btn"><span class="icon lnr lnr-cross"></span></div>
 
         <nav class="menu-box">
-            <div class="nav-logo"><a ><img src="{{ asset('/source/images/logo-2.png') }}"
-                        alt="" title=""></a>
+            <div class="nav-logo"><a><img src="{{ asset('/source/images/logo-2.png') }}" alt=""
+                        title=""></a>
             </div>
             <div class="ps-3">
                 @if (Auth::user())
@@ -282,3 +288,45 @@
     </div><!-- End Mobile Menu -->
 
 </header>
+
+
+<div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Thông tin chuyển khoản</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-lg-6">
+                       <img src="{{ $detailPays->image ? asset( $detailPays->image) : asset('source/imges/none-image.jpg') }}" alt="">
+                    </div>
+                    <div class="col-lg-6">
+                        <table class="table">
+                            <tbody class="fs-6">
+                                <tr>
+                                    <th scope="row">Tên ngân hàng:</th>
+                                    <td>{{ $detailPays->bank_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"> Số tài khoản:</th>
+                                    <td> {{ $detailPays->bank_number }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">{{ $detailPays->description }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h6><span style="color: red;font-weight: 900">Lưu ý</span>: {!! $detailPays->content !!}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+

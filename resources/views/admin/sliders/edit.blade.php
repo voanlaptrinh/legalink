@@ -25,7 +25,7 @@
                               
                                 <div class="col-lg-12 mb-3">
                                     <label for="image">Mô tả ngắn:</label>
-                                    <textarea rows="10" cols="50" name="description" id="description" class="form-control">{{ old('description', $slider->title) }}</textarea>
+                                    <textarea rows="10" cols="50" name="description" id="description" class="form-control">{{ old('description', $slider->description) }}</textarea>
                                 </div>
                             </div>
                         </div>

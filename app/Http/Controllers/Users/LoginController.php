@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetailPays;
 use App\Models\MenusServices;
 use App\Models\Sliders;
 use App\Models\User;
@@ -17,9 +18,10 @@ class LoginController extends Controller
     public function index()
     {
         $webConfig = Webconfigs::find(1);
+        $detailPays = DetailPays::find(1);
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
         $sliders = Sliders::all();
-        return view('users.login.index', compact('webConfig', 'menus','sliders'));
+        return view('users.login.index', compact('webConfig', 'menus','sliders',detailPays''));
     }
 
     public function login(Request $request)

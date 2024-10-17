@@ -113,6 +113,10 @@ Route::prefix('/admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/', [WebConfigController::class, 'index'])->name('webConfig.index');
         Route::post('/update-webConfig', [WebConfigController::class, 'update'])->name('webConfig.update');
     });
+    Route::prefix('/pay_description')->group(function () {
+        Route::get('/', [WebConfigController::class, 'pay'])->name('pay.index');
+        Route::post('/update-pay', [WebConfigController::class, 'payupdate'])->name('pay.update');
+    });
     Route::prefix('/introduces')->group(function () {
         Route::get('/', [IntroducesController::class, 'index'])->name('introduce.index');
         Route::post('/update-introducts', [IntroducesController::class, 'update'])->name('introduce.update');

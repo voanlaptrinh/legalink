@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetailPays;
 use App\Models\Webconfigs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,11 @@ class WebConfigController extends Controller
     {
         $webConfig = Webconfigs::find(1);
         return view('admin.webconfig.index', compact('webConfig'));
+    }
+    public function pay(Request $request)
+    {
+        $webConfig = DetailPays::find(1);
+        return view('admin.paydescription.index', compact('webConfig'));
     }
     public function update(Request $request)
     {
@@ -106,6 +112,73 @@ class WebConfigController extends Controller
     
             // Lưu đường dẫn logo mới vào cơ sở dữ liệu
             $webConfig->logo = $logoPath;
+        }
+
+
+
+        // Save the changes
+        $webConfig->save();
+        // Redirect back or to a specific route after the update
+        return redirect()->back()->with('success', 'Đã update thành công!');
+    }
+    public function payupdate(Request $request)
+    {
+
+        // Validate the form data
+        $request->validate([
+            'bank_name' => 'required|string',
+            'bank_number' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+           
+            'description' => 'nullable',
+            'content' => 'nullable',
+           
+            // Add validation for other fields
+        ], [
+            'bank_name.required' => 'Vui lòng nhập tên.',
+            'bank_name.string' => 'Tên phải là một chuỗi.',
+            'bank_number.required' => 'Vui lòng nhập số điện thoại.',
+            'bank_number.string' => 'Số điện thoại phải là một chuỗi.',
+            
+          
+            'image.image' => 'Logo phải là một hình ảnh.',
+         
+
+        ]);
+
+        // Find the existing WebConfig model based on some criteria (you might use ID or some unique identifier)
+        $webConfig = DetailPays::find(1); // Replace 1 with the appropriate identifier
+
+        // Update other fields
+        $webConfig->update([
+            'bank_name' => $request->input('bank_name'),
+            'bank_number' => $request->input('bank_number'),
+            'description' => $request->input('description'),
+            'content' => $request->input('content'),
+            
+            // Add update for other fields
+        ]);
+
+
+        // Handle logo upload
+        // Handle logo upload
+        if ($request->hasFile('image')) {
+            // Xóa logo cũ nếu có
+            if ($webConfig->image && file_exists(public_path($webConfig->image))) {
+                unlink(public_path($webConfig->image));
+            }
+    
+            // Xử lý file logo mới
+            $logo = $request->file('image');
+            $logoExtension = $logo->getClientOriginalExtension(); // Lấy đuôi file
+            $logoName = Str::random(10) . '.' . $logoExtension; // Tạo tên ngẫu nhiên cho logo
+            $logoPath = 'source/logo/' . $logoName; // Đường dẫn sẽ lưu file
+    
+            // Di chuyển logo vào thư mục public/source/logo
+            $logo->move(public_path('source/logo'), $logoName);
+    
+            // Lưu đường dẫn logo mới vào cơ sở dữ liệu
+            $webConfig->image = $logoPath;
         }
 
 

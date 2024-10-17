@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('detail_pays', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Tên file
-            $table->string('file'); // Đường dẫn file
-            $table->integer('price'); // Giá tải file
-            $table->string('image')->nullable(); // Giá tải file
+            $table->string('bank_name');
+            $table->string('bank_number');
+            $table->text('description')->nullable();
+            $table->text('content')->nullable();
+            $table->string('image')->nullable();
+       
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('detail_pays');
     }
 };

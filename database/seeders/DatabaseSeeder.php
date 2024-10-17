@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\DetailPays;
 use App\Models\Evaluations;
 use App\Models\Introduces;
 use App\Models\Members;
@@ -125,6 +126,16 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('12345678'),
             'role' => 'admin',
+        ]);
+        DetailPays::create([
+            'bank_name' => 'TP_BANK',
+            'bank_number' => '1234567890',
+            'description' => 'Số tiền bạn chuyển sẽ được chuyển vào tài khoản tương đương với tài khoản bạn sử dụng và chỉ định cho chúng tôi
+                VD: 10.000 VNĐ = 10.000,
+                    .....',
+            'content' => 'Chuyển khoản vui lòng ghi rõ với những nội dung dưới đây:
+                email + tên tài khoản (VD: example@gmail.com , example)
+            '
         ]);
 
     }

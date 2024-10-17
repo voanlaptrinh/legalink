@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\ArticlesService;
+use App\Models\DetailPays;
 use App\Models\Introduces;
 use App\Models\MenusServices;
 use App\Models\News;
@@ -27,6 +28,7 @@ class MenuServiceController extends Controller
     {
         $menu = MenusServices::where('alias', $alias)->with('children')->firstOrFail();
         $webConfig = Webconfigs::find(1);
+        $detailPays = DetailPays::find(1);
         // Lấy tất cả các menu con (nếu có)
         $subMenuIds = $menu->children->pluck('id')->toArray();
 
@@ -48,7 +50,7 @@ class MenuServiceController extends Controller
         }
 
         // Trả về view danh sách bài viết nếu có nhiều hơn một bài
-        return view('users.articles.list', compact('menu','sliders', 'articles','latestNews','webConfig','menus'));
+        return view('users.articles.list', compact('menu','sliders', 'articles','latestNews','webConfig','menus','detailPays'));
     }
 
     // Hiển thị chi tiết bài viết
@@ -57,9 +59,10 @@ class MenuServiceController extends Controller
         // Tìm bài viết theo alias
         $article = ArticlesService::where('alias', $alias)->firstOrFail();
         $webConfig = Webconfigs::find(1);
+        $detailPays = DetailPays::find(1);
         $sliders = Sliders::all();
         $article->increment('views');
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
-        return view('users.articles.detail', compact('article', 'webConfig', 'sliders', 'menus'));
+        return view('users.articles.detail', compact('article', 'webConfig', 'sliders', 'menus','detailPays'));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetailPays;
 use App\Models\MenusServices;
 use App\Models\News;
 use App\Models\Sliders;
@@ -15,9 +16,10 @@ class NewsController extends Controller
     {
         $news = News::orderBy('id', 'desc')->paginate(5);
         $webConfig = Webconfigs::find(1);
+        $detailPays = DetailPays::find(1);
         $sliders = Sliders::all();
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
-        return view('users.news.index', compact('news', 'webConfig', 'sliders', 'menus'));
+        return view('users.news.index', compact('news', 'webConfig', 'sliders', 'menus','detailPays'));
     }
     public function detail(Request $request, $alias)
     {
@@ -25,8 +27,9 @@ class NewsController extends Controller
         $webConfig = Webconfigs::find(1);
         $sliders = Sliders::all();
         $news->increment('views');
+        $detailPays = DetailPays::find(1);
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
         $latestNews = News::orderBy('id', 'desc')->take(4)->get();
-        return view('users.news.detail', compact('news', 'webConfig', 'sliders','latestNews', 'menus'));
+        return view('users.news.detail', compact('news', 'webConfig', 'sliders','latestNews', 'menus','detailPays'));
     }
 }

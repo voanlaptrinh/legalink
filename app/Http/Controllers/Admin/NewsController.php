@@ -34,7 +34,7 @@ class NewsController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'nullable|string|max:255',
             'content' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,sv',
         ], [
@@ -42,6 +42,7 @@ class NewsController extends Controller
             'title.string' => 'Tiêu đề phải là chuỗi.',
             'title.max' => 'Tiêu đề không được vượt quá 255 ký tự.',
             'description.string' => 'Mô tả phải là chuỗi.',
+            'description.max' => 'Mô tả không quá 255 kí tự.',
             'content.string' => 'Nội dung phải là chuỗi.',
             'image.image' => 'Tệp tin phải là hình ảnh.',
             'image.mimes' => 'Hình ảnh phải có định dạng jpeg, png, jpg, gif, hoặc svg.',
@@ -79,7 +80,6 @@ class NewsController extends Controller
         ]);
         $alias = Str::slug($request->input('title'), '-') . '-' . $news->id;
         $news->update(['alias' => $alias]);
-        dd($news);
         return redirect()->route('news.index')->with('success', 'Tin tức đã được thêm thành công!');
     }
     public function edit($alias)
@@ -91,7 +91,7 @@ class NewsController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'nullable|string|255',
             'content' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ], [
@@ -100,7 +100,7 @@ class NewsController extends Controller
             'title.max' => 'Tiêu đề không được vượt quá 255 ký tự.',
             'description.string' => 'Mô tả phải là chuỗi.',
             'content.string' => 'Nội dung phải là chuỗi.',
-            
+            'description.max' => 'Mô tả không quá 255 kí tự.',
             'image.image' => 'Tệp tin phải là hình ảnh.',
             'image.mimes' => 'Hình ảnh phải có định dạng jpeg, png, jpg, gif, hoặc svg.',
         ]);

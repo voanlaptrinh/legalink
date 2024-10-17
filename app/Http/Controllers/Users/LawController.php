@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetailPays;
 use App\Models\Files;
 use App\Models\MenusServices;
 use App\Models\Sliders;
@@ -21,47 +22,34 @@ class LawController extends Controller
     {
         $search = $request->input('search');
         $webConfig = Webconfigs::find(1);
+        $detailPays = DetailPays::find(1);
         $sliders = Sliders::all();
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
         $files = Files::when($search, function ($query, $search) {
             return $query->where('name', 'like', "%{$search}%");
         })->paginate(20);
-        return view('users.files.index', compact('files', 'search', 'webConfig', 'menus', 'sliders'));
+        return view('users.files.index', compact('files', 'search', 'webConfig', 'menus', 'sliders','detailPays'));
     }
 
 
     public function download($id)
     {
-        // Kiểm tra xem người dùng đã đăng nhập hay chưa
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'Bạn cần đăng nhập để tải xuống file.');
         }
-
-        // Lấy thông tin file
         $file = Files::findOrFail($id);
-
-        // Lấy thông tin người dùng
         $user = Auth::user();
-
-        // Kiểm tra số dư tài khoản của người dùng
         if ($user->price < $file->price) {
             return redirect()->back()->with('error', 'Số dư trong tài khoản của bạn không đủ để tải file này.');
         }
-
-        // Trừ số tiền từ tài khoản của người dùng
         $user->price -= $file->price;
         $user->save();
+        $filePath = public_path($file->file);
 
-        // Tạo đường dẫn tới file
-        $filePath = $file->file;
-
-        // Kiểm tra nếu file tồn tại trong storage
-        if (!$filePath) {
+        if (!file_exists($filePath)) {
             return redirect()->back()->with('error', 'File không tồn tại.');
         }
-
-        // Nếu file tồn tại, thực hiện tải file xuống
-        return Storage::disk('public')->download($filePath);
+        return response()->download($filePath);
     }
 
 
@@ -70,6 +58,7 @@ class LawController extends Controller
     {
         $file = Files::findOrFail($id);
         $webConfig = Webconfigs::find(1);
+        $detailPays = DetailPays::find(1);
         $sliders = Sliders::all();
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
         // Check the   $webConfig = Webconfigs::find(1);file extension
@@ -77,11 +66,11 @@ class LawController extends Controller
         $extension = pathinfo($filePath, PATHINFO_EXTENSION);
         if ($extension === 'pdf') {
             // For PDFs, directly return the view for rendering
-            return view('users.files.preview_pdf', compact('file', 'sliders', 'menus', 'webConfig'));
+            return view('users.files.preview_pdf', compact('file', 'sliders', 'menus', 'webConfig','detailPays'));
         } elseif ($extension === 'docx') {
             // Convert DOCX to HTML and return a partial view
             $content = $this->previewDocx($filePath);
-            return view('users.files.preview_docx', compact('content','sliders', 'file','menus','webConfig'));
+            return view('users.files.preview_docx', compact('content', 'sliders', 'file', 'menus', 'webConfig','detailPays'));
         }
 
         // For unsupported formats, redirect to download or show an error message
@@ -93,25 +82,25 @@ class LawController extends Controller
     {
         // Load the DOCX file
         $phpWord = IOFactory::load($filePath);
-    
+
         // Create an HTML writer
         $htmlWriter = new HTML($phpWord);
         $htmlOutput = '';
-    
+
         // Capture HTML output as a string
         ob_start(); // Start output buffering
         $htmlWriter->save('php://output');
         $htmlOutput = ob_get_clean(); // Get the output and clean the buffer
-    
+
         // Set a character limit for the preview
         $limit = 800; // Set the character limit for preview
         $previewContent = '';
         $currentLength = 0;
-    
+
         // Use DOMDocument to parse the HTML and limit content
         $dom = new \DOMDocument();
         @$dom->loadHTML($htmlOutput, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD); // Load HTML
-    
+
         // Iterate through the paragraphs and limit the content
         $paragraphs = $dom->getElementsByTagName('p');
         foreach ($paragraphs as $paragraph) {
@@ -123,7 +112,7 @@ class LawController extends Controller
             $previewContent .= $paragraphHtml;
             $currentLength += strlen(strip_tags($paragraphHtml)); // Update current length without HTML tags
         }
-    
+
         return $previewContent; // Return the limited HTML content
     }
     protected function extractPdfContent($filePath)
