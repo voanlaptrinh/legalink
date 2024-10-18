@@ -50,11 +50,11 @@
                     <div class="inner-column">
                         <div class="sec-title">
                             <div class="title">Về chúng tôi</div>
-                            <h2>CÔNG TY LUẬT LEGALINK</h2>
+                            <h2>{{$introduces->name}}</h2>
                         </div>
                         <div class="text">{{$introduces->description}}
                         </div>
-                        <h6>Phan Kim Du</h6>
+                        <h6>{{$introduces->name_ceo}}</h6>
                         <div class="designation">CEO/Luật LEGALINK</div>
                         <a href="{{route('introduce')}}" class="theme-btn btn-style-one"><span class="txt">xem
                                 thêm</span></a>
@@ -66,7 +66,11 @@
                     <div class="inner-column wow slideInRight" data-wow-delay="0ms"
                         data-wow-duration="1500ms">
                         <div class="image">
-                            <img src="{{asset('source/images/resource/about.png')}}" alt="" />
+                            @if ($introduces->image)
+                                    <img src="{{ asset($introduces->image) }}" alt="" class="img-fluid" />
+                                @else
+                                    <img src="{{ asset('source/images/resource/about.png') }}" alt="" />
+                                @endif
                         </div>
                     </div>
                 </div>

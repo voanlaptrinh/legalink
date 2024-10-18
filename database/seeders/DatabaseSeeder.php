@@ -30,12 +30,14 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         Introduces::create(attributes: [
-            'name' => 'Giới thiệu',
+            'name' => 'CÔNG TY LUẬT LEGALINK',
             'description' => 'Công ty cung cấp các dịch vụ tư vấn pháp lý chuyên nghiệp cho cá nhân và doanh nghiệp trong nhiều lĩnh vực khác nhau. Làm việc với phương châm Tâm – Trí – Tín. Chúng tôi không chỉ là một công ty luật, mà còn là người bạn đồng hành đáng tin cậy trên con đường pháp lý của bạn. Cùng với đội ngũ luật sư và chuyên viên dày dặn kinh nghiệm, tâm huyết và nhiệt huyết, chúng tôi luôn nỗ lực mang đến cho khách hàng những giải pháp pháp lý hiệu quả và tối ưu nhất.',
             'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. dapibus
             Tincidunt mollis pretium. Vivamus sodales eu sapien sitamet iaculis.
             Curabitur mollis quam dolor, quis gravida orci mattis non. Nam erat erat,
-            tristique a elit at consectetur.'
+            tristique a elit at consectetur.',
+            'name_ceo' => 'Phan Kim Du',
+            
         ]);
 
         Webconfigs::create([

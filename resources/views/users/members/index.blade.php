@@ -17,13 +17,13 @@
                         <div class="inner-column">
                             <div class="sec-title">
                                 <div class="title">Về chúng tôi</div>
-                                <h2>CÔNG TY LUẬT LEGALINK</h2>
+                                <h2>{{ $introduces->name }}dd</h2>
                             </div>
                             <div class="text">{{ $introduces->description }}
                             </div>
-                            <h6>Phan Kim Du</h6>
+                            <h6>{{ $introduces->name_ceo }}</h6>
                             <div class="designation">CEO/Luật LEGALINK</div>
-                            <a href="{{route('introduce')}}" class="theme-btn btn-style-one"><span class="txt">xem
+                            <a href="{{ route('introduce') }}" class="theme-btn btn-style-one"><span class="txt">Xem
                                     thêm</span></a>
                         </div>
                     </div>
@@ -31,9 +31,11 @@
                     <!-- Image Column -->
                     <div class="image-column col-lg-6 col-sm-12 col-sm-12">
                         <div class="inner-column wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
-                            <div class="image">
+                            @if ($introduces->image)
+                                <img src="{{ asset($introduces->image) }}" alt="" class="img-fluid" />
+                            @else
                                 <img src="{{ asset('source/images/resource/about.png') }}" alt="" />
-                            </div>
+                            @endif
                         </div>
                     </div>
 
@@ -43,11 +45,12 @@
 
         </div>
     </section>
-   <style>
-    .team-section .team-carousel:before, .team-section .team-carousel:after{
-        background: #fbf7f0 !important;
-    }
-   </style>
+    <style>
+        .team-section .team-carousel:before,
+        .team-section .team-carousel:after {
+            background: #fbf7f0 !important;
+        }
+    </style>
     <section class="team-section" style="background: #fbf7f0">
         <div class="auto-container">
             <!-- Sec Title -->
@@ -65,20 +68,22 @@
                                 <div class="inner-box">
                                     <div class="image">
                                         @if ($member->image)
-                                            <a href=""><img src="{{ asset( $member->image) }}"  class="img-fluid"
+                                            <a href=""><img src="{{ asset($member->image) }}" class="img-fluid"
                                                     alt="" /></a>
                                         @else
-                                            <a href=""><img src="{{ asset('/source/images/resource/team-1.jpg') }}"  class="img-fluid"
-                                                    alt="" /></a>
+                                            <a href=""><img src="{{ asset('/source/images/resource/team-1.jpg') }}"
+                                                    class="img-fluid" alt="" /></a>
                                         @endif
                                     </div>
                                     <div class="lower-content">
-                                        <h3><a href="">{{$member->name}}</a></h3>
-                                        <div class="text">{{$member->description}}</div>
+                                        <h3><a href="">{{ $member->name }}</a></h3>
+                                        <div class="text">{{ $member->description }}</div>
                                         <!-- Social Box -->
                                         <ul class="social-box">
-                                            <li><a href="mailto: {{$member->email}}"><span class="icofont-mail"></span></a></li>
-                                            <li><a href="tel: +{{$member->phone}}"><span class="icofont-phone"></span></a></li>
+                                            <li><a href="mailto: {{ $member->email }}"><span
+                                                        class="icofont-mail"></span></a></li>
+                                            <li><a href="tel: +{{ $member->phone }}"><span
+                                                        class="icofont-phone"></span></a></li>
                                         </ul>
                                     </div>
                                 </div>

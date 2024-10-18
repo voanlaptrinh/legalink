@@ -9,6 +9,6 @@ class Introduces extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'content', 'description'
+        'name', 'content', 'description', 'image','name_ceo'
     ];
 }
