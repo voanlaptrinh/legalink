@@ -25,6 +25,9 @@
                                 <div class="col-lg-12 mb-3">
                                     <label for="image">Mô tả ngắn:</label>
                                     <textarea rows="10" cols="50" name="description" id="description" class="form-control">{{ old('description') }}</textarea>
+                                    @error('description')
+                                    <p class="fw-bold" style="color: red;">{{ $message }}</p>
+                                @enderror
                                 </div>
                             </div>
                         </div>

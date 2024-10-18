@@ -1,5 +1,5 @@
 <!-- Consulation Section -->
-<section class="consulation-section" style="background-image: url('/images/background/slide-bg-1.jpg')">
+<section class="consulation-section" style="background-image: url('source/images/background/slide-bg-1.jpg')">
     <div class="auto-container">
         <div class="sec-title centered">
             <div class="title">Phản Hồi</div>

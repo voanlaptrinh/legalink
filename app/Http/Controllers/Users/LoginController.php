@@ -21,7 +21,7 @@ class LoginController extends Controller
         $detailPays = DetailPays::find(1);
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
         $sliders = Sliders::all();
-        return view('users.login.index', compact('webConfig', 'menus','sliders',detailPays''));
+        return view('users.login.index', compact('webConfig', 'menus','sliders','detailPays'));
     }
 
     public function login(Request $request)

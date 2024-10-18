@@ -270,6 +270,8 @@
                     <details>
                         <summary class="text-dark">{{ Auth::user()->name }}</summary>
                         <ul class="ps-4">
+                            <li class="text-dark"><a class="text-dark" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"> Nạp tiền</a></li>
                             <li class="text-dark">Số tiền: {{ number_format(Auth::user()->price) }}</li>
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf

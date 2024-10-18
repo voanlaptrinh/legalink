@@ -2,7 +2,7 @@
 <footer class="main-footer">
     <div class="auto-container">
         <div class="logo-box">
-            <div class="logo"><a href="{{ route('home') }}"><img src="/images/logo.png" alt="" /></a></div>
+            <div class="logo"><a href="{{ route('home') }}"><img src="{{asset('source/images/logo.png')}}" alt="" /></a></div>
         </div>
         <ul class="footer-nav">
             <li><a href="{{ route('introduce') }}">Về Chúng Tôi</a></li>
