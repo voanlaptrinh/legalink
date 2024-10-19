@@ -26,6 +26,7 @@ class WebConfigController extends Controller
         // Validate the form data
         $request->validate([
             'title' => 'required|string',
+            'address' => 'required|string',
             'phone' => 'required|string|regex:/^[0-9]{10}$/',
             'email' => 'required|email',
             'key' => 'required',
@@ -70,6 +71,7 @@ class WebConfigController extends Controller
         // Update other fields
         $webConfig->update([
             'title' => $request->input('title'),
+            'address' => $request->input('address'),
             'phone' => $request->input('phone'),
             'email' => $request->input('email'),
             'code' => $request->input('code'),

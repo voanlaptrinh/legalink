@@ -4779,3 +4779,28 @@ img{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+@media (min-width:1200px) {
+    .img-image{
+        height: 187px !important;
+    }
+}
+@media (min-width:992px) {
+  
+    .img-image{
+        height: 127px ;
+    }
+}
+@media (min-width:768px) {
+    .img-image{
+        height: 205px;
+    }
+}
+@media (min-width:480px) {
+    .img-image{
+        height: 146px;
+    }
+}
+.img__news{
+    width: 248px;
+    height: 156px;
+}

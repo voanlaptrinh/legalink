@@ -1,50 +1,41 @@
 @extends('users.index')
-@section('name')
-@include('users.home.section_banner')
 
-<div class="sidebar-page-container">
-    <div class="auto-container">
-        <div class="row clearfix">
-            
-            <!-- Content Side -->
-            <div class="content-side col-lg-12 col-md-12 col-sm-12">
-                <div class="our-blogs">
-                    @foreach ($news as $item)
-                    <div class="news-block-two">
-                        <div class="inner-box">
-                            <div class="image">
-                                @if ($item->image)
-                                <a href="{{ route('news.chi', $item->alias) }}"><img src="{{asset( $item->image)}}" alt="" /></a>
-                                @else
-                                    
-                                <a href="{{ route('news.chi', $item->alias) }}"><img src="{{asset('/source/images/resource/news-4.jpg')}}" alt="" /></a>
-                                @endif
-                            </div>
-                       
-                            <h4><a href="{{ route('news.chi', $item->alias) }}" class="text-limit-2-line">{{$item->title}}</a></h4>
-                            <p class="text-limit-2-line">{{$item->description}}</p>
-                            <div class="post-date">{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F, Y') }}
-                                by <span>Admin</span></div>
-                        </div>
+@section('name')
+    @include('users.home.section_banner')
+
+    <div class="sidebar-page-container">
+        <div class="auto-container">
+            <div class="row clearfix">
+
+                <!-- Content Side -->
+                <div class="content-side col-lg-12 col-md-12 col-sm-12">
+                    <div class="our-blogs" id="news-list">
+                        @include('users.news.news_list') <!-- Include the partial view for AJAX -->
                     </div>
-                    @endforeach
-                    <!-- News Block Two -->
-                   
-                    
-                 
-                    
                 </div>
-               
-                <!-- Post Share Options -->
-                <div class="nac_pri d-flex" style="justify-content: center">
-                    {{ $news->appends(request()->query())->links('pagination::bootstrap-4') }}
-                </div>
-                
+
             </div>
-            
-          
-            
         </div>
     </div>
-</div>
+
+    <script>
+        $(document).on('click', '.pagination a', function(event) {
+            event.preventDefault();
+
+            var page = $(this).attr('href').split('page=')[1];
+            fetchNews(page);
+        });
+
+        function fetchNews(page) {
+            $.ajax({
+                url: "?page=" + page,
+                success: function(data) {
+                    $('#news-list').html(data); // Load the new content into the news list section
+                },
+                error: function(xhr) {
+                    console.log("Error fetching news: " + xhr.responseText);
+                }
+            });
+        }
+    </script>
 @endsection

@@ -19,9 +19,14 @@ class NewsController extends Controller
         $detailPays = DetailPays::find(1);
         $sliders = Sliders::all();
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
-        return view('users.news.index', compact('news', 'webConfig', 'sliders', 'menus','detailPays'));
+    
+        if ($request->ajax()) {
+            return view('users.news.news_list', compact('news'))->render(); // Render only news for AJAX
+        }
+    
+        return view('users.news.index', compact('news', 'webConfig', 'sliders', 'menus', 'detailPays'));
     }
-    public function detail(Request $request, $alias)
+        public function detail(Request $request, $alias)
     {
         $news = News::where('alias', $alias)->firstOrFail();
         $webConfig = Webconfigs::find(1);
