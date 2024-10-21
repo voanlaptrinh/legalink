@@ -17,7 +17,7 @@
                         <div class="inner-column">
                             <div class="sec-title">
                                 <div class="title">Về chúng tôi</div>
-                                <h2>{{ $introduces->name }}dd</h2>
+                                <h2>{{ $introduces->name }}</h2>
                             </div>
                             <div class="text">{{ $introduces->description }}
                             </div>
@@ -68,11 +68,11 @@
                                 <div class="inner-box">
                                     <div class="image">
                                         @if ($member->image)
-                                            <a href=""><img src="{{ asset($member->image) }}" class="img-fluid"
+                                            <a href=""><img src="{{ asset($member->image) }}"  class="img-member" 
                                                     alt="" /></a>
                                         @else
                                             <a href=""><img src="{{ asset('/source/images/resource/team-1.jpg') }}"
-                                                    class="img-fluid" alt="" /></a>
+                                                     class="img-member"  alt="" /></a>
                                         @endif
                                     </div>
                                     <div class="lower-content">

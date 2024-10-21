@@ -36,6 +36,7 @@
                                     <tr>
                                         <th>Tên</th>
                                         <th>ngày tạo</th>
+                                        <th>Danh mục cha</th>
 
                                         <th class="text-end">Thao tác</th>
                                     </tr>
@@ -47,6 +48,9 @@
                                             <td>{{ $article->name }}</td>
                                             <td>
                                               {{ $article->created_at}}
+                                            </td>
+                                            <td>
+                                              {{ $article->menuService->title}}
                                             </td>
 
                                             <td class="table-action text-end">

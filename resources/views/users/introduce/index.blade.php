@@ -47,7 +47,7 @@
 
         </div>
     </section>
-    <section class="testimonial-section" id="noi__gioithieyu">
+    <section class="testimonial-section pb-5" id="noi__gioithieyu">
         <div class="auto-container">
             <!-- Sec Title -->
             <div class="sec-title centered">
@@ -76,11 +76,11 @@
                                 <div class="inner-box">
                                     <div class="image">
                                         @if ($member->image)
-                                            <a href=""><img src="{{ asset($member->image) }}" class="img-fluid"
+                                            <a href=""><img src="{{ asset($member->image) }}" class="img-member" 
                                                     alt="" /></a>
                                         @else
                                             <a href=""><img src="{{ asset('/source/images/resource/team-1.jpg') }}"
-                                                    class="img-fluid" alt="" /></a>
+                                                    class="img-member"  alt="" /></a>
                                         @endif
                                     </div>
                                     <div class="lower-content">

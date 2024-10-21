@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contacts;
+use App\Models\DetailPays;
 use App\Models\MenusServices;
 use App\Models\Sliders;
 use App\Models\Webconfigs;
@@ -17,8 +18,8 @@ class ContactsControler extends Controller
         $webConfig = Webconfigs::find(1);
         $sliders = Sliders::all();
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
-
-        return view('users.contact.index', compact( 'webConfig', 'sliders','menus'));
+        $detailPays = DetailPays::find(1);
+        return view('users.contact.index', compact( 'webConfig','detailPays', 'sliders','menus'));
     }
     public function store(Request $request)
     {

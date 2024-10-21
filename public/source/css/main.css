@@ -4783,24 +4783,49 @@ img{
     .img-image{
         height: 187px !important;
     }
+	.img-member{
+        width: 350px !important;
+		height: 350px !important;
+        
+    }
 }
 @media (min-width:992px) {
   
     .img-image{
-        height: 127px ;
+        height: 127px;
+    }
+	.img-member{
+        width: 350px ;
+		height: 350px ;
+        
     }
 }
 @media (min-width:768px) {
     .img-image{
         height: 205px;
     }
+	.img-member{
+        width: 350px ;
+		height: 350px ;
+        
+    }
 }
 @media (min-width:480px) {
     .img-image{
         height: 146px;
     }
+	.img-member{
+        width: 350px ;
+		height: 350px ;
+        
+    }
 }
 .img__news{
     width: 248px;
     height: 156px;
+}
+.img-member{
+	width: 350px ;
+	height: 293px ;
+	
 }
