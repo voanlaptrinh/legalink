@@ -4,7 +4,7 @@
 
 
     <div class="sidebar-page-container">
-       
+
         <div class="auto-container">
             <div class="row clearfix">
 
@@ -13,7 +13,7 @@
                     <div class="service-detail">
                         <div class="inner-box">
                             <div class="fs-3 text-center pb-3">
-                                {{$article->name}}
+                                {{ $article->name }}
                             </div>
                             <div class="content"
                                 style="overflow-wrap: break-word; word-wrap: break-word; white-space: normal; overflow: hidden;">
@@ -32,11 +32,9 @@
                                         <div class="lawyer-column col-lg-4 col-md-4 col-sm-6">
                                             <div class="image">
                                                 @if ($member->image)
-                                                    <a href=""><img src="{{ asset($member->image) }}"
-                                                            alt="" /></a>
+                                                    <a><img src="{{ asset($member->image) }}" alt="" /></a>
                                                 @else
-                                                    <a href=""><img
-                                                            src="{{ asset('/source/images/resource/team-1.jpg') }}"
+                                                    <a><img src="{{ asset('/source/images/resource/team-1.jpg') }}"
                                                             alt="" /></a>
                                                 @endif
 

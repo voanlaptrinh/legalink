@@ -39,9 +39,9 @@ class MenuServiceController extends Controller
         $articles = ArticlesService::whereIn('menus_services_id', $menuIds)->paginate(10);
         $sliders = Sliders::all();
         // Kiểm tra xem có bài viết nào không
-        if ($articles->isEmpty()) {
-            return redirect()->back()->with('error', 'Không có bài viết nào cho menu này.');
-        }
+        // if ($articles->isEmpty()) {
+        //     return redirect()->back()->with('error', 'Không có bài viết nào cho menu này.');
+        // }
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
         // Nếu chỉ có một bài viết, điều hướng tới trang chi tiết bài viết
         if ($articles->count() === 1) {

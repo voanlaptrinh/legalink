@@ -1,6 +1,3 @@
-
-
-
 @extends('users.index')
 @section('name')
     @include('users.home.section_banner')
@@ -10,32 +7,39 @@
     <div class="sidebar-page-container">
         <div class="auto-container">
             <div class="row clearfix">
-
-                <!-- Content Side -->
-                <div class="content-side col-lg-9 col-md-12 col-sm-12">
-                    <div class="our-blogs">
-                        @foreach ($articles as $article)
-                            <!-- News Block Two -->
-                            <div class="news-block-two">
-                                <div class="">
-                                    <div class="title">{{ $article->menuService->title }}</div>
-                                    <h4><a
-                                            href="{{ route('articles.show', ['alias' => $article->alias]) }}">{{ $article->name }}</a>
-                                    </h4>
-                                    <div class="post-date">{{ $article->created_at->diffForHumans() }} bởi <span>Admin</span>
+                @if (count($articles) > 0)
+                    <div class="content-side col-lg-9 col-md-12 col-sm-12">
+                        <div class="our-blogs">
+                            @foreach ($articles as $article)
+                                <!-- News Block Two -->
+                                <div class="news-block-two">
+                                    <div class="">
+                                        <div class="title">{{ $article->menuService->title }}</div>
+                                        <h4><a
+                                                href="{{ route('articles.show', ['alias' => $article->alias]) }}">{{ $article->name }}</a>
+                                        </h4>
+                                        <div class="post-date">{{ $article->created_at->diffForHumans() }} bởi
+                                            <span>Admin</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+
+                        </div>
+
+                        <!-- Post Share Options -->
+                        <div class="styled-pagination">
+                            {{ $articles->appends(request()->query())->links('pagination::bootstrap-4') }}
+                        </div>
 
                     </div>
-
-                    <!-- Post Share Options -->
-                    <div class="styled-pagination">
-                        {{ $articles->appends(request()->query())->links('pagination::bootstrap-4') }}
-                    </div>
-
+                @else
+                <div class="content-side col-lg-9 col-md-12 col-sm-12">
+                    <h4>Không có bài viết nào...</h4>
                 </div>
+                @endif
+                <!-- Content Side -->
+
 
                 <!-- Sidebar Side -->
                 <div class="sidebar-side col-lg-3 col-md-12 col-sm-12">
@@ -53,14 +57,17 @@
                                         <figure class="post-thumb">
                                             <a href="{{ route('news.chi', $latestNew->alias) }}">
                                                 @if ($latestNew->image)
-                                                    <img src="{{ asset('/storage/' . $latestNew->image) }}" alt="" />
+                                                    <img src="{{ asset('/storage/' . $latestNew->image) }}"
+                                                        alt="" />
                                                 @else
                                                     <img src="{{ asset('/source/images/resource/news-4.jpg') }}"
                                                         alt="" />
                                                 @endif
                                             </a>
                                         </figure>
-                                        <div class="text"><a href="{{ route('news.chi', $latestNew->alias) }}">{{ $latestNew->title }}</a></div>
+                                        <div class="text"><a
+                                                href="{{ route('news.chi', $latestNew->alias) }}">{{ $latestNew->title }}</a>
+                                        </div>
                                     </article>
                                 @endforeach
 
