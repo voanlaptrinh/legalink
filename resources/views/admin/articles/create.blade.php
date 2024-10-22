@@ -37,11 +37,11 @@
 @section('content')
     <div class="row mb-2 mb-xl-3">
         <div class="col-auto d-none d-sm-block">
-            <h3><strong>Form</strong></h3>
+            <h3><strong>Thêm mới bài viết dịch vụ</strong></h3>
         </div>
 
         <div class="col-auto ms-auto text-end mt-n1">
-            <a href="{{ route('article.create') }}" class="btn btn-primary">Thêm mới bài viết danh mục</a>
+            <a href="{{ route('article.create') }}" class="btn btn-primary">Thêm mới bài viết dịch vụ</a>
         </div>
     </div>
     <div class="row">
@@ -50,8 +50,8 @@
         <div class="col-xl-12">
             <div class="card flex-fill w-100">
                 <div class="card-header">
-                    <h5 class="card-title">Form thêm mới</h5>
-                    <h6 class="card-subtitle text-muted">Thêm mới bài viết danh mục</h6>
+                   
+                    <h6 class="card-subtitle text-muted">Thêm mới bài viết dịch vụ</h6>
                 </div>
 
                 <div class="card-body">

@@ -32,9 +32,9 @@
                                         <div class="lawyer-column col-lg-4 col-md-4 col-sm-6">
                                             <div class="image">
                                                 @if ($member->image)
-                                                    <a><img src="{{ asset($member->image) }}" alt="" /></a>
+                                                    <a href="{{ route('members.detailuser', $member->alias) }}"><img src="{{ asset($member->image) }}" alt="" /></a>
                                                 @else
-                                                    <a><img src="{{ asset('/source/images/resource/team-1.jpg') }}"
+                                                    <a href="{{ route('members.detailuser', $member->alias) }}"><img src="{{ asset('/source/images/resource/team-1.jpg') }}"
                                                             alt="" /></a>
                                                 @endif
 

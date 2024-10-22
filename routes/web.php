@@ -48,6 +48,7 @@ Route::get('/{alias}/chi-tiet', [UsersNewsController::class, 'detail'])->name('n
 
 Route::get('gioi-thieu', [IntroduceController::class, 'index'])->name('introduce');
 Route::get('nhan-su', [MembersControler::class, 'index'])->name('members');
+Route::get('chi-tiet-nhan-su/{alias}', [MembersControler::class, 'details'])->name('members.detailuser');
 Route::get('lien-he', [ContactsControler::class, 'index'])->name('contacts');
 Route::get('van-ban-phap-luat', [LawController::class, 'index'])->name('law.index');
 

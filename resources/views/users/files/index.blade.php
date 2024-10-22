@@ -17,11 +17,11 @@
                                     <div class="inner-box">
                                         <div class="image">
                                             @if ($item->image)
-                                                <a href="{{ route('file.preview', $item->id) }}"><img src="{{ asset($item->image) }}" alt="" /></a>
+                                                <a href="{{ route('file.preview', $item->id) }}"><img src="{{ asset($item->image) }}" class="img-newws" alt="" /></a>
                                             @else
-                                                <a href="{{ route('file.preview', $item->id) }}"><img
+                                                <a href="{{ route('file.preview', $item->id) }}"><img class="img-newws"
                                                         src="{{ asset('/source/images/resource/news-4.jpg') }}"
-                                                        alt="" class="img-fluid" /></a>
+                                                        alt=""  /></a>
                                             @endif
                                         </div>
                                       

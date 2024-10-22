@@ -4781,13 +4781,18 @@ img{
 }
 @media (min-width:1200px) {
     .img-image{
-        height: 187px !important;
+		width: 200px !important;
+        height: 200px !important;
     }
 	.img-member{
         width: 350px !important;
 		height: 350px !important;
         
     }
+	.img-newws{
+		width: 300px !important;
+		height: 193px !important;
+	}
 }
 @media (min-width:992px) {
   
@@ -4799,6 +4804,10 @@ img{
 		height: 350px ;
         
     }
+	.img-newws{
+		width: 300px;
+		height: 193px;
+	}
 }
 @media (min-width:768px) {
     .img-image{
@@ -4809,6 +4818,10 @@ img{
 		height: 350px ;
         
     }
+	.img-newws{
+		width: 300px;
+		height: 193px;
+	}
 }
 @media (min-width:480px) {
     .img-image{
@@ -4819,6 +4832,13 @@ img{
 		height: 350px ;
         
     }
+	.img-newws{
+		width: 300px;
+		height: 193px;
+	}
+}
+.img-newws{
+	height: 200px;
 }
 .img__news{
     width: 248px;

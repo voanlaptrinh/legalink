@@ -68,15 +68,15 @@
                                 <div class="inner-box">
                                     <div class="image">
                                         @if ($member->image)
-                                            <a href=""><img src="{{ asset($member->image) }}"  class="img-member" 
+                                            <a href="{{ route('members.detailuser', $member->alias) }}"><img src="{{ asset($member->image) }}"  class="img-member" 
                                                     alt="" /></a>
                                         @else
-                                            <a href=""><img src="{{ asset('/source/images/resource/team-1.jpg') }}"
+                                            <a href="{{ route('members.detailuser', $member->alias) }}"><img src="{{ asset('/source/images/resource/team-1.jpg') }}"
                                                      class="img-member"  alt="" /></a>
                                         @endif
                                     </div>
                                     <div class="lower-content">
-                                        <h3><a href="">{{ $member->name }}</a></h3>
+                                        <h3><a href="{{ route('members.detailuser', $member->alias) }}">{{ $member->name }}</a></h3>
                                         <div class="text">{{ $member->description }}</div>
                                         <!-- Social Box -->
                                         <ul class="social-box">

@@ -2,11 +2,11 @@
 @section('content')
     <div class="row mb-2 mb-xl-3">
         <div class="col-auto d-none d-sm-block">
-            <h3><strong>Thống kê</strong> Danh mục</h3>
+            <h3><strong>Thống kê</strong> bài viết dịch vụ</h3>
         </div>
 
         <div class="col-auto ms-auto text-end mt-n1">
-            <a href="{{ route('article.create') }}" class="btn btn-primary">Thêm mới danh mục</a>
+            <a href="{{ route('article.create') }}" class="btn btn-primary">Thêm mới bài viết dịch vụ</a>
         </div>
     </div>
     <div class="row">
@@ -35,7 +35,7 @@
                                 <thead>
                                     <tr>
                                         <th>Tên</th>
-                                        <th>ngày tạo</th>
+                                        <th>Ngày tạo</th>
                                         <th>Danh mục cha</th>
 
                                         <th class="text-end">Thao tác</th>
@@ -95,7 +95,7 @@
                                     @endforeach
                                 @else
                                     <tr class="text-center">
-                                        <td colspan="3">Không có danh mục nào</td>
+                                        <td colspan="3">Không có bài viết dịch vụ nào</td>
 
                                     </tr>
                                 @endif

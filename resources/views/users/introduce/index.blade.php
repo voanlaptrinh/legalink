@@ -23,8 +23,7 @@
                             </div>
                             <h6>{{$introduces->name_ceo}}</h6>
                             <div class="designation">CEO/Luật LEGALINK</div>
-                            <a href="#noi__gioithieyu" class="theme-btn btn-style-one"><span class="txt">Xem
-                                    thêm</span></a>
+                        
                         </div>
                     </div>
 
