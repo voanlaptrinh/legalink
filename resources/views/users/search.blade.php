@@ -10,22 +10,23 @@
                 <div class="content-side col-lg-9 col-md-12 col-sm-12">
                     <div class="our-blogs">
                         @if (count($results) > 0)
-                        @foreach ($results as $article)
-                        <div class="news-block-two">
-                            <div class="">
-                               
-                                
-                                    <div class="title">{{ $article->menuService->title }}</div>
-                                    <h4><a
-                                            href="{{ route('articles.show', ['alias' => $article->alias]) }}">{{ $article->name }}</a>
-                                    </h4>
-                                    <div class="post-date">{{ $article->created_at->diffForHumans() }} bởi <span>Admin</span>
+                            @foreach ($results as $article)
+                                <div class="news-block-two">
+                                    <div class="">
+
+
+                                        <div class="title">{{ $article->menuService->title }}</div>
+                                        <h4><a
+                                                href="{{ route('articles.show', ['alias' => $article->alias]) }}">{{ $article->name }}</a>
+                                        </h4>
+                                        <div class="post-date">{{ $article->created_at->diffForHumans() }} bởi
+                                            <span>Admin</span>
+                                        </div>
+
                                     </div>
-                                
-                            </div>
-                        </div>
-                        @endforeach
-                           
+                                </div>
+                            @endforeach
+
                             <div class="styled-pagination">
                                 {{ $results->appends(request()->query())->links('pagination::bootstrap-4') }}
                             </div>

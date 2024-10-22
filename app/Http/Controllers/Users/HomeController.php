@@ -40,6 +40,16 @@ class HomeController extends Controller
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
         return view('users.thuvienanh.index', compact('webConfig', 'sliders', 'images', 'menus','detailPays'));
     }
+    public function faqs(Request $request)
+    {
+        $webConfig = Webconfigs::find(1);
+        $detailPays = DetailPays::find(1);
+        $sliders = Sliders::all();
+        $images = Images::all();
+        $faqs = Questions::orderBy('id', 'desc')->get();
+        $menus = MenusServices::whereNull('parent_id')->with('children')->get();
+        return view('users.faq', compact('webConfig','faqs', 'sliders', 'images', 'menus','detailPays'));
+    }
     public function search(Request $request)
     {
         $query = $request->input('query');

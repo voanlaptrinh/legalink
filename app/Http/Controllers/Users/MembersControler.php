@@ -28,9 +28,10 @@ class MembersControler extends Controller
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
         $webConfig = Webconfigs::find(1);
         $detailPays = DetailPays::find(1);
+        $latestMember = Members::orderBy('id', 'desc')->take(4)->get();
         $sliders = Sliders::all();
         $images = Images::all();
         $member = Members::where('alias', $alias)->firstOrFail();
-        return view('users.members.detail', compact('member', 'webConfig', 'sliders','menus','detailPays','images'));
+        return view('users.members.detail', compact('member', 'webConfig','latestMember', 'sliders','menus','detailPays','images'));
     }
 }

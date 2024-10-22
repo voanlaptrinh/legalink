@@ -42,6 +42,7 @@ Route::post('/upload-image', action: [UploadController::class, 'uploadImage'])->
 
 Route::get('/',  [HomeController::class, 'index'])->name('home');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/question', [HomeController::class, 'faqs'])->name('faqs');
 Route::get('/tin-tuc', [UsersNewsController::class, 'index'])->name('news');
 Route::get('/thu-vien-anh', [HomeController::class, 'thuvien'])->name('thuvien');
 Route::get('/{alias}/chi-tiet', [UsersNewsController::class, 'detail'])->name('news.chi');

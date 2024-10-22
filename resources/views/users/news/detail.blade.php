@@ -46,10 +46,10 @@
                                     <article class="post">
                                         <figure class="post-thumb"><a href="{{ route('news.chi', $latestNew->alias) }}">
                                                 @if ($latestNew->image)
-                                                    <img src="{{ asset($latestNew->image) }}" alt="" class="img-fluid">
+                                                    <img src="{{ asset($latestNew->image) }}" alt="" class="img-fluid-news">
                                                 @else
                                                     <img src="{{ asset('source/images/resource/post-thumb-1.jpg') }}"
-                                                        alt="">
+                                                        alt="" class="img-fluid-news">
                                                 @endif
                                             </a>
                                         </figure>

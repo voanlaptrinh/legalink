@@ -69,7 +69,7 @@
                         @endforeach
                     </ul>
 
-                    {{-- <a href="" class="questions">Xem tất cả câu hỏi</a> --}}
+                    <a href="{{route('faqs')}}" class="questions">Xem tất cả câu hỏi</a>
 
                 </div>
             </div>
