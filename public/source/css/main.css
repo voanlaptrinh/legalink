@@ -4853,3 +4853,19 @@ img{
 	width: 100px;
 	height: 60px;
 }
+.to-right{
+	position: fixed;
+    bottom: 77px;
+    left: 15px;
+    width: 60px;
+    height: 60px;
+    color: #ffffff;
+    font-size: 24px;
+    text-transform: uppercase;
+    line-height: 60px;
+    text-align: center;
+    z-index: 100;
+    cursor: pointer;
+
+
+}
