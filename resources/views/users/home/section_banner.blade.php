@@ -11,7 +11,7 @@
                             <div class="content-boxed">
                                 <div class="inner-box">
                                     <div class="title">CÔNG TY TNHH LUẬT LEGALINK</div>
-                                    <h2>Hiệu Quả & Niềm TinGiải Pháp Pháp Lý</h2>
+                                    <h2 style="color:white; font-weight: 700">{{$item->title}}</h2>
                                 </div>
                             </div>
 
@@ -46,19 +46,7 @@
             @endif
 
 
-            {{-- <div class="swiper-slide" style="background-image: url(source/images/main-slider/2.jpg)">
-                <div class="auto-container">
-
-                    <div class="content-boxed">
-                        <div class="inner-box">
-                            <div class="title">CÔNG TY TNHH LUẬT LEGALINK</div>
-                            <h3><span>Hiệu Quả</span> & <span>Niềm Tin</span> <br> Giải Pháp Pháp Lý</h3>
-                        </div>
-                    </div>
-
-                </div>
-            </div> --}}
-
+          
         </div>
     </div>
 
