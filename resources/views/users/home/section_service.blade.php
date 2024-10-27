@@ -20,7 +20,16 @@
                     </div>
                 </div>
             @endforeach
-
+            <div class="service-block col-lg-3 col-md-6 col-sm-12">
+                <div class="inner-box">
+                    <div class="image-layer" style="background-image: url({{asset('source/images/resource/service-1.jpg')}})">
+                    </div>
+                   
+                    <h5><a href="">Văn bản pháp luật</a></h5>
+                    <div class="text defau_3" style="overflow-wrap: break-word; word-wrap: break-word; white-space: normal; overflow: hidden;">
+                    </div>
+                </div>
+            </div>
         </div>
         @else
             <p class="text-center">Không có dịch vụ</p>

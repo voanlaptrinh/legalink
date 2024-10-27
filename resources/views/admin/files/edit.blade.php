@@ -23,7 +23,7 @@
                     <form action="{{ route('files.update', $file->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <div class="row g-0">
+                        <div class="row g-3">
                             <div class="mb-3 col-lg-6">
                                 <div>
                                     <label class="form-label" for="title">Tên bài viết:</label>
@@ -54,10 +54,10 @@
                        
                         <div class="mb-3 col-lg-6">
                             <div class="text-center">
-                                <img id="preview-image" src="{{ asset( $file->image) }}" alt=""
-                                    class="review_img img-thumbnail" style="max-width: 290px; max-height: 288px;">
-                                <input type="file" class="form-control" name="image" id="image"
-                                    onchange="previewImage(event)">
+                                <img id="preview-image" src="{{ asset($file->image) }}" alt=""
+                                class="review_img img-thumbnail" style="max-width: 290px; max-height: 288px; cursor: pointer;"
+                                onclick="document.getElementById('image').click()">
+                            <input type="file" class="form-control" name="image" id="image" onchange="previewImage(event)" style="display: none;">
                             </div>
                             @error('image')
                                 <p class="fw-bold" style="color: red;">{{ $message }}</p>

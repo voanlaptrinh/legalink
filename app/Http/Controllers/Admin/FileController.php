@@ -26,14 +26,27 @@ class FileController extends Controller
     // Lưu file lên server và lưu thông tin vào cơ sở dữ liệu
     public function store(Request $request)
     {
-        // Validate các trường nhập
         $request->validate([
             'name' => 'required|string|max:255',
-            'file' => 'required|file|mimes:jpg,jpeg,png,pdf,docx,txt', // Giới hạn loại và kích thước file
+            'file' => 'nullable|file|mimes:pdf,docx,txt', // File có thể không bắt buộc
             'price' => 'required|integer|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif', // Ảnh tùy chọn
+        ], [
+            'name.required' => 'Tên là bắt buộc.',
+            'name.string' => 'Tên phải là một chuỗi ký tự.',
+            'name.max' => 'Tên không được vượt quá 255 ký tự.',
+            
+            'file.file' => 'Tệp không hợp lệ.',
+            'file.mimes' => 'Tệp phải có định dạng: pdf, docx hoặc txt.',
+        
+            'price.required' => 'Giá là bắt buộc.',
+            'price.integer' => 'Giá phải là một số nguyên.',
+            'price.min' => 'Giá phải lớn hơn hoặc bằng 0.',
+            
+            'image.image' => 'Ảnh không hợp lệ.',
+            'image.mimes' => 'Ảnh phải có định dạng: jpeg, png, jpg hoặc gif.',
         ]);
-
+        
         // Xử lý file tải lên
         $filePath = null;
         $imagePath = null;
@@ -79,13 +92,27 @@ class FileController extends Controller
     // Lưu cập nhật thông tin file
     public function update(Request $request, $id)
     {
-        // Validate các trường nhập
         $request->validate([
             'name' => 'required|string|max:255',
-            'file' => 'nullable|file|mimes:jpg,jpeg,png,pdf,docx,txt', // File có thể không bắt buộc
+            'file' => 'nullable|file|mimes:pdf,docx,txt', // File có thể không bắt buộc
             'price' => 'required|integer|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif', // Ảnh tùy chọn
+        ], [
+            'name.required' => 'Tên là bắt buộc.',
+            'name.string' => 'Tên phải là một chuỗi ký tự.',
+            'name.max' => 'Tên không được vượt quá 255 ký tự.',
+            
+            'file.file' => 'Tệp không hợp lệ.',
+            'file.mimes' => 'Tệp phải có định dạng: pdf, docx hoặc txt.',
+        
+            'price.required' => 'Giá là bắt buộc.',
+            'price.integer' => 'Giá phải là một số nguyên.',
+            'price.min' => 'Giá phải lớn hơn hoặc bằng 0.',
+            
+            'image.image' => 'Ảnh không hợp lệ.',
+            'image.mimes' => 'Ảnh phải có định dạng: jpeg, png, jpg hoặc gif.',
         ]);
+        
 
         // Tìm file cần cập nhật
         $fileRecord = Files::findOrFail($id);

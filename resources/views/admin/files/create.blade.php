@@ -20,9 +20,9 @@
                 </div>
                 <div class="card-body">
                     <!-- Form thêm mới danh mục -->
-                    <form action="{{ route('files.store') }}" class="row g-0" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('files.store') }}" class="row g-3" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="mb-3 col-lg-6">
+                        <div class="mb-3 col-lg-6 ">
                             <div>
                                 <label class="form-label" for="title">Tên bài viết:</label>
                                 <input type="text" id="name" name="name" class="form-control"
@@ -48,16 +48,19 @@
                             </div>
                         </div>
                         <div class="mb-3 col-lg-6">
+                            <label class="form-label" for="title">Ảnh mô tả:</label>
                             <div class="text-center">
                                 <img id="preview-image" src="{{ asset('source/imges/none-image.jpg') }}" alt=""
-                                    class="review_img img-thumbnail" style="max-width: 290px; max-height: 288px;">
-                                <input type="file" class="form-control" name="image" id="image"
-                                    onchange="previewImage(event)">
+                                    class="review_img img-thumbnail" style="max-width: 290px; max-height: 288px; cursor: pointer;"
+                                    onclick="document.getElementById('image').click()">
+                                <input type="file" class="form-control" name="image" id="image" onchange="previewImage(event)" style="display: none;">
                             </div>
                             @error('image')
                                 <p class="fw-bold" style="color: red;">{{ $message }}</p>
                             @enderror
                         </div>
+                       
+                        
                         <div class="text-end">
                             <button type="submit" class="btn btn-primary">Thêm mới</button>
                             <a href="{{ route('files.index') }}" class="btn btn-primary">Quay lại</a>

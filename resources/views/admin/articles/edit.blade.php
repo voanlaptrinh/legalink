@@ -1,81 +1,8 @@
-{{-- <form action="{{ route('article.update', $article->id) }}" method="POST">
-    @csrf
-    @method('PUT')
-
-    <!-- Menu Dịch Vụ -->
-    <div class="form-group">
-        <label for="menus_services_id">Menu Dịch Vụ:</label>
-        <select name="menus_services_id" id="menus_services_id" class="form-control" required>
-            <option value="">Chọn Menu Dịch Vụ</option>
-            @foreach ($menus as $menu)
-                <option value="{{ $menu->id }}" {{ $article->menus_services_id == $menu->id ? 'selected' : '' }}>
-                    {{ $menu->title }}
-                </option>
-            @endforeach
-        </select>
-        @error('menus_services_id')
-            <div class="text-danger">{{ $message }}</div>
-        @enderror
-    </div>
-
-    <!-- Tên Bài Viết -->
-    <div class="form-group">
-        <label for="name">Tên Bài Viết:</label>
-        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $article->name) }}" required>
-        @error('name')
-            <div class="text-danger">{{ $message }}</div>
-        @enderror
-    </div>
-
-    <!-- Nội Dung Bài Viết -->
-    <div class="form-group">
-        <label for="content">Nội Dung:</label>
-        <textarea name="content" id="content" class="form-control" required>{{ old('content', $article->content) }}</textarea>
-        @error('content')
-            <div class="text-danger">{{ $message }}</div>
-        @enderror
-    </div>
-
-    <!-- Alias (Bí Danh) -->
-    <div class="form-group">
-        <label for="alias">Alias (Bí Danh):</label>
-        <input type="text" name="alias" id="alias" class="form-control" value="{{ old('alias', $article->alias) }}">
-        @error('alias')
-            <div class="text-danger">{{ $message }}</div>
-        @enderror
-    </div>
-
-    <!-- Chọn Thành Viên Phụ Trách -->
-    <div class="form-group">
-        <label for="members_ids">Thành Viên Phụ Trách:</label>
-        <select name="members_ids[]" id="members_ids" class="form-control" multiple required>
-            @foreach ($members as $member)
-                <option value="{{ $member->id }}" 
-                    {{ in_array($member->id, $article->getMembersArray()) ? 'selected' : '' }}>
-                    {{ $member->name }}
-                </option>
-            @endforeach
-        </select>
-        @error('members_ids')
-            <div class="text-danger">{{ $message }}</div>
-        @enderror
-    </div>
-
-    <!-- Nút Cập Nhật -->
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Cập Nhật Bài Viết</button>
-    </div>
-</form> --}}
-
-
-
 
 @extends('admin.index')
 @section('content')
     <div class="row mb-2 mb-xl-3">
-        <div class="col-auto d-none d-sm-block">
-            <h3><strong>Form</strong></h3>
-        </div>
+       
 
         <div class="col-auto ms-auto text-end mt-n1">
             <a href="{{ route('article.update', $article->id) }}" class="btn btn-primary">Thêm mới bài viết danh mục</a>

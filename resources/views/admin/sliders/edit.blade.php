@@ -34,10 +34,14 @@
                             <!-- Hình ảnh xem trước -->
                             <label class="form-label" for="title">Kích thước 1900px x 663px</label>
                             <div class="text-center">
-                                <img id="preview-image" src="{{ asset($slider->image) }}" alt=""
-                                    class="review_img img-thumbnail" style="max-width: 290px; max-height: 288px;">
+                                <img id="preview-image"
+                                    src="{{ $slider->image ? asset($slider->image) : asset('source/imges/none-image.jpg') }}"
+                                    alt="" class="review_img img-thumbnail"
+                                    style="max-width: 290px; max-height: 288px; cursor: pointer;"
+                                    onclick="document.getElementById('image').click()">
+
                                 <input type="file" class="form-control" name="image" id="image"
-                                    onchange="previewImage(event)">
+                                    style="display: none;" onchange="previewImage(event)">
                             </div>
                             @error('image')
                                 <p class="fw-bold" style="color: red;">{{ $message }}</p>
@@ -47,7 +51,7 @@
 
 
 
-                    <div class="text-end">
+                    <div class="text-end mt-4">
                         <button type="submit" class="btn btn-primary">Thêm mới</button>
                         <a href="{{ route('sliders.index') }}" class="btn btn-secondary">Quay lại</a>
                     </div>

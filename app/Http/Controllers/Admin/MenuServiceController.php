@@ -39,6 +39,7 @@ class MenuServiceController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
             'parent_id' => 'nullable|exists:menus_services,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,sv',
         ], [
             'title.required' => 'Tên danh mục không được để trống',
             'title.string' => 'Tên danh mục phải là một chuỗi',
@@ -46,14 +47,35 @@ class MenuServiceController extends Controller
             'description.string' => 'Mô tả danh mục phải là một chuỗi',
             'description.max' => 'Mô tả danh mục không quá 255 ký tự',
             'parent_id.exists' => 'Danh mục cha không hợp lệ',
-           
+            'image.image' => 'Tệp tin phải là hình ảnh.',
+            'image.mimes' => 'Hình ảnh phải có định dạng jpeg, png, jpg, gif, hoặc svg.',
         ]);
-       
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            if ($image->isValid()) {
+                
+                $imageExtension = $image->getClientOriginalExtension();
+                $imageName = Str::random(10) . '.' . $imageExtension;
+                $destinationPath = public_path('source/news');
+        
+                $image->move($destinationPath, $imageName);
+        
+                $imagePath = 'source/news/' . $imageName;
+        
+                if (!file_exists(public_path($imagePath))) {
+                    return redirect()->back()->withErrors('Lỗi khi lưu ảnh.');
+                }
+            } else {
+                return redirect()->back()->withErrors('Ảnh không hợp lệ.');
+            }
+        }
         // Tạo mới danh mục
         $category = MenusServices::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'parent_id' => $request->input(key: 'parent_id'),
+            'image' => $imagePath,
         ]);
         // Tạo alias với id sau khi bản ghi đã được lưu
         $alias = Str::slug($request->input('title'), '-') . '-' . $category->id;

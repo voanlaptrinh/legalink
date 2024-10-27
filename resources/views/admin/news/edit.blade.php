@@ -33,10 +33,14 @@
                         <div class="col-lg-4 ">
                             <!-- Hình ảnh xem trước -->
                             <div class="text-center">
-                                <img id="preview-image" src="{{ asset( $news->image) }}" alt=""
-                                    class="review_img img-thumbnail" style="max-width: 290px; max-height: 288px;">
+                                <img id="preview-image"
+                                    src="{{ $news->image ? asset($news->image) : asset('source/imges/none-image.jpg') }}"
+                                    alt="" class="review_img img-thumbnail"
+                                    style="max-width: 290px; max-height: 288px; cursor: pointer;"
+                                    onclick="document.getElementById('image').click()">
+
                                 <input type="file" class="form-control" name="image" id="image"
-                                    onchange="previewImage(event)">
+                                    style="display: none;" onchange="previewImage(event)">
                             </div>
                             @error('image')
                                 <p class="fw-bold" style="color: red;">{{ $message }}</p>

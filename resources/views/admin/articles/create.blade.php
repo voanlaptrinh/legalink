@@ -1,35 +1,4 @@
-{{-- <form action="{{ route('article.store') }}" method="POST">
-    @csrf
-    <div class="form-group">
-        <label for="menus_services_id">Chọn menu dịch vụ:</label>
-        <select name="menus_services_id" id="menus_services_id" class="form-control">
-            @foreach ($menus as $menu)
-                <option value="{{ $menu->id }}">{{ $menu->title }}</option>
-            @endforeach
-        </select>
-    </div>
 
-    <div class="form-group">
-        <label for="name">Tên bài viết:</label>
-        <input type="text" name="name" class="form-control" required>
-    </div>
-
-    <div class="form-group">
-        <label for="content">Nội dung bài viết:</label>
-        <textarea name="content" class="form-control" required></textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="members_ids">Chọn thành viên phụ trách:</label>
-        <select name="members_ids[]" id="members_ids" class="form-control" multiple>
-            @foreach ($members as $member)
-                <option value="{{ $member->id }}">{{ $member->name }}</option>
-            @endforeach
-        </select>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Tạo bài viết</button>
-</form> --}}
 
 
 

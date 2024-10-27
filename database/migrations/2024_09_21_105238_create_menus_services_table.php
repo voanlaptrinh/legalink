@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title'); // Tên menu
             $table->string('description'); // Tên menu
+            $table->string('image')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable(); // Để thiết kế menu con
             $table->string('alias')->nullable();
             $table->timestamps();

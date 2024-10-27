@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\EvaluationsController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Admin\MenuServiceController;
+use App\Http\Controllers\Admin\MindController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UserController;
@@ -43,6 +44,7 @@ Route::post('/upload-image', action: [UploadController::class, 'uploadImage'])->
 Route::get('/',  [HomeController::class, 'index'])->name('home');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/question', [HomeController::class, 'faqs'])->name('faqs');
+Route::get('/question/{id}', [HomeController::class, 'faqsdetail'])->name('faqs.detail');
 Route::get('/tin-tuc', [UsersNewsController::class, 'index'])->name('news');
 Route::get('/thu-vien-anh', [HomeController::class, 'thuvien'])->name('thuvien');
 Route::get('/{alias}/chi-tiet', [UsersNewsController::class, 'detail'])->name('news.chi');
@@ -82,8 +84,17 @@ Route::prefix('/admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/create', [FileController::class, 'create'])->name('files.create');
         Route::post('/store', [FileController::class, 'store'])->name('files.store');
         Route::get('/files/{id}/edit', [FileController::class, 'edit'])->name('files.edit');
+        Route::get('/files/{id}/detail', [FileController::class, 'detail'])->name('files.deatail');
         Route::put('/files/{id}', [FileController::class, 'update'])->name('files.update');
         Route::delete('/files/{id}', [FileController::class, 'destroy'])->name('files.destroy');
+    });
+    Route::prefix('/mind')->group(function () {
+        Route::get('/', [MindController::class, 'index'])->name('minds.index');
+        Route::get('/create', [MindController::class, 'create'])->name('minds.create');
+        Route::post('/store', [MindController::class, 'store'])->name('minds.store');
+        Route::get('/{id}/edit', [MindController::class, 'edit'])->name('minds.edit');
+        Route::put('/{id}', [MindController::class, 'update'])->name('minds.update');
+        Route::delete('delete/{id}', [MindController::class, 'destroy'])->name('minds.destroy');
     });
     Route::prefix('/news')->group(function () {
         Route::get('/', [NewsController::class, 'index'])->name('news.index');

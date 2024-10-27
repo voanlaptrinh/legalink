@@ -95,7 +95,7 @@
                                     @endforeach
                                 @else
                                     <tr class="text-center">
-                                        <td colspan="3">Không có bài viết dịch vụ nào</td>
+                                        <td colspan="4">Không có bài viết dịch vụ nào</td>
 
                                     </tr>
                                 @endif

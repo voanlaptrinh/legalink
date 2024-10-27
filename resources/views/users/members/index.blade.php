@@ -23,8 +23,7 @@
                             </div>
                             <h6>{{ $introduces->name_ceo }}</h6>
                             <div class="designation">CEO/Luật LEGALINK</div>
-                            <a href="{{ route('introduce') }}" class="theme-btn btn-style-one"><span class="txt">Xem
-                                    thêm</span></a>
+                          
                         </div>
                     </div>
 
@@ -77,7 +76,7 @@
                                     </div>
                                     <div class="lower-content">
                                         <h3><a href="{{ route('members.detailuser', $member->alias) }}">{{ $member->name }}</a></h3>
-                                        <div class="text">{{ $member->description }}</div>
+                                        <div class="text text-white">{{ $member->description }}</div>
                                         <!-- Social Box -->
                                         <ul class="social-box">
                                             <li><a href="mailto: {{ $member->email }}"><span

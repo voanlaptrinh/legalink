@@ -30,8 +30,9 @@
                                     {{ \Carbon\Carbon::parse($latestNew->created_at)->translatedFormat('d F, Y') }}
                                 </div>
                                 <h4>
-                                    <a href="" class="text-limit-2-line">{{ $latestNew->title }}</a>
+                                    <a href="{{ route('news.chi', $latestNew->alias) }}" class="text-limit-2-line">{{ $latestNew->title }}</a>
                                 </h4>
+                                <p class="text-limit-1-line">{{$latestNew->description}}</p>
                             </div>
                         </div>
                     @endforeach
@@ -63,6 +64,7 @@
                                 <div class="acc-content  {{ $index == 0 ? 'current' : '' }}">
                                     <div class="content">
                                         <div class="text defau_3">{{ $question->description }}</div>
+                                        <a href="{{ route('faqs.detail', $question->id) }}">Chi tiết</a>
                                     </div>
                                 </div>
                             </li>

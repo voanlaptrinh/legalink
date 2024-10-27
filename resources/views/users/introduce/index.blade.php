@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="lower-content">
                                         <h3><a href="{{ route('members.detailuser', $member->alias) }}">{{ $member->name }}</a></h3>
-                                        <div class="text">{{ $member->description }}</div>
+                                        <div class="text text-white">{{ $member->description }}</div>
                                         <!-- Social Box -->
                                         <ul class="social-box">
                                             <li><a href="mailto: {{ $member->email }}"><span

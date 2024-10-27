@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">Form Thêm mới quản lýs</h5>
+                <h5 class="card-title"> Thêm mới quản lý</h5>
             </div>
             <div class="card-body">
                 <form action="{{ route('adminaccount.store') }}" method="POST">

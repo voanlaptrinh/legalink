@@ -35,8 +35,8 @@
                                 <thead>
                                     <tr>
                                         <th>Tên</th>
-                                        <th>giá</th>
-                                        <th>ngày tạo</th>
+                                        <th>Giá</th>
+                                        <th>Ngày tạo</th>
                                         <th>Xem trước file</th>
 
                                         <th class="text-end">Thao tác</th>
@@ -44,18 +44,18 @@
                                 </thead>
                                 <tbody>
                                     @if (count($files) > 0)
-                                    @foreach ($files as $file)
+                                    @foreach ($files as $item)
                                         <tr>
-                                            <td>{{ $file->name }}</td>
-                                            <td>{{number_format($file->price)}}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{number_format($item->price)}}VNĐ</td>
                                             <td>
-                                              {{ $file->created_at}}
+                                              {{ $item->created_at}}
                                             </td>
-                                            <td><a href="{{ asset( $file->file) }}"
+                                            <td><a href="{{ asset($item->file) }}"
                                                 target="_blank">View file</a></td>
 
                                             <td class="table-action text-end">
-                                                <a href="{{ route('files.edit', $file->id) }}"
+                                                <a href="{{ route('files.edit', $item->id) }}"
                                                     class="btn btn-primary text-white"><svg
                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -65,7 +65,7 @@
                                                             d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
                                                         </path>
                                                     </svg></a>
-                                               <form action="{{ route('files.destroy', $file->id) }}"
+                                               <form action="{{ route('files.destroy', $item->id) }}"
                                                     method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')

@@ -15,22 +15,24 @@
                                 <div class="mb-3 col-md-12">
                                     <label class="form-label" for="name">Tên thành viên</label>
                                     <input type="text" class="form-control" name="name"
-                                        value="{{ old('name', $member->name) }}" id="name" placeholder="Tên thành viên">
+                                        value="{{ old('name', $member->name) }}" id="name"
+                                        placeholder="Tên thành viên">
                                     @error('name')
                                         <p class="fw-bold" style="color: red;">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label" for="email">Email</label>
-                                    <input type="email" class="form-control" name="email" value="{{ old('email', $member->email) }}" id="email"
-                                        placeholder="email">
+                                    <input type="email" class="form-control" name="email"
+                                        value="{{ old('email', $member->email) }}" id="email" placeholder="email">
                                     @error('email')
                                         <p class="fw-bold" style="color: red;">{{ $message }}</p>
                                     @enderror
-                                </div>  
+                                </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label" for="phone">Số điện thoại</label>
-                                    <input type="text" class="form-control" name="phone" value="{{ old('phone', $member->phone) }}" id="phone"
+                                    <input type="text" class="form-control" name="phone"
+                                        value="{{ old('phone', $member->phone) }}" id="phone"
                                         placeholder="Số điện thoại">
                                     @error('phone')
                                         <p class="fw-bold" style="color: red;">{{ $message }}</p>
@@ -48,10 +50,14 @@
                         <div class="col-lg-4 ">
                             <!-- Hình ảnh xem trước -->
                             <div class="text-center">
-                                <img id="preview-image" src="{{ asset( $member->image) }}" alt=""
-                                    class="review_img img-thumbnail" style="max-width: 290px; max-height: 288px;">
+                                <img id="preview-image"
+                                    src="{{ $member->image ? asset($member->image) : asset('source/imges/none-image.jpg') }}"
+                                    alt="" class="review_img img-thumbnail"
+                                    style="max-width: 290px; max-height: 288px; cursor: pointer;"
+                                    onclick="document.getElementById('image').click()">
+
                                 <input type="file" class="form-control" name="image" id="image"
-                                    onchange="previewImage(event)">
+                                    style="display: none;" onchange="previewImage(event)">
                             </div>
                             @error('image')
                                 <p class="fw-bold" style="color: red;">{{ $message }}</p>

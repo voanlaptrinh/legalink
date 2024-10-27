@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MenusServices extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'parent_id', 'alias', 'description'];
+    protected $fillable = ['title', 'parent_id', 'alias', 'description','image'];
 
     // Liên kết với bài viết
     public function articles()

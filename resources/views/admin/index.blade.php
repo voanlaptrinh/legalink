@@ -94,6 +94,12 @@
                         </a>
                     </li>
                     <li
+                        class="sidebar-item {{ in_array(Request::route()->getName(), ['minds.index', 'minds.create', 'minds.edit', 'minds.detail']) ? 'active' : '' }}">
+                        <a class='sidebar-link' href='{{ route('minds.index') }}'>
+                            <i class="bi bi-people-fill"></i> <span class="align-middle">Tâm - Trí - Tín</span>
+                        </a>
+                    </li>
+                    <li
                         class="sidebar-item {{ in_array(Request::route()->getName(), ['introduce.index']) ? 'active' : '' }}">
                         <a class='sidebar-link' href='{{ route('introduce.index') }}'>
                             <i class="bi bi-chat-right-quote-fill"></i><span class="align-middle">Giới thiệu</span>
@@ -145,7 +151,7 @@
                     <li
                         class="sidebar-item {{ in_array(Request::route()->getName(), ['pay.index']) ? 'active' : '' }}">
                         <a class='sidebar-link' href='{{ route('pay.index') }}'>
-                            <i class="bi bi-gear-wide-connected"></i><span class="align-middle">Cài đặt thông tin chuyển khoản</span>
+                            <i class="bi bi-gear-wide-connected"></i><span class="align-middle">Thông tin chuyển khoản</span>
                         </a>
                     </li>
 

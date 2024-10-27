@@ -25,7 +25,7 @@
                         <div class="content-boxed">
                             <div class="inner-box">
                                 <div class="title">CÔNG TY TNHH LUẬT LEGALINK</div>
-                                <h3><span>Hiệu Quả</span> & <span>Niềm Tin</span> <br> Giải Pháp Pháp Lý</h3>
+                                <h3 style="color:white; font-weight: 700"><span>Hiệu Quả</span> & <span>Niềm Tin</span> <br> Giải Pháp Pháp Lý</h3>
                             </div>
                         </div>
 
@@ -37,7 +37,7 @@
                         <div class="content-boxed">
                             <div class="inner-box">
                                 <div class="title">CÔNG TY TNHH LUẬT LEGALINK</div>
-                                <h3><span>Hiệu Quả</span> & <span>Niềm Tin</span> <br> Giải Pháp Pháp Lý</h3>
+                                <h3 style="color:white; font-weight: 700"><span>Hiệu Quả</span> & <span>Niềm Tin</span> <br> Giải Pháp Pháp Lý</h3>
                             </div>
                         </div>
 

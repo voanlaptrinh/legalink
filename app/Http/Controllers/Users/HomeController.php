@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\ArticlesService;
+use App\Models\DetailMind;
 use App\Models\DetailPays;
 use App\Models\Evaluations;
 use App\Models\Images;
@@ -29,7 +30,8 @@ class HomeController extends Controller
         $members = Members::all();
         $questions = Questions::orderBy('id', 'desc')->take(6)->get();
         $evaluations = Evaluations::all();
-        return view('users.home.index', compact('latestNews', 'webConfig', 'sliders', 'introduces', 'members', 'questions', 'evaluations', 'menus','detailPays'));
+        $minds = DetailMind::all();
+        return view('users.home.index', compact('latestNews', 'webConfig', 'sliders', 'introduces','minds', 'members', 'questions', 'evaluations', 'menus','detailPays'));
     }
     public function thuvien(Request $request)
     {
@@ -49,6 +51,17 @@ class HomeController extends Controller
         $faqs = Questions::orderBy('id', 'desc')->get();
         $menus = MenusServices::whereNull('parent_id')->with('children')->get();
         return view('users.faq', compact('webConfig','faqs', 'sliders', 'images', 'menus','detailPays'));
+    }
+    public function faqsdetail(Request $request, $id)
+    {
+        $webConfig = Webconfigs::find(1);
+        $detailPays = DetailPays::find(1);
+        $sliders = Sliders::all();
+        $images = Images::all();
+        $latestNews = News::orderBy('id', 'desc')->take(4)->get();
+        $faqs = Questions::where('id', $id)->firstOrFail();
+        $menus = MenusServices::whereNull('parent_id')->with('children')->get();
+        return view('users.faq_detail', compact('webConfig','faqs', 'sliders', 'images','latestNews', 'menus','detailPays'));
     }
     public function search(Request $request)
     {

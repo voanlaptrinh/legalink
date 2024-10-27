@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\DetailMind;
 use App\Models\DetailPays;
 use App\Models\Evaluations;
 use App\Models\Introduces;
@@ -29,6 +30,24 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        DetailMind::create([
+            'name' => 'TÂM',
+            'description' => 'Là tận tâm, tâm huyết cố gắng hết sức, làm hết trách nhiệm và khả năng để đạt được kết quả tốt nhất.',
+
+        ]);
+
+        DetailMind::create([
+            'name' => 'TRÍ',
+            'description' => 'Là thông minh, trí tuệ trong cách xử lý công việc, có tầm nhìn và chiến lược rõ ràng.',
+        ]);
+        DetailMind::create([
+            'name' => 'TÍN',
+            'description' => 'Là uy tín, tin cậy và trung thực trong công việc, giữ đúng cam kết với khách hàng.',
+        ]);
+
+
+
         Introduces::create(attributes: [
             'name' => 'CÔNG TY LUẬT LEGALINK',
             'description' => 'Công ty cung cấp các dịch vụ tư vấn pháp lý chuyên nghiệp cho cá nhân và doanh nghiệp trong nhiều lĩnh vực khác nhau. Làm việc với phương châm Tâm – Trí – Tín. Chúng tôi không chỉ là một công ty luật, mà còn là người bạn đồng hành đáng tin cậy trên con đường pháp lý của bạn. Cùng với đội ngũ luật sư và chuyên viên dày dặn kinh nghiệm, tâm huyết và nhiệt huyết, chúng tôi luôn nỗ lực mang đến cho khách hàng những giải pháp pháp lý hiệu quả và tối ưu nhất.',
@@ -37,7 +56,7 @@ class DatabaseSeeder extends Seeder
             Curabitur mollis quam dolor, quis gravida orci mattis non. Nam erat erat,
             tristique a elit at consectetur.',
             'name_ceo' => 'Phan Kim Du',
-            
+
         ]);
 
         Webconfigs::create([
@@ -139,6 +158,5 @@ class DatabaseSeeder extends Seeder
                 email + tên tài khoản (VD: example@gmail.com , example)
             '
         ]);
-
     }
 }
