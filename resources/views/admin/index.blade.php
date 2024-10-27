@@ -4,7 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Header Example</title>
+    <title>Admin Legalink</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('/source/img/favicon-16x16.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/source/img/favicon-16x16.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/source/img/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="144x144" href="{{asset('/source/img/android-chrome-144x144.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{asset('/source/img/android-chrome-192x192.png')}}">
+
+    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('/source/img/apple-touch-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{asset('/source/img/apple-touch-icon-120x120.png')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('/source/img/apple-touch-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{asset('/source/img/apple-touch-icon-152x152.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/source/img/apple-touch-icon.png')}}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{asset('/source/img/apple-touch-icon-57x57.png')}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{asset('/source/img/apple-touch-icon-60x60.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('/source/img/apple-touch-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('/source/img/apple-touch-icon-76x76.png')}}">
+    <link rel="apple-touch-startup-image" href="{{asset('/source/img/apple-touch-icon-180x180.png')}}" />
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script src="{{ asset('/source/js/jquery-3.5.1.min.js') }}"></script>

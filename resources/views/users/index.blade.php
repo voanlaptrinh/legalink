@@ -2,22 +2,42 @@
 <html lang="en">
 
 <head>
+   
+    <title>{{$webConfig->title}}</title>
+    <meta name="description" content="{{$webConfig->description}}">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="{{$webConfig->key}}">
+    <link rel="canonical" href="https://legalink.com" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('/source/img/favicon-16x16.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/source/img/favicon-16x16.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/source/img/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="144x144" href="{{asset('/source/img/android-chrome-144x144.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{asset('/source/img/android-chrome-192x192.png')}}">
 
-    <!-- Title here -->
-    <title>Legalink - Tâm Trí Tín</title>
+    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('/source/img/apple-touch-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{asset('/source/img/apple-touch-icon-120x120.png')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('/source/img/apple-touch-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{asset('/source/img/apple-touch-icon-152x152.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/source/img/apple-touch-icon.png')}}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{asset('/source/img/apple-touch-icon-57x57.png')}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{asset('/source/img/apple-touch-icon-60x60.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('/source/img/apple-touch-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('/source/img/apple-touch-icon-76x76.png')}}">
+    <link rel="apple-touch-startup-image" href="{{asset('/source/img/apple-touch-icon-180x180.png')}}" />
 
-    <!-- Meta tag SEO here-->
-    <meta name="title" content="Luật Legalink">
-    <meta name="discription" content="Công ty trách nhiệm hữu hạn luật Legalink">
-    <meta name="keyworld" content="Luật, legalink, pháp lý, pháp chế">
-    <meta name="robots" content="noodp,index,follow">
-    <meta name="revisit-after" content="1-days">
-    <meta http-equiv="content-language" content="vi">
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <meta name="google" content="nositelinkssearchbox">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Legalink">
+    <meta property="og:url" content="https://legalink.com/">
+
+    <meta property="og:title" content="{{$webConfig->title}}">
+    <meta property="og:description" content="{{$webConfig->description}}">
+  
+
+    <meta property="og:image" content="{{ asset('source/img/512x512.png') }}">
+    <meta property="og:locale" content="vi">
+
+    <meta itemprop="image" content="{{ asset('source/img/512x512.png') }}">
 
 
     <!-- Stylesheets -->
@@ -37,10 +57,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
         rel="stylesheet">
 
-    <!-- Add site Favicon -->
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-    <meta name="msapplication-TileImage" content="/images/favicon.ico" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -98,43 +114,7 @@
 
 
 
-{{-- 
-    <div class="to-right " data-target="html">
-        <div>
-            <a href="{{ $webConfig->facebook }}">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px">
-                    <path fill="#448AFF"
-                        d="M24,4C13.5,4,5,12.1,5,22c0,5.2,2.3,9.8,6,13.1V44l7.8-4.7c1.6,0.4,3.4,0.7,5.2,0.7c10.5,0,19-8.1,19-18C43,12.1,34.5,4,24,4z" />
-                    <path fill="#FFF" d="M12 28L22 17 27 22 36 17 26 28 21 23z" />
-                </svg>
-            </a>
-        </div>
-        <div id="button-contact-vr" class="">
-            <div id="gom-all-in-one">
-                <!-- Phone -->
-                <div class="phone-bar phone-bar-n">
-                    <a href="tel:0399162342">
-                        <span class="text-phone">039.916.2342</span>
-                    </a>
-                </div>
-                <div id="phone-vr" class="button-contact">
-                    <div class="phone-vr">
-                        <div class="phone-vr-circle-fill"></div>
-                        <div class="phone-vr-img-circle">
-                            <a href="tel:0399162342">
-                                <img src="/images/icons/phone.png">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- end phone -->
-            </div>
-            <!-- end v3 class gom-all-in-one -->
-        </div>
-      
 
-
-    </div> --}}
 
 
 
@@ -185,3 +165,6 @@
 </body>
 
 </html>
+
+
+
