@@ -193,10 +193,11 @@
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a class="text-dark" style="font-size: 12px"
-                                                onclick="window.location.href=''; return false;">
+                                               onclick="window.location.href='{{ Auth::user()->role == 'admin' ? route('admin.dashboard') : 'javascript:void(0)' }}'; return false;">
                                                 {{ Auth::user()->name }}
                                             </a>
                                         </li>
+                                        
                                         <li>
                                             <a class="text-dark" style="font-size: 12px" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal"> Nạp tiền</a>
@@ -270,8 +271,10 @@
                     <details>
                         <summary class="text-dark">{{ Auth::user()->name }}</summary>
                         <ul class="ps-4">
-                            <li class="text-dark"><a class="text-dark" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"> Nạp tiền</a></li>
+                            <li class="text-dark">
+                                <a class="text-dark" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"> Nạp tiền</a>
+                            </li>
                             <li class="text-dark">Số tiền: {{ number_format(Auth::user()->price) }}</li>
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
