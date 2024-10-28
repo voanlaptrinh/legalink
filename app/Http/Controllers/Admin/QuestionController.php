@@ -30,15 +30,14 @@ class QuestionController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
             
         ], [
             'name.required' => 'Tiêu đề là bắt buộc.',
             'name.string' => 'Tiêu đề phải là chuỗi.',
             'name.max' => 'Tiêu đề không được vượt quá 255 ký tự.',
             'description.string' => 'Mô tả phải là chuỗi.',
-            'description.max' => 'nội dung không được vượt quá 255 ký tự.',
-           
+
         ]);
         Questions::create([
             'name' => $request->input('name'),
@@ -56,14 +55,14 @@ class QuestionController extends Controller
     public function update(Request $request, $id)
     {  $request->validate([
         'name' => 'required|string|max:255',
-        'description' => 'nullable|string|max:255',
+        'description' => 'nullable|string',
         
     ], [
         'name.required' => 'Tiêu đề là bắt buộc.',
         'name.string' => 'Tiêu đề phải là chuỗi.',
         'name.max' => 'Tiêu đề không được vượt quá 255 ký tự.',
         'description.string' => 'Mô tả phải là chuỗi.',
-        'description.max' => 'nội dung không được vượt quá 255 ký tự.',
+       
        
     ]);
 

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Tên file
-            $table->string('file'); // Đường dẫn file
-            $table->integer('price'); // Giá tải file
+            $table->string('name')->nullable(); // Tên file
+            $table->string('file')->nullable(); // Đường dẫn file
+            $table->integer('price')->nullable(); // Giá tải file
             $table->string('image')->nullable(); // Giá tải file
             $table->timestamps();
         });

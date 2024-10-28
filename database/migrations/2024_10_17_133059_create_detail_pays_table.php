@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('detail_pays', function (Blueprint $table) {
             $table->id();
-            $table->string('bank_name');
-            $table->string('bank_number');
+            $table->string('bank_name')->nullable();
+            $table->string('bank_number')->nullable();
             $table->text('description')->nullable();
             $table->text('content')->nullable();
             $table->string('image')->nullable();

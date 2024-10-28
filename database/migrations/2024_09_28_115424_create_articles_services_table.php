@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('menus_services_id'); // Liên kết với menu dịch vụ
             $table->json('members_ids')->nullable(); // Liên kết với thành viên
-            $table->string('name'); // Tên bài viết
-            $table->text('content'); // Nội dung bài viết
+            $table->string('name')->nullable(); // Tên bài viết
+            $table->text('content')->nullable(); // Nội dung bài viết
             $table->integer('views')->default(0); // Số lượt xem
             $table->string('alias')->nullable(); // Bí danh hoặc đường dẫn thay thế
             $table->timestamps();
