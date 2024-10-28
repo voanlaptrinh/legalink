@@ -18,8 +18,7 @@
 
                 <div class="card-body">
                     <!-- Form thêm mới danh mục -->
-                    <form action="{{ route('menuservice.update', $category->id) }}" method="POST" class="row" 
-                        enctype="multipart/form-data">
+                    <form action="{{ route('menuservice.update', $category->id) }}" class="row"  method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row g-5">
@@ -27,7 +26,7 @@
                                 <div class="mb-3 col-md-12">
                                     <label class="form-label" for="title">Tên danh mục:</label>
                                     <input type="text" id="title" name="title" class="form-control"
-                                        placeholder="Tên dah mục" value="{{ old('title', $category->title) }}">
+                                        placeholder="Tên danh mục" value="{{ old('title', $category->title) }}">
                                     @error('title')
                                         <p class="fw-bold" style="color: red;">{{ $message }}</p>
                                     @enderror

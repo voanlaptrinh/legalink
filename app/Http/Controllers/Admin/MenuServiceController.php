@@ -37,13 +37,14 @@ class MenuServiceController extends Controller
         // Xác thực dữ liệu
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
+            'description' => 'required|string|max:255',
             'parent_id' => 'nullable|exists:menus_services,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,sv',
         ], [
             'title.required' => 'Tên danh mục không được để trống',
             'title.string' => 'Tên danh mục phải là một chuỗi',
             'title.max' => 'Tên danh mục không quá 255 ký tự',
+            'description.required' => 'Mô tả không được để trống',
             'description.string' => 'Mô tả danh mục phải là một chuỗi',
             'description.max' => 'Mô tả danh mục không quá 255 ký tự',
             'parent_id.exists' => 'Danh mục cha không hợp lệ',
@@ -85,20 +86,25 @@ class MenuServiceController extends Controller
 
         return redirect()->route('menuservice.index')->with('success', 'Danh mục đã được thêm thành công!');
     }
-    public function edit($alias)
+    public function edit($alias, Request $request)
     {
-        // Tìm danh mục theo alias
+        // Find category by alias
         $category = MenusServices::where('alias', $alias)->firstOrFail();
-
-        // Lấy tất cả các danh mục để chọn danh mục cha (ngoại trừ chính danh mục đó)
+    
+        // Get all categories except the current one
         $categories = MenusServices::where('id', '!=', $category->id)->get();
-
-        // Trả về view chỉnh sửa với danh mục và danh sách danh mục cha
+    
+       
+    
+        // Return edit view with category and parent categories
         return view('admin.menuservice.edit', [
             'category' => $category,
-            'categories' => $categories
+            'categories' => $categories,
+       
         ]);
     }
+    
+    
 
     public function update(Request $request, $id)
     {
@@ -123,13 +129,35 @@ class MenuServiceController extends Controller
        
         // Kiểm tra alias mới có trùng hay không
         $alias = Str::slug($request->input('title'), '-') . '-' . $id;
+
+
+        $imagePath = $category->image;
+
+        if ($request->hasFile('image')) {
+            // Delete the old image from public/source/category if it exists
+            if ($category->image && file_exists(public_path($category->image))) {
+                unlink(public_path($category->image));
+            }
+        
+            // Upload the new image
+            $image = $request->file('image');
+            $imageExtension = $image->getClientOriginalExtension();
+            $imageName = Str::random(10) . '.' . $imageExtension;
+        
+            // Move the new image to public/source/news
+            $destinationPath = public_path('source/news');
+            $image->move($destinationPath, $imageName);
+        
+            // Store the new image path
+            $imagePath = 'source/news/' . $imageName;
+        }
         // Cập nhật danh mục
         $category->update([
             'title' => $request->input('title'),
             'alias' => $alias,
             'description' => $request->input('description'),
             'parent_id' => $request->input('parent_id'), // Cập nhật danh mục cha
-           
+           'image' => $imagePath,
         ]);
 
         return redirect()->route('menuservice.index')->with('success', 'Danh mục đã được cập nhật thành công!');

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('menus_services', function (Blueprint $table) {
             $table->id();
             $table->string('title'); // Tên menu
-            $table->string('description'); // Tên menu
+            $table->string('description')->nullable(); // Tên menu
             $table->string('image')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable(); // Để thiết kế menu con
             $table->string('alias')->nullable();

@@ -24,7 +24,7 @@
                                 <div class="mb-3 col-lg-12">
                                     <label class="form-label" for="title">Tên danh mục:</label>
                                     <input type="text" id="title" name="title" class="form-control"
-                                        placeholder="Tên dah mục" value="{{ old('title') }}">
+                                        placeholder="Tên danh mục" value="{{ old('title') }}">
                                     @error('title')
                                         <p class="fw-bold" style="color: red;">{{ $message }}</p>
                                     @enderror
