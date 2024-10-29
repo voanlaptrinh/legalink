@@ -43,8 +43,9 @@
                 <div class="sidebar-user">
                     <div class="d-flex justify-content-center">
                         <div class="flex-shrink-0">
-                            <img src="{{ asset('/source/imges/Arrow.png') }}" class="avatar img-fluid rounded me-1"
+                            <img src="{{ asset('/source/img/favicon-32x32.png') }}" class="avatar img-fluid rounded me-1"
                                 alt="" />
+                                
                         </div>
                         <div class="flex-grow-1 ps-2">
                             <a class="sidebar-user-title" href="#">
