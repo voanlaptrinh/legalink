@@ -19,7 +19,7 @@
                                 <div class="title">Về chúng tôi</div>
                                 <h2>{{$introduces->name}}</h2>
                             </div>
-                            <div class="text">{{ $introduces->description }}
+                            <div class="text" style="text-align: justify;">{{ $introduces->description }}
                             </div>
                             <h6>{{$introduces->name_ceo}}</h6>
                             <div class="designation">CEO/Luật LEGALINK</div>
