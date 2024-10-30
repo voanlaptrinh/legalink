@@ -11,7 +11,7 @@
                     <div class="row">
 
                         <div class="col-lg-4 ">
-                            <!-- Hình ảnh xem trước -->
+                            <label class="form-label" for="name">Ảnh CEO</label>
                             <div class="text-center">
                                 <img id="preview-image"
                                     src="{{ $introduces->image ? asset($introduces->image) : asset('source/imges/none-image.jpg') }}"
@@ -46,8 +46,8 @@
                           </div>
 
                             <div class="col-lg-12 mb-3">
-                                <label for="image">Mô tả ngắn:</label>
-                                <textarea rows="5" cols="50" name="description" id="description" class="form-control">{{ old('description', $introduces->description) }}</textarea>
+                                <label for="image">Mô tả ngắn (Không được thêm ảnh):</label>
+                                <textarea rows="5" cols="50" name="description" id="tyni" class="form-control">{{ old('description', $introduces->description) }}</textarea>
                                 @error('description')
                                     <p class="fw-bold" style="color: red;">{{ $message }}</p>
                                 @enderror
